@@ -1,8 +1,13 @@
 package ija.diagram.classdiagram;
 
 public class Relationships{
-    private String nameFrom; // todo String ?
-    private String nameTo;   // todo String ?
+//    private String nameClassFrom; // todo String ?
+    private String nameClassTo;   // todo String ?
+    private String name;
+    private final int inName;
+    private static int counter = 0;
+    private Type typeFrom;
+    private Type typeTo;
     enum Type{
         ASSOCIATION,
         REFLEXIVEASSOCIATION,
@@ -11,24 +16,38 @@ public class Relationships{
         COMPOSITION,
         INHERITANCE_GENERALIZATION,
         REALIZATION,
-    }
-    private Type typeFrom;
-    private Type typeTo;
+        }
 
-    public String getNameFrom() {
-        return nameFrom;
-    }
 
-    public void setNameFrom(String nameFrom) {
-        this.nameFrom = nameFrom;
+    public Relationships(String nameClassTo, Type typeFrom, Type typeTo){
+        this.nameClassTo = nameClassTo;
+        this.typeFrom = typeFrom;
+        this.typeTo = typeTo;
+        this.inName = counter++;
     }
 
-    public String getNameTo() {
-        return nameTo;
+    public void setName(String name){
+        this.name = name;
     }
 
-    public void setNameTo(String nameTo) {
-        this.nameTo = nameTo;
+    public String getName(){
+        return this.name;
+    }
+
+//    public String getNameClassFrom() {
+//        return nameClassFrom;
+//    }
+//
+//    public void setNameClassFrom(String nameClassFrom) {
+//        this.nameClassFrom = nameClassFrom;
+//    }
+
+    public String getNameClassTo() {
+        return nameClassTo;
+    }
+
+    public void setNameClassTo(String nameClassTo) {
+        this.nameClassTo = nameClassTo;
     }
 
     public Type getTypeFrom() {
@@ -45,5 +64,9 @@ public class Relationships{
 
     public void setTypeTo(Type typeTo) {
         this.typeTo = typeTo;
+    }
+
+    public int getInName(){
+      return this.inName;
     }
 }

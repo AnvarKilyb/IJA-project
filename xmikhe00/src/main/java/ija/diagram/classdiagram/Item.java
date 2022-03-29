@@ -1,6 +1,6 @@
 package ija.diagram.classdiagram;
 
-public class Item extends Element{
+abstract class Item extends Element{
     enum AccessModifier{
         PRIVATE,    // -
         PUBLIC,     // +
