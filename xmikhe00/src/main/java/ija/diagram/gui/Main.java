@@ -1,10 +1,14 @@
 package ija.diagram.gui;
 
+
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.net.URL;
 
 /**
  * JavaFX App
@@ -12,12 +16,15 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     @Override
-    public void start(Stage stage) {
-        var javaVersion = SystemInfo.javaVersion();
-        var javafxVersion = SystemInfo.javafxVersion();
+    public void start(Stage stage) throws IOException {
+//        var javaVersion = SystemInfo.javaVersion();
+//        var javafxVersion = SystemInfo.javafxVersion();
+//
+//        var label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
+//        URL url = getClass().getClassLoader().getResource("/home/goofy/study/iJA/IJA-project/xmikhe00/src/main/resources/new.fxml");
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/main/new.fxml"));
 
-        var label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-        var scene = new Scene(new StackPane(label), 640, 480);
+        Scene scene = new Scene(loader.load());
         stage.setScene(scene);
         stage.show();
     }
