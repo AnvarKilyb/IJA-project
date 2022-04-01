@@ -3,28 +3,28 @@ package ija.diagram.classdiagram;
 import java.util.List;
 
 public class Diagram{
-    private List<Class> classList;
+    private List<DiagramClass> diagramClassList;
 
     public void addClass(String name){
-        Class cl  = returnClass(name);
+        DiagramClass cl  = returnClass(name);
         if(cl != null){
             //todo warning class exist
             return;
         }
-        classList.add(new Class(name));
+        diagramClassList.add(new DiagramClass(name));
     }
 
     public void classChange(String name){
-        Class cl = returnClass(name);
+        DiagramClass cl = returnClass(name);
         cl.setName(name);
     }
 
     public void classDelete(String name){
-        this.classList.remove(returnClass(name));
+        this.diagramClassList.remove(returnClass(name));
     }
 
-    public Class returnClass(String name){
-        for(Class cl: classList){
+    public DiagramClass returnClass(String name){
+        for(DiagramClass cl: diagramClassList){
             if(cl.getName().equals(name)){
                 return cl;
             }

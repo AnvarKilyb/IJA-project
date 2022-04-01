@@ -3,13 +3,13 @@ package ija.diagram.classdiagram;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Class extends Element{
+public class DiagramClass extends Element{
     private List<Arguments> argumentsList;
     private List<Methods> methodsList;
     private List<Relationships> relationshipsList;
     //todo coordinates
 
-    public Class(String name){
+    public DiagramClass(String name){
         super(name);
         argumentsList = new ArrayList<Arguments>();
         methodsList = new ArrayList<Methods>();
