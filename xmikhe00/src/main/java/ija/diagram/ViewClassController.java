@@ -1,7 +1,6 @@
 package ija.diagram;
 
-import javafx.event.Event;
-import javafx.scene.control.ContextMenu;
+
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
