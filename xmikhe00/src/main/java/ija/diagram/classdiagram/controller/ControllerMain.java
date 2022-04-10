@@ -1,16 +1,23 @@
 package ija.diagram.classdiagram.controller;
+import ija.diagram.classdiagram.model.ClassDiagram;
+import ija.diagram.classdiagram.model.DClass;
 import ija.diagram.classdiagram.view.ViewClass;
-import ija.diagram.loader.objectJSON;
+import ija.diagram.classdiagram.view.ViewDiagram;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
-import java.util.ArrayList;
-
-import static ija.diagram.loader.parser.parseJSON;
-
 public class ControllerMain {
+    private ViewClassController viewClassController;
+    private ClassContextController classContextController;
+    private final ClassDiagram classDiagram;
+    private final ViewDiagram viewDiagram;
+
+    public ControllerMain(ClassDiagram classDiagram, ViewDiagram viewDiagram){
+            this.classDiagram = classDiagram;
+            this.viewDiagram = viewDiagram;
+    }
 
     @FXML
     private Button buttonAdd;
@@ -31,20 +38,45 @@ public class ControllerMain {
     }
 
     private void addClassAction(ActionEvent event){
-        ViewClass viewclass = new ViewClass();
-        viewclass.show();
-        this.mainPane.getChildren().add(viewclass);
+        DClass dClass = classDiagram.addClass();
+        ViewClass viewClass = viewDiagram.addNewClass(dClass);
+        this.mainPane.getChildren().add(viewClass);
     }
 
     private void loadFile(ActionEvent event){
-        ArrayList<objectJSON> list = new ArrayList<>();
-        list = parseJSON();
-//        System.out.println(list.get(1).getName());
-        for (objectJSON object : list){
+        classDiagram.writeAll();
+//        ArrayList<objectJSON> list = new ArrayList<>();
+//        list = parseJSON();
+////        System.out.println(list.get(1).getName());
+//        for (objectJSON object : list){
+//
+//
+//        }
+    }
 
 
-        }
+    public ViewClassController getViewClassController(){
+        return viewClassController;
+    }
 
+    public ClassContextController getClassContextController(){
+        return classContextController;
+    }
+
+    public void setClassContextController(ClassContextController classContextController){
+        this.classContextController = classContextController;
+    }
+
+    public void setViewClassController(ViewClassController viewClassController){
+        this.viewClassController = viewClassController;
+    }
+
+    public ClassDiagram getClassDiagram(){
+        return classDiagram;
+    }
+
+    public ViewDiagram getViewDiagram(){
+        return viewDiagram;
     }
 
 }

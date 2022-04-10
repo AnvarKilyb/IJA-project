@@ -23,19 +23,19 @@ public class MethodItem extends HBox implements ViewItem{
         accessModifier.getItems().add("~");
     }
 
-    public void mainConstruct(){
+    public void mainConstruct(ClassContextController classContextController){
         super.getChildren().add(accessModifier);
         super.getChildren().add(argumentName);
-        initContextMenu();
+        initContextMenu(classContextController);
         accessModifier.setContextMenu(contextMenu);
         argumentName.setContextMenu(contextMenu);
         argumentName.setPrefWidth(212); //todo normal
     }
 
-    private void initContextMenu(){
+    private void initContextMenu(ClassContextController classContextController){
         MenuItem menuItem1 = new MenuItem("Delete");
         menuItem1.setUserData(this);
-        menuItem1.addEventHandler(Event.ANY, ClassContextController::deleteItem);
+        menuItem1.addEventHandler(Event.ANY, classContextController::deleteMethod);
         contextMenu.getItems().add(menuItem1);
     }
 

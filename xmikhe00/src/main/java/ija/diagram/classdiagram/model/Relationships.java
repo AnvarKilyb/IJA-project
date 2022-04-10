@@ -4,8 +4,6 @@ public class Relationships{
 //    private String nameClassFrom; // todo String ?
     private String nameClassTo;   // todo String ?
     private String name;
-    private final int inName;
-    private static int counter = 0;
     private Type typeFrom;
     private Type typeTo;
     enum Type{
@@ -23,7 +21,12 @@ public class Relationships{
         this.nameClassTo = nameClassTo;
         this.typeFrom = typeFrom;
         this.typeTo = typeTo;
-        this.inName = counter++;
+    }
+
+    public Relationships(String nameClassTo){
+        this.nameClassTo = nameClassTo;
+        this.typeFrom = Type.ASSOCIATION;
+        this.typeTo = Type.ASSOCIATION;
     }
 
     public void setName(String name){
@@ -66,7 +69,4 @@ public class Relationships{
         this.typeTo = typeTo;
     }
 
-    public int getInName(){
-      return this.inName;
-    }
 }

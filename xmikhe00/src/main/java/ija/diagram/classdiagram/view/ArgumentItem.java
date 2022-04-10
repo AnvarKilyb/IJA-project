@@ -26,18 +26,18 @@ public class ArgumentItem extends HBox implements ViewItem {
         argumentType.setPrefWidth(50);
     }
 
-    private void initContextMenu(){
+    private void initContextMenu(ClassContextController classContextController){
         MenuItem menuItem1 = new MenuItem("Delete");
         menuItem1.setUserData(this);
-        menuItem1.addEventHandler(Event.ANY, ClassContextController::deleteItem);
+        menuItem1.addEventHandler(Event.ANY, classContextController::deleteArgument);
         contextMenu.getItems().add(menuItem1);
     }
 
-    public void mainConstruct(){
+    public void mainConstruct(ClassContextController classContextController){
         super.getChildren().add(accessModifier);
         super.getChildren().add(argumentName);
         super.getChildren().add(argumentType);
-        initContextMenu();
+        initContextMenu(classContextController);
         accessModifier.setContextMenu(contextMenu);
         argumentName.setContextMenu(contextMenu);
         argumentType.setContextMenu(contextMenu);

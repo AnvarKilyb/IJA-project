@@ -7,8 +7,13 @@ import javafx.scene.input.MouseEvent;
 
 public class ViewClassController{
 
+    private final ControllerMain controllerMain;
 
-    public static void classDraggedMouse(MouseEvent mouseEvent){
+    public ViewClassController(ControllerMain controllerMain){
+        this.controllerMain = controllerMain;
+    }
+
+    public void classDraggedMouse(MouseEvent mouseEvent){
         if(mouseEvent.getButton() == MouseButton.MIDDLE) {
             ViewClass viewClass = (ViewClass) mouseEvent.getSource();
             double X = mouseEvent.getX();
@@ -32,7 +37,7 @@ public class ViewClassController{
 //    }
 
 
-    public static void classMenu(MouseEvent mouseButton) {
+    public void classMenu(MouseEvent mouseButton) {
         if(mouseButton.getButton() == MouseButton.SECONDARY){
             System.out.println("Hello");
         }

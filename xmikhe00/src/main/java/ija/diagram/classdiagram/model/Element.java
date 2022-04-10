@@ -7,6 +7,10 @@ abstract class Element {
         this.name = name;
     }
 
+    public Element(){
+        this.name = "";
+    }
+
     public void setName(String name){
         this.name = name;
     }

@@ -7,6 +7,10 @@ public class Arguments extends Item{
         super(name,accessModifier);
     }
 
+    public Arguments(){
+        super();
+        type = "";
+    }
     public void setType(String type){
         this.type = type;
     }

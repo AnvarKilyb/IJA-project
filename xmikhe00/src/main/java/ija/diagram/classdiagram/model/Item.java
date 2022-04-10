@@ -1,17 +1,24 @@
 package ija.diagram.classdiagram.model;
 
 abstract public class Item extends Element{
+
+    public AccessModifier accessModifier;
+
     public enum AccessModifier{
         PRIVATE,    // -
         PUBLIC,     // +
         PROTECTED,  // #
         VISIBLE,    // ~
     }
-    public AccessModifier accessModifier;
 
     public Item(String name, AccessModifier accessModifier) {
         super(name);
         this.accessModifier = accessModifier;
+    }
+
+    public Item(){
+        super();
+        this.accessModifier = AccessModifier.PUBLIC;
     }
 
     public void setAccessModifier(AccessModifier accessModifier){
