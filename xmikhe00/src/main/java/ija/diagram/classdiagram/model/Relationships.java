@@ -1,4 +1,4 @@
-package ija.diagram.classdiagram;
+package ija.diagram.classdiagram.model;
 
 public class Relationships{
 //    private String nameClassFrom; // todo String ?

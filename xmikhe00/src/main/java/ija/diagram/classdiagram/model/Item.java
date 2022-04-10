@@ -1,4 +1,4 @@
-package ija.diagram.classdiagram;
+package ija.diagram.classdiagram.model;
 
 abstract class Item extends Element{
     enum AccessModifier{

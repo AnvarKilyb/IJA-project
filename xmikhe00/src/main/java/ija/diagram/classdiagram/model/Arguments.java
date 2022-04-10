@@ -1,4 +1,4 @@
-package ija.diagram.classdiagram;
+package ija.diagram.classdiagram.model;
 
 public class Arguments extends Item{
     public String type;

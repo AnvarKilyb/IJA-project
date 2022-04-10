@@ -1,6 +1,7 @@
-package ija.diagram;
+package ija.diagram.classdiagram.controller;
 
 
+import ija.diagram.classdiagram.view.ViewClass;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 

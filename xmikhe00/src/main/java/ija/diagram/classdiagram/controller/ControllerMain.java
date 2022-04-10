@@ -1,10 +1,8 @@
-package ija.diagram;
+package ija.diagram.classdiagram.controller;
+import ija.diagram.classdiagram.view.ViewClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 public class ControllerMain {
@@ -27,9 +25,9 @@ public class ControllerMain {
     }
 
     private void addClassAction(ActionEvent event){
-//        mainPane.getChildren().add(new Label("Hello"));
-        ViewClass newclass = new ViewClass();;
-        mainPane.getChildren().add(newclass);
+        ViewClass viewclass = new ViewClass();
+        viewclass.show();
+        this.mainPane.getChildren().add(viewclass);
     }
 
 //    public static void classMouseMoved(MouseEvent mouseEvent){

@@ -5,4 +5,8 @@ module ija.diagram.gui {
     requires json.simple;
     exports ija.diagram;
     opens ija.diagram;
+    exports ija.diagram.classdiagram.view;
+    opens ija.diagram.classdiagram.view;
+    exports ija.diagram.classdiagram.controller;
+    opens ija.diagram.classdiagram.controller;
 }
