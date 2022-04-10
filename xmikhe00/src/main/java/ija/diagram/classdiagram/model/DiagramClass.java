@@ -16,6 +16,18 @@ public class DiagramClass extends Element{
         relationshipsList = new ArrayList<Relationships>();
     }
 
+    public List<Arguments> getArgumentsList(){
+        return argumentsList;
+    }
+
+    public List<Methods> getMethodsList(){
+        return methodsList;
+    }
+
+    public List<Relationships> getRelationshipsList(){
+        return relationshipsList;
+    }
+
     public void addArgument(String name, Item.AccessModifier accessModifier,String type ){
         Arguments arg = returnArgument(name);
         if (arg != null){

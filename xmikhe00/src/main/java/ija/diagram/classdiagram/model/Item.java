@@ -1,7 +1,7 @@
 package ija.diagram.classdiagram.model;
 
-abstract class Item extends Element{
-    enum AccessModifier{
+abstract public class Item extends Element{
+    public enum AccessModifier{
         PRIVATE,    // -
         PUBLIC,     // +
         PROTECTED,  // #
@@ -20,5 +20,20 @@ abstract class Item extends Element{
 
     public AccessModifier getAccessModifier(){
         return accessModifier;
+    }
+
+    public static String returnString(AccessModifier accessModifier){
+        switch (accessModifier){
+            case PRIVATE:
+                return "-";
+            case PROTECTED:
+                return  "#";
+            case PUBLIC:
+                return  "+";
+            case VISIBLE:
+                return  "~";
+            //todo add method, for read warning if access modifier not correct
+        }
+        return "+";
     }
 }
