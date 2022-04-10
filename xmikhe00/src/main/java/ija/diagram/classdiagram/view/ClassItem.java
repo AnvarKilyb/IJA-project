@@ -32,12 +32,12 @@ public class ClassItem extends HBox {
         super.getChildren().add(relationShip);
         super.getChildren().add(argumentName);
         super.getChildren().add(argumentType);
-        addContextMenu(classLink);
+        addContextMenu();
     }
 
-    private void addContextMenu(ViewClass classLinc){
-        argumentName.addContextMenu(classLinc);
-        argumentType.addContextMenu(classLinc);
+    private void addContextMenu(){
+        argumentName.addContextMenu(this);
+        argumentType.addContextMenu(this);
     }
 
     public ChoiceBox<String> getChoiceBox() {

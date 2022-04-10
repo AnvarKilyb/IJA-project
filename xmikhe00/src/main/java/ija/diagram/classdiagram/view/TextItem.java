@@ -14,7 +14,7 @@ public class TextItem extends TextField {
         super();
     }
 
-    public void addContextMenu(ViewClass classLink){
+    public void addContextMenu(ClassItem classLink){
         MenuItem menuItem1 = new MenuItem("Delete");
         menuItem1.setUserData(classLink);
         menuItem1.addEventHandler(Event.ANY, ClassContextController::delete_item);
