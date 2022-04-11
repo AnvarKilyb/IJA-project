@@ -2,18 +2,17 @@ package ija.diagram.loader;
 
 import ija.diagram.classdiagram.model.ClassDiagram;
 import ija.diagram.classdiagram.model.DClass;
-import ija.diagram.classdiagram.model.Item;
 import ija.diagram.classdiagram.model.Relationships;
 
 import java.util.ArrayList;
 
-import static ija.diagram.loader.parser.parseJSON;
-
 public class Loader {
-    private ClassDiagram classDiagram;
+    private final ClassDiagram classDiagram;
+    private ArrayList<objectJSON> list;
+    private final Parser parser = new Parser();
 
     public void classLoad(){
-        ArrayList<objectJSON> list = parseJSON();
+        list = parser.parseJSON();
         for(objectJSON item: list){
             if(item.getType() == objectJSON.ItemType.CLASS){
                 classDiagram.addClass(parseDiagram(item));
@@ -32,7 +31,7 @@ public class Loader {
      *      Returns specified object.
      */
     private DClass parseDiagram(objectJSON item) {
-        ArrayList<objectJSON> list = parseJSON();
+//        ArrayList<objectJSON> list = parser.parseJSON();
         DClass dClass  = parseClasses(item);
         //Parse relations
         for (objectJSON relation : list) {

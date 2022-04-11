@@ -64,6 +64,7 @@ public class ViewClass extends VBox {
         this.mainConstructClass(classContextController, viewClassController);
         this.setVisualOptions();
         super.addEventFilter(MouseEvent.MOUSE_DRAGGED, viewClassController::classDraggedMouse);
+        super.addEventFilter(MouseEvent.MOUSE_PRESSED, viewClassController::clickToLine);
     }
 //------------------------------------------------------------------------------------------------------//
 //    public void addArgument(Arguments argument, ClassContextController classContextController){
