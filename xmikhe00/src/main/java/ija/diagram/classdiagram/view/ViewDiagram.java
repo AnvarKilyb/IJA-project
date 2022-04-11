@@ -18,6 +18,7 @@ public class ViewDiagram {
         this.controllerMain = controllerMain;
     }
 
+//    public
     public ViewClass addNewClass(DClass modelClass){
         ViewClass viewClass = new ViewClass();
         viewClass.show(controllerMain.getClassContextController(), controllerMain.getViewClassController());
@@ -28,6 +29,8 @@ public class ViewDiagram {
         addArguments(viewClass, argumentsList);
         addMethods(viewClass, methodsList);
         diagramClassMap.put(viewClass, modelClass);
+        viewClass.setX(modelClass.getX());
+        viewClass.setY(modelClass.setY());
         //todo x, y
         return viewClass;
     }

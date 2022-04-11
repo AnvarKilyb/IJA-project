@@ -18,6 +18,10 @@ public class ClassDiagram {
         return dClass;
     }
 
+    public void addClass(DClass dClass){
+        dClassList.add(dClass);
+    }
+
     public DClass addClass(){
         String name = Integer.toString(classNameCounter);
         classNameCounter++;
@@ -55,5 +59,9 @@ public class ClassDiagram {
                 System.out.println(Item.returnString(arguments.getAccessModifier()));
             }
         }
+    }
+
+    public List<DClass> getdClassList(){
+        return dClassList;
     }
 }

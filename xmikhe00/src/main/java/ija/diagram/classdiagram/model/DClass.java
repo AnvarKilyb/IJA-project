@@ -7,6 +7,8 @@ public class DClass extends Element{
     private List<Arguments> argumentsList;
     private List<Methods> methodsList;
     private List<Relationships> relationshipsList;
+    private double X = 0;
+    private double Y = 0;
     //todo coordinates
 
     public DClass(String name){
@@ -75,6 +77,21 @@ public class DClass extends Element{
     }
 
 
+    public void setX(double x){
+        this.X = x;
+    }
+
+    public double getX(){
+        return this.X;
+    }
+
+    public void setY(double y){
+        this.Y = y;
+    }
+
+    public double setY(){
+        return this.Y;
+    }
 
     public void relationshipDelete(Relationships relationships){
         this.relationshipsList.remove(relationships);

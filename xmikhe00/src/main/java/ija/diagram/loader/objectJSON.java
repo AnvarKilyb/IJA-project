@@ -4,19 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class objectJSON {
-    enum ItemType{
+    public enum ItemType{
         CLASS,
         CONNECTION
     }
-    enum ConType{
+    public enum ConType{
         ASSOCIATION,
         REFLEXIVE_ASSOCIATION,
+        MULTIPLICITY,
         AGGREGATION,
         COMPOSITION,
         INHERITANCE,
+        REALIZATION,
         NONE
     }
-    enum Notation{
+    public enum Notation{
         ONE_TO_NONE,
         ZERO_MANY_TO_NONE,
         ONE_MANY_TO_NONE,
@@ -41,6 +43,8 @@ public class objectJSON {
     Notation notation;
     int height;
     int width;
+    double xAxis;
+    double yAxis;
 
     public void addOperation(attrJSON operation){
         this.operations.add(operation);
@@ -128,5 +132,21 @@ public class objectJSON {
 
     public Notation getNotation() {
         return notation;
+    }
+
+    public void setxAxis(double xAxis) {
+        this.xAxis = xAxis;
+    }
+
+    public double getxAxis() {
+        return xAxis;
+    }
+
+    public void setyAxis(double yAxis) {
+        this.yAxis = yAxis;
+    }
+
+    public double getyAxis() {
+        return yAxis;
     }
 }

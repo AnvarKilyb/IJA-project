@@ -6,6 +6,7 @@ import ija.diagram.classdiagram.controller.ControllerMain;
 import ija.diagram.classdiagram.controller.ViewClassController;
 import ija.diagram.classdiagram.model.ClassDiagram;
 import ija.diagram.classdiagram.view.ViewDiagram;
+import ija.diagram.loader.Loader;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,7 +23,8 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         ClassDiagram classDiagram = new ClassDiagram();
         ViewDiagram viewDiagram = new ViewDiagram();
-        ControllerMain controllerMain = new ControllerMain(classDiagram, viewDiagram);
+        Loader load = new Loader(classDiagram);
+        ControllerMain controllerMain = new ControllerMain(classDiagram, viewDiagram, load);
         viewDiagram.setControllerMain(controllerMain);
         ViewClassController viewClassController = new ViewClassController(controllerMain);
         ClassContextController classContextController = new ClassContextController(controllerMain);

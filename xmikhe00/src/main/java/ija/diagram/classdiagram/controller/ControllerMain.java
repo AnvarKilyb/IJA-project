@@ -3,6 +3,7 @@ import ija.diagram.classdiagram.model.ClassDiagram;
 import ija.diagram.classdiagram.model.DClass;
 import ija.diagram.classdiagram.view.ViewClass;
 import ija.diagram.classdiagram.view.ViewDiagram;
+import ija.diagram.loader.Loader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,10 +14,12 @@ public class ControllerMain {
     private ClassContextController classContextController;
     private final ClassDiagram classDiagram;
     private final ViewDiagram viewDiagram;
+    private final Loader loader;
 
-    public ControllerMain(ClassDiagram classDiagram, ViewDiagram viewDiagram){
+    public ControllerMain(ClassDiagram classDiagram, ViewDiagram viewDiagram, Loader loader){
             this.classDiagram = classDiagram;
             this.viewDiagram = viewDiagram;
+            this.loader = loader;
     }
 
     @FXML
@@ -44,6 +47,11 @@ public class ControllerMain {
     }
 
     private void loadFile(ActionEvent event){
+        loader.classLoad();
+        for(DClass dClass : classDiagram.getdClassList()){
+            ViewClass viewClass = viewDiagram.addNewClass(dClass);
+            this.mainPane.getChildren().add(viewClass);
+        }
         classDiagram.writeAll();
 //        ArrayList<objectJSON> list = new ArrayList<>();
 //        list = parseJSON();

@@ -115,11 +115,11 @@ public class ViewClass extends VBox {
         return  methodsMap.get(methodItem);
     }
 
-    public void setX(int x){
+    public void setX(double x){
         super.setLayoutX(x);
     }
 
-    public void setY(int y){
+    public void setY(double y){
         super.setLayoutY(y);
     }
 

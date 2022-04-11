@@ -6,7 +6,7 @@ public class Relationships{
     private String name;
     private Type typeFrom;
     private Type typeTo;
-    enum Type{
+    public enum Type{
         ASSOCIATION,
         REFLEXIVEASSOCIATION,
         MULTIPLICITY,
