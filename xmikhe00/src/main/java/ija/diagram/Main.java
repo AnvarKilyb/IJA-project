@@ -23,8 +23,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         ClassDiagram classDiagram = new ClassDiagram();
         ViewDiagram viewDiagram = new ViewDiagram();
-        Loader load = new Loader(classDiagram);
-        ControllerMain controllerMain = new ControllerMain(classDiagram, viewDiagram, load);
+        ControllerMain controllerMain = new ControllerMain(classDiagram, viewDiagram);
         viewDiagram.setControllerMain(controllerMain);
         ViewClassController viewClassController = new ViewClassController(controllerMain);
         ClassContextController classContextController = new ClassContextController(controllerMain);

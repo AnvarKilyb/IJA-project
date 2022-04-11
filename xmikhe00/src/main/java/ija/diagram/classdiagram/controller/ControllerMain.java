@@ -14,12 +14,10 @@ public class ControllerMain {
     private ClassContextController classContextController;
     private final ClassDiagram classDiagram;
     private final ViewDiagram viewDiagram;
-    private final Loader loader;
 
-    public ControllerMain(ClassDiagram classDiagram, ViewDiagram viewDiagram, Loader loader){
+    public ControllerMain(ClassDiagram classDiagram, ViewDiagram viewDiagram){
             this.classDiagram = classDiagram;
             this.viewDiagram = viewDiagram;
-            this.loader = loader;
     }
 
     @FXML
@@ -47,6 +45,8 @@ public class ControllerMain {
     }
 
     private void loadFile(ActionEvent event){
+        //todo delete old diagram
+        Loader loader = new Loader(classDiagram);
         loader.classLoad();
         for(DClass dClass : classDiagram.getdClassList()){
             ViewClass viewClass = viewDiagram.addNewClass(dClass);
