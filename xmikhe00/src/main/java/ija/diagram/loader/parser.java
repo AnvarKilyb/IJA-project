@@ -3,18 +3,22 @@ package ija.diagram.loader;
 import java.io.*;
 import java.util.ArrayList;
 
+import ija.diagram.classdiagram.model.Item;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class parser {
-//    public static void main(String[] args){
-//        ArrayList<objectJSON> list = new ArrayList<>();
-//        list = parseJSON();
-//        return;
-//    }
-
+    /**
+     * Method parseJSON()
+     *      Parse JSON file from input.json.
+     *      Creates list of objects, that are represented as classes and relationships.
+     *      Each specified object contains:
+     *          name, type(class,relationship), list of attributes, list of methods, height, width, x Axis, y Axis.
+     *          start relations, end relation, relation type(association, aggregation, e.t.c).
+     *      Returns above mentioned list.
+    * */
     public static ArrayList<objectJSON> parseJSON(){
         ArrayList<objectJSON> itemList = new ArrayList<>();
         JSONObject objectConnection = new JSONObject();
@@ -55,31 +59,24 @@ public class parser {
                             else{
                                 switch (accessModifiers){
                                     case "public":
-                                        aux.setAccessModifiers(attrJSON.AccessModifiers.PUBLIC);
+                                        aux.setAccessModifiers(Item.AccessModifier.PUBLIC);
                                         break;
                                     case "protected":
-                                        aux.setAccessModifiers(attrJSON.AccessModifiers.PROTECTED);
+                                        aux.setAccessModifiers(Item.AccessModifier.PROTECTED);
                                         break;
                                     case "private":
-                                        aux.setAccessModifiers(attrJSON.AccessModifiers.PRIVATE);
+                                        aux.setAccessModifiers(Item.AccessModifier.PRIVATE);
+                                        break;
+                                    case "visible":
+                                        aux.setAccessModifiers(Item.AccessModifier.VISIBLE);
                                         break;
                                 }
                             }
                             String type = (String) tmp.get("type");
-                            if(type == null)
+                            if(type == null){
                                 aux.setType(null);
-                            else{
-                                switch (type){
-                                    case "string":
-                                        aux.setType(attrJSON.Type.STRING);
-                                        break;
-                                    case "int":
-                                        aux.setType(attrJSON.Type.INT);
-                                        break;
-                                    case "bool":
-                                        aux.setType(attrJSON.Type.BOOL);
-                                        break;
-                                }
+                            }else{
+                                aux.setType(type);
                             }
                             newObject.addOperation(aux);
                         }
@@ -103,31 +100,24 @@ public class parser {
                             else{
                                 switch (accessModifiers) {
                                     case "public":
-                                        aux.setAccessModifiers(attrJSON.AccessModifiers.PUBLIC);
+                                        aux.setAccessModifiers(Item.AccessModifier.PUBLIC);
                                         break;
                                     case "protected":
-                                        aux.setAccessModifiers(attrJSON.AccessModifiers.PROTECTED);
+                                        aux.setAccessModifiers(Item.AccessModifier.PROTECTED);
                                         break;
                                     case "private":
-                                        aux.setAccessModifiers(attrJSON.AccessModifiers.PRIVATE);
+                                        aux.setAccessModifiers(Item.AccessModifier.PRIVATE);
+                                        break;
+                                    case "visible":
+                                        aux.setAccessModifiers(Item.AccessModifier.VISIBLE);
                                         break;
                                 }
                             }
                             String type = (String) tmp.get("type");
-                            if(type == null)
+                            if(type == null){
                                 aux.setType(null);
-                            else{
-                                switch (type) {
-                                    case "string":
-                                        aux.setType(attrJSON.Type.STRING);
-                                        break;
-                                    case "int":
-                                        aux.setType(attrJSON.Type.INT);
-                                        break;
-                                    case "bool":
-                                        aux.setType(attrJSON.Type.BOOL);
-                                        break;
-                                }
+                            }else{
+                                aux.setType(type);
                             }
                             newObject.addAttribute(aux);
                         }
@@ -136,7 +126,6 @@ public class parser {
                         newObject.setAttributes(null);
                     }
                     if(objectClass.get("height") == null){
-                        //TODO
                         newObject.setHeight(0);
                     }
                     else{
@@ -144,12 +133,26 @@ public class parser {
                         newObject.setHeight((int) height);
                     }
                     if(objectClass.get("width") == null){
-                        //TODO
                         newObject.setWidth(0);
                     }
                     else{
                         long width = (long) objectClass.get("width");
                         newObject.setWidth((int) width);
+                    }
+                    if(objectClass.get("xAxis") == null){
+                        newObject.setxAxis(0);
+                    }
+                    else{
+//                        System.out.println(objectClass.get("xAxis").getClass());
+                        double x = Double.parseDouble((objectClass.get("xAxis")).toString());
+                        newObject.setxAxis((double) x);
+                    }
+                    if(objectClass.get("yAxis") == null){
+                        newObject.setyAxis(0);
+                    }
+                    else{
+                        double y =  Double.parseDouble(objectClass.get("yAxis").toString());
+                        newObject.setyAxis((double) y);
                     }
 
 
@@ -183,6 +186,12 @@ public class parser {
                                 break;
                             case "inheritance":
                                 newObject.setConType(objectJSON.ConType.INHERITANCE);
+                                break;
+                            case "multiplicity":
+                                newObject.setConType(objectJSON.ConType.MULTIPLICITY);
+                                break;
+                            case "realization":
+                                newObject.setConType(objectJSON.ConType.REALIZATION);
                                 break;
                         }
                     }
@@ -256,6 +265,12 @@ public class parser {
             return null;
         }
     }
+    /**
+     * Method checkJSON(JSONArray).
+     *      Checks JSON file for syntax errors.
+     *      Returns -1 in case of errors.
+     *      Otherwise, 0.
+     */
     private static int checkJSON(JSONArray jsonArr){
         for(int i = 0; i < jsonArr.size(); i++){
             JSONObject object = (JSONObject) jsonArr.get(i);
