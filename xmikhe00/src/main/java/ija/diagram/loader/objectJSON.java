@@ -2,7 +2,13 @@ package ija.diagram.loader;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Trida reprezentuje jednotlivu reprezentace tridy nebo vztahu v JSON souboru
+ * obsahuje metody pro uchovani polozek a prace s nima
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.0.5
+ */
 public class objectJSON {
     public enum ItemType{
         CLASS,
@@ -45,6 +51,11 @@ public class objectJSON {
     int width;
     double xAxis;
     double yAxis;
+
+    double startX;
+    double startY;
+    double endX;
+    double endY;
 
     public void addOperation(attrJSON operation){
         this.operations.add(operation);
@@ -148,5 +159,37 @@ public class objectJSON {
 
     public double getyAxis() {
         return yAxis;
+    }
+
+    public double getStartX() {
+        return startX;
+    }
+
+    public void setStartX(double starX) {
+        this.startX = starX;
+    }
+
+    public double getStartY() {
+        return startY;
+    }
+
+    public void setStartY(double startY) {
+        this.startY = startY;
+    }
+
+    public double getEndX() {
+        return endX;
+    }
+
+    public void setEndX(double endX) {
+        this.endX = endX;
+    }
+
+    public double getEndY() {
+        return endY;
+    }
+
+    public void setEndY(double endY) {
+        this.endY = endY;
     }
 }

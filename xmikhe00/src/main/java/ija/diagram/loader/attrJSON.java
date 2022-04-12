@@ -1,7 +1,12 @@
 package ija.diagram.loader;
 
 import ija.diagram.classdiagram.model.Item;
-
+/**
+ * Trida reprezentuje jednotlivy atribut v {@link objectJSON}
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.0.5
+ */
 public class attrJSON {
 
 //    public enum AccessModifiers{

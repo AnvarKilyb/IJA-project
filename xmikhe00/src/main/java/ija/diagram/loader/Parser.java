@@ -8,18 +8,22 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
+/**
+ * Parser pro načten souboru
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.0.5
+ */
 public class Parser {
     private ArrayList<objectJSON> itemList = new ArrayList<>();
 
     /**
-     * Method parseJSON()
-     *      Parse JSON file from input.json.
-     *      Creates list of objects, that are represented as classes and relationships.
-     *      Each specified object contains:
-     *          name, type(class,relationship), list of attributes, list of methods, height, width, x Axis, y Axis.
-     *          start relations, end relation, relation type(association, aggregation, e.t.c).
-     *      Returns above mentioned list.
+     * Parsuje JSON soubor ze souboru input.json.
+     * Vytvoří seznam objektů, které jsou reprezentovány jako třídy a vztahy.
+     * Každý zadaný objekt obsahuje:
+     *      název, typ (třída, vztah), seznam atributů, seznam metod, výška, šířka, Osa x, osa y.
+     *      počáteční relace, koncová relace, typ relace (asociace, agregace, e.t. c).
+     * Vrací výše uvedený seznam.
      * */
     public ArrayList<objectJSON> parseJSON(){
         JSONArray jsonArr = fileOpen();
@@ -170,6 +174,35 @@ public class Parser {
             newObject.setType(objectJSON.ItemType.CONNECTION);
             String name = (String) objectConnection.get("name");
             newObject.setName(name);
+            if(objectConnection.get("startX") == null){
+                newObject.setStartX(0);
+            }
+            else{
+                double x = Double.parseDouble((objectConnection.get("startX")).toString());
+                newObject.setStartX(x);
+            }
+            if(objectConnection.get("startY") == null){
+                newObject.setStartY(0);
+            }
+            else{
+                double y = Double.parseDouble((objectConnection.get("startY")).toString());
+                newObject.setStartY(y);
+            }
+            if(objectConnection.get("endX") == null){
+                newObject.setEndX(0);
+            }
+            else{
+                double x = Double.parseDouble((objectConnection.get("endX")).toString());
+                newObject.setEndX(x);
+            }
+
+            if(objectConnection.get("endY") == null){
+                newObject.setEndY(0);
+            }
+            else{
+                double y = Double.parseDouble((objectConnection.get("endY")).toString());
+                newObject.setEndY(y);
+            }
             String start = (String) objectConnection.get("start");
             String end = (String) objectConnection.get("end");
             String type = (String) objectConnection.get("type");
@@ -267,10 +300,8 @@ public class Parser {
 //    public static void
 
     /**
-     * Method checkJSON(JSONArray).
-     *      Checks JSON file for syntax errors.
-     *      Returns -1 in case of errors.
-     *      Otherwise, 0.
+     * Kontroluje JSON Soubor pro chyby syntaxe.
+     * @return Vrací -1 v případě chyb jinak 0.
      */
     private static int checkJSON(JSONArray jsonArr){
         if(jsonArr == null){

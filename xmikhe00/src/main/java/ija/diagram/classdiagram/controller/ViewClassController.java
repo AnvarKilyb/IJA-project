@@ -1,23 +1,37 @@
+
 package ija.diagram.classdiagram.controller;
-
-
 import ija.diagram.classdiagram.view.ViewClass;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 
+/**
+ * Ovladač kontrolue akce s vizuální částí,
+ * posunuti tridy, dodani vztahu(beta)
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.0.5
+ */
 public class ViewClassController{
 
+    /**
+     * Instance hlavního ovladače
+     */
     private final ControllerMain controllerMain;
-//    private double lineStartX;
-//    private double lineStartY;
+    /**
+     * Proměna pro zavádění vztahu
+     */
     private Line newLine;
 
     public ViewClassController(ControllerMain controllerMain){
         this.controllerMain = controllerMain;
     }
 
+    /**
+     * Pripravuje vazbu
+     * @param mouseEvent akce tlaceni levym tlacitkem mysi na tridu
+     */
     public void clickToLine(MouseEvent mouseEvent){
         if(mouseEvent.getButton() == MouseButton.PRIMARY) {
             double X = mouseEvent.getX();
@@ -27,10 +41,6 @@ public class ViewClassController{
             if(X < 4 || X > viewClass.getWidth() - 4 || Y < 4 || Y > viewClass.getHeight() -4){
 //                ViewClass viewClass = (ViewClass) mouseEvent.getSource();
                 Pane mainPane = (Pane) viewClass.getParent();
-                System.out.println("Xm" + X);
-                System.out.println("Ym" + Y);
-                System.out.println("Xcl" + viewClass.getLayoutX());
-                System.out.println("Ycl" + viewClass.getLayoutX());
                 newLine.setStartX(viewClass.getLayoutX() + X);
                 newLine.setStartY(viewClass.getLayoutY() + Y);
                 newLine.setEndX(viewClass.getLayoutX() + X);
@@ -41,7 +51,10 @@ public class ViewClassController{
             }
         }
     }
-
+    /**
+     * Prenasi tridu do noveho mista nebo prenasi vztah
+     * @param mouseEvent akce hybani tridou mysi s zazatym levym tlacitkem mysi
+     */
     public void classDraggedMouse(MouseEvent mouseEvent){
         if(mouseEvent.getButton() == MouseButton.MIDDLE) {
             ViewClass viewClass = (ViewClass) mouseEvent.getSource();
@@ -76,12 +89,6 @@ public class ViewClassController{
 
         }
     }
-
-
-//    public static void classMenu(MouseButton mouseButton){
-//
-//    }
-
 
     public void classMenu(MouseEvent mouseButton) {
         if(mouseButton.getButton() == MouseButton.SECONDARY){

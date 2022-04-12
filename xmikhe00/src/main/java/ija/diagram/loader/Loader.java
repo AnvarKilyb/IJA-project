@@ -3,9 +3,16 @@ package ija.diagram.loader;
 import ija.diagram.classdiagram.model.ClassDiagram;
 import ija.diagram.classdiagram.model.DClass;
 import ija.diagram.classdiagram.model.Relationships;
+import ija.diagram.loader.Parser;
 
 import java.util.ArrayList;
 
+/**
+ * Trida uz soubory ktery byli z analizirovany prevadi do modeli
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.0.5
+ */
 public class Loader {
     private final ClassDiagram classDiagram;
     private ArrayList<objectJSON> list;
@@ -24,12 +31,7 @@ public class Loader {
         this.classDiagram = classDiagram;
     }
 
-    /**
-     * Method parseDiagram()
-     *      Receives objectJson object from parsed list.
-     *      Creates DiagramCLass object, fills its parameters(argumentsList,methodsList,relationshipsList,xAxis,yAxis).
-     *      Returns specified object.
-     */
+
     private DClass parseDiagram(objectJSON item) {
 //        ArrayList<objectJSON> list = parser.parseJSON();
         DClass dClass  = parseClasses(item);
@@ -37,27 +39,31 @@ public class Loader {
         for (objectJSON relation : list) {
             if (relation.getType() == objectJSON.ItemType.CONNECTION) {
                 if (relation.getStartConnection().equals(item.getName())) {
+                    double sX = relation.getStartX();
+                    double sY = relation.getStartY();
+                    double eX = relation.getEndX();
+                    double eY = relation.getEndY();
                     switch (relation.getConType()) {
                         case ASSOCIATION:
-                            dClass.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.ASSOCIATION);
+                            dClass.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.ASSOCIATION, sX, sY, eX, eY);
                             break;
                         case AGGREGATION:
-                            dClass.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.AGGREGATION);
+                            dClass.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.AGGREGATION, sX, sY, eX, eY);
                             break;
                         case REFLEXIVE_ASSOCIATION:
-                            dClass.addRelationship(relation.getEndConnection(), Relationships.Type.REFLEXIVEASSOCIATION, Relationships.Type.REFLEXIVEASSOCIATION);
+                            dClass.addRelationship(relation.getEndConnection(), Relationships.Type.REFLEXIVEASSOCIATION, Relationships.Type.REFLEXIVEASSOCIATION, sX, sY, eX, eY);
                             break;
                         case MULTIPLICITY:
-                            dClass.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.MULTIPLICITY);
+                            dClass.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.MULTIPLICITY, sX, sY, eX, eY);
                             break;
                         case COMPOSITION:
-                            dClass.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.COMPOSITION);
+                            dClass.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.COMPOSITION, sX, sY, eX, eY);
                             break;
                         case INHERITANCE:
-                            dClass.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.INHERITANCE_GENERALIZATION);
+                            dClass.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.INHERITANCE_GENERALIZATION, sX, sY, eX, eY);
                             break;
                         case REALIZATION:
-                            dClass.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.REALIZATION);
+                            dClass.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.REALIZATION, sX, sY, eX, eY);
                             break;
                     }
                 }
@@ -65,12 +71,7 @@ public class Loader {
         }
         return dClass;
     }
-    /**
-     * Method parseClasses()
-     *      Aux method of parseDiagram(objectJSON).
-     *      Determine attributes and methods of class.
-     *
-     */
+
     private DClass parseClasses(objectJSON item){
         DClass dClass = new DClass(item.getName());
         if(item.getAttributes() != null){

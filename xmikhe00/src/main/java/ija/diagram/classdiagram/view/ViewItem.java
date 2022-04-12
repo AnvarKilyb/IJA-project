@@ -5,6 +5,12 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
+/**
+ * Rozhrani pro reprezentace zovbrazeni elemntu ve tride
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.0.5
+ */
 public interface ViewItem {
 
     public void mainConstruct(ClassContextController classContextController);

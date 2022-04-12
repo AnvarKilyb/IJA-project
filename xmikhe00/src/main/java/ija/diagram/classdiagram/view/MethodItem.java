@@ -9,6 +9,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * Reprezentuje zobrazeni metodu ve tride
+ * obsahuje metody pro vytvoření a zmenu metodu
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.0.5
+ */
 public class MethodItem extends HBox implements ViewItem{
 
     private final ChoiceBox<String> accessModifier = new ChoiceBox<String>();
