@@ -1,5 +1,6 @@
 
 package ija.diagram.classdiagram.controller;
+import ija.diagram.classdiagram.model.DClass;
 import ija.diagram.classdiagram.view.ViewClass;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -58,6 +59,7 @@ public class ViewClassController{
     public void classDraggedMouse(MouseEvent mouseEvent){
         if(mouseEvent.getButton() == MouseButton.MIDDLE) {
             ViewClass viewClass = (ViewClass) mouseEvent.getSource();
+            DClass dClass = controllerMain.getViewDiagram().returnDClass(viewClass);
             double X = mouseEvent.getX();
             double Y = mouseEvent.getY();
             double nx = viewClass.getLayoutX() - (viewClass.getWidth() / 2) + X;
@@ -70,24 +72,27 @@ public class ViewClassController{
                 viewClass.setLayoutX(nx);
                 viewClass.setLayoutY(ny);
             }
-        }else if(mouseEvent.getButton() == MouseButton.PRIMARY){
-            ViewClass viewClass = (ViewClass) mouseEvent.getSource();
-            Pane mainPane = (Pane) viewClass.getParent();
-            double X = mouseEvent.getX();
-            double Y = mouseEvent.getY();
-            double endX = viewClass.getLayoutX() + X;
-            double endY = viewClass.getLayoutY() + Y;
-            if (endX < 0 && endY > 0) {
-                newLine.setEndY(endY);
-            } else if (endY < 0 && endX > 0) {
-                newLine.setEndX(endX);
-            } else if (endX > 0 && endY > 0) {
-                newLine.setEndX(endX);
-                newLine.setEndY(endY);
-            }
-
-
+            dClass.setX(nx); //todo new stream?
+            dClass.setY(ny);
         }
+//        else if(mouseEvent.getButton() == MouseButton.PRIMARY){
+//            ViewClass viewClass = (ViewClass) mouseEvent.getSource();
+//            Pane mainPane = (Pane) viewClass.getParent();
+//            double X = mouseEvent.getX();
+//            double Y = mouseEvent.getY();
+//            double endX = viewClass.getLayoutX() + X;
+//            double endY = viewClass.getLayoutY() + Y;
+//            if (endX < 0 && endY > 0) {
+//                newLine.setEndY(endY);
+//            } else if (endY < 0 && endX > 0) {
+//                newLine.setEndX(endX);
+//            } else if (endX > 0 && endY > 0) {
+//                newLine.setEndX(endX);
+//                newLine.setEndY(endY);
+//            }
+//
+//
+//        }
     }
 
     public void classMenu(MouseEvent mouseButton) {

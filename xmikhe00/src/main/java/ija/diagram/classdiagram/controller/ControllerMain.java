@@ -5,6 +5,7 @@ import ija.diagram.classdiagram.model.Relationships;
 import ija.diagram.classdiagram.view.ViewClass;
 import ija.diagram.classdiagram.view.ViewDiagram;
 import ija.diagram.loader.Loader;
+import ija.diagram.loader.Writer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -67,6 +68,7 @@ public class ControllerMain {
     public void initialize(){
         buttonAdd.addEventFilter(ActionEvent.ACTION,this::addClassAction);
         buttonLoad.addEventFilter(ActionEvent.ACTION,this::loadFile);
+        buttonSave.addEventFilter(ActionEvent.ACTION,this::saveFile);
     }
 
     /**
@@ -78,6 +80,12 @@ public class ControllerMain {
         DClass dClass = classDiagram.addClass();
         ViewClass viewClass = viewDiagram.addNewClass(dClass);
         this.mainPane.getChildren().add(viewClass);
+    }
+
+    private void saveFile(ActionEvent event){
+        Writer writer = new Writer();
+        List<DClass> dClassList = classDiagram.getdClassList();
+        writer.writeJSON(dClassList);
     }
 
     /**

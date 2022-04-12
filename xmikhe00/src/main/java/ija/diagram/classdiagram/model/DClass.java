@@ -150,7 +150,7 @@ public class DClass extends Element{
         this.Y = y;
     }
 
-    public double setY(){
+    public double getY(){
         return this.Y;
     }
 

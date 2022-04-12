@@ -47,7 +47,7 @@ public class ViewDiagram {
         addMethods(viewClass, methodsList);
         diagramClassMap.put(viewClass, modelClass);
         viewClass.setX(modelClass.getX());
-        viewClass.setY(modelClass.setY());
+        viewClass.setY(modelClass.getY());
         //todo x, y
         return viewClass;
     }

@@ -53,7 +53,7 @@ public class Parser {
 
     private JSONArray fileOpen(){
         JSONParser jsonParser = new JSONParser();
-        try(FileReader reader = new FileReader("/home/goofy/study/iJA/IJA-project/xmikhe00/src/main/resources/input.json")){
+        try(FileReader reader = new FileReader("data/input.json")){
             Object objects = jsonParser.parse(reader);
             JSONArray jsonArr = (JSONArray) objects;
             if (checkJSON(jsonArr) == -1)
