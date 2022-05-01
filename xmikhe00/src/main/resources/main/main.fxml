@@ -1,38 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #808080;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="712.0" prefWidth="1148.0" stylesheets="@WindowStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox layoutX="7.0" prefHeight="400.0" prefWidth="187.0" style="-fx-background-color: blue;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="leftBar" layoutY="-1.0" prefHeight="740.0" prefWidth="267.0" stylesheets="@WindowStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane prefHeight="44.0" prefWidth="188.0">
+            <VBox prefHeight="369.0" prefWidth="268.0">
                <children>
-                  <Button fx:id="buttonLoad" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" text="Load" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Pane prefHeight="30.0" prefWidth="268.0" />
+                  <Button fx:id="buttonSave" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="0.0" prefWidth="268.0" stylesheets="@WindowStyle.css" text="Save" textAlignment="CENTER" textFill="#969696">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                     <font>
+                        <Font name="LEMON MILK Regular" size="16.0" />
+                     </font>
+                  </Button>
+                  <Pane prefHeight="24.0" prefWidth="268.0" />
+                  <Button fx:id="buttonLoad" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="0.0" prefWidth="268.0" stylesheets="@WindowStyle.css" text="Load" textAlignment="CENTER" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                     <font>
+                        <Font name="LEMON MILK Regular" size="16.0" />
+                     </font>
+                  </Button>
+                  <Pane prefHeight="24.0" prefWidth="268.0" />
+                  <Button fx:id="buttonAdd" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="0.0" prefWidth="270.0" stylesheets="@WindowStyle.css" text="Add new class" textAlignment="CENTER" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                     <font>
+                        <Font name="LEMON MILK Regular" size="16.0" />
+                     </font>
+                  </Button>
+                  <Pane prefHeight="24.0" prefWidth="268.0" />
                </children>
-            </AnchorPane>
-            <AnchorPane prefHeight="44.0" prefWidth="188.0">
+            </VBox>
+            <VBox layoutX="-1.0" layoutY="318.0" prefHeight="92.0" prefWidth="268.0" AnchorPane.bottomAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="370.0">
                <children>
-                  <Button fx:id="buttonSave" mnemonicParsing="false" text="Save" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Button fx:id="sequenceDiagram1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="64.0" prefWidth="310.0" stylesheets="@WindowStyle.css" text="New sequence diagram" textAlignment="CENTER" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                     <font>
+                        <Font name="LEMON MILK Regular" size="16.0" />
+                     </font>
+                  </Button>
+                  <Pane prefHeight="24.0" prefWidth="268.0" />
                </children>
-               <VBox.margin>
-                  <Insets top="3.0" />
-               </VBox.margin>
-            </AnchorPane>
-            <AnchorPane prefHeight="44.0" prefWidth="188.0">
-               <children>
-                  <Button fx:id="buttonAdd" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-               </children>
-               <VBox.margin>
-                  <Insets top="3.0" />
-               </VBox.margin>
-            </AnchorPane>
+            </VBox>
+            <Label id="labelWarning" alignment="TOP_LEFT" layoutX="19.0" layoutY="461.0" prefHeight="251.0" prefWidth="268.0" text="Warning!!!" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="461.0" />
          </children>
-      </VBox>
-      <Pane fx:id="mainPane" layoutX="237.0" layoutY="68.0" prefHeight="400.0" prefWidth="412.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="186.08787665819847" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      </AnchorPane>
+      <TabPane id="topbar" layoutX="245.0" prefHeight="733.0" prefWidth="913.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="268.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab id="topbuttom" text="CLASS DIAGRAM">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane id="mainPane" fx:id="mainPane" layoutX="8.0" layoutY="-1.0" prefHeight="702.0" prefWidth="920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab id="topbuttom" text="SEQUENCE DIAGRAM">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane prefHeight="704.0" prefWidth="912.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
    </children>
 </AnchorPane>

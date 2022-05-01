@@ -1,0 +1,86 @@
+#leftBar {
+    -fx-background-color: rgb(15, 15, 15);
+}
+
+
+.tab-pane .tab-header-area .tab-header-background {
+    /*-fx-opacity: 0;*/
+    -fx-background-color: rgb(15, 15, 15);
+}
+
+.root{
+    -fx-background-color: rgb(15, 15, 15);
+}
+
+.button{
+    -fx-background-color:rgb(48, 47, 46);
+    -fx-background-radius: 30 0 0 30;
+    -fx-padding:20px;
+    -fx-text-fill: rgb(150,150,150);
+}
+
+
+
+.button:hover {
+    -fx-background-color:rgb(54, 48, 119);
+    -fx-text-fill:rgb(211, 211, 211);
+    /* -fx-font-weight:bold;  */
+    -fx-border-radius: 30 0 0 30;
+    -fx-border-color: rgb(54, 48, 119);
+    /* -fx-border-weight: 2; */
+}
+
+.button:pressed {
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-background-color:rgb(61, 84, 133);
+    -fx-border-radius: 30 0 0 30;
+}
+
+
+#topbuttom{
+   -fx-background-radius: 10 10 10 10;
+   -fx-pref-width: 200;
+   -fx-background-color:rgb(48, 47, 46);
+   /* -fx-background-radius: 10 10 10 10; */
+   /* -fx-text-fill:rgb(255, 255, 255); */
+}
+
+.tab-label{
+    -fx-text-fill: rgb(150,150,150);
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: rgb(255, 255, 255);
+    
+}
+
+#topbuttom:selected {
+    -fx-background-color: rgb(61, 84, 133);
+}
+
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-radius: 0px;
+    -fx-border-width:  0 0 0 0;
+}
+
+
+
+#mainPane{
+    /* -fx-background-color:rgb(48, 47, 46); */
+    -fx-background-image: url('./grid.png');
+    -fx-background-repeat: repeat; 
+    -fx-background-size: 40 40; 
+    /* -fx-background-position: center center; */
+}
+#labelWarning{
+    -fx-background-color:rgb(48, 47, 46);
+    -fx-text-fill:rgb(255, 161, 110);
+}
+/* 
+black rgb(15, 15, 15)
+grea
+
+
+
+
+*/
