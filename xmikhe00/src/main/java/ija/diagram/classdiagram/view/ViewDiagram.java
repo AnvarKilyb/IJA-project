@@ -10,15 +10,15 @@ import java.util.Map;
 
 
 /**
- * Trida reprezentuje zobrazeni diagramy trid
- * obsahuje metody pro manipulave s jednotlivami tridami a vzthami
+ * Třída reprezentuje zobrazení diagramu tříd
+ * obsahuje metody pro manipulace s jednotlivými třídami a vztahy
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
  * @version 0.0.5
  */
 public class ViewDiagram {
     /**
-     * Uchovova instance tridy a instance ktera reprezentuje zobrazeni tridy
+     * Uchovává instance třídy a instance která reprezentuje zobrazení třídy
      */
     private Map<ViewClass, DClass> diagramClassMap = new HashMap<ViewClass, DClass>();
     private ControllerMain controllerMain;
@@ -27,14 +27,14 @@ public class ViewDiagram {
         this.controllerMain = controllerMain;
     }
     /**
-     * Uchovova instance vztahu a instance ktera reprezentuje zobrazeni vztahu
+     * Uchovává instance vztahu a instance která reprezentuje zobrazení vztahu
      */
     private Map<Line, Relationships> relationshipsLineMap = new HashMap<Line, Relationships>(); //todo
 
     /**
-     * Vytvori instance ktera reprezentuje zobrazeni tridy a uchova ji
-     * @param modelClass instance tridy
-     * @return vrati vytvorenou tridu
+     * Vytvoří instance která reprezentuje zobrazení třídy a uchová ji
+     * @param modelClass instance třídy
+     * @return vrátí vytvořenou třídu
      */
     public ViewClass addNewClass(DClass modelClass){
         ViewClass viewClass = new ViewClass();
@@ -53,9 +53,9 @@ public class ViewDiagram {
     }
 
     /**
-     * Dodova zobraeni argumentu do instance zobrazeni tridy
-     * @param viewClass instance zobrazeni tridy
-     * @param argumentsList seznma argumentu
+     * Dodává zobrazení argumentu do instance zobrazení třídy
+     * @param viewClass instance zobrazeni třídy
+     * @param argumentsList seznam argumentů
      */
     private void addArguments(ViewClass viewClass, List<Arguments> argumentsList){
         for(Arguments argument : argumentsList){
@@ -64,8 +64,8 @@ public class ViewDiagram {
     }
 
     /**
-     * Dodova zobraeni argumentu do instance zobrazeni tridy
-     * @param viewClass instance zobrazeni tridy
+     * Dodává zobrazení argumentu do instance zobrazeni třídy
+     * @param viewClass instance zobrazeni třídy
      * @param argument argument
      */
     public void addArguments(ViewClass viewClass, Arguments argument){
@@ -74,9 +74,9 @@ public class ViewDiagram {
     }
 
     /**
-     * Dodova zobrazeni metodu do instance zobrazeni tridy
-     * @param viewClass instance zobrazeni tridy
-     * @param methodsList seznma metodu
+     * Dodává zobrazení metod do instance zobrazení třídy
+     * @param viewClass instance zobrazeni třídy
+     * @param methodsList seznam metodu
      */
     private void addMethods(ViewClass viewClass, List<Methods> methodsList){
         for(Methods method : methodsList){
@@ -85,8 +85,8 @@ public class ViewDiagram {
     }
 
     /**
-     * Dodova zobraeni argumentu do instance zobrazeni tridy
-     * @param viewClass instance zobrazeni tridy
+     * Dodává zobrazení argumentu do instance zobrazení třídy
+     * @param viewClass instance zobrazení třídy
      * @param method metod
      */
     public void addMethods(ViewClass viewClass, Methods method){
@@ -110,5 +110,18 @@ public class ViewDiagram {
         line.setEndY(relationships.getEndY());
         relationshipsLineMap.put(line, relationships);
         return line;
+    }
+
+    public void deleteAll(){
+        diagramClassMap.clear();
+        relationshipsLineMap.clear();
+    }
+
+    public Map<ViewClass,DClass> getDiagramClassMap(){
+        return diagramClassMap;
+    }
+
+    public Map<Line,Relationships> getRelationshipsLineMap(){
+        return relationshipsLineMap;
     }
 }

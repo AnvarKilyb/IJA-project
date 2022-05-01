@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 /**
- * Rozhrani pro reprezentace zovbrazeni elemntu ve tride
+ * Rozhraní pro reprezentace zobrazení elementu ve třídě
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
  * @version 0.0.5

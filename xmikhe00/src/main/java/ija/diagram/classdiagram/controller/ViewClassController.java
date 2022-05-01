@@ -8,8 +8,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 
 /**
- * Ovladač kontrolue akce s vizuální částí,
- * posunuti tridy, dodani vztahu(beta)
+ * Ovladač kontroluje akce s vizuální částí,
+ * posunutí třídy, dodaní vztahu(beta)
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
  * @version 0.0.5
@@ -30,8 +30,8 @@ public class ViewClassController{
     }
 
     /**
-     * Pripravuje vazbu
-     * @param mouseEvent akce tlaceni levym tlacitkem mysi na tridu
+     * Připravuje vazbu
+     * @param mouseEvent akce tlačení levým tlačítkem myši na třídu
      */
     public void clickToLine(MouseEvent mouseEvent){
         if(mouseEvent.getButton() == MouseButton.PRIMARY) {
@@ -53,8 +53,8 @@ public class ViewClassController{
         }
     }
     /**
-     * Prenasi tridu do noveho mista nebo prenasi vztah
-     * @param mouseEvent akce hybani tridou mysi s zazatym levym tlacitkem mysi
+     * Přenáší třídu do nového místa nebo přenáší vztah
+     * @param mouseEvent akce hýbání třídou, pomocí myší se stisknutým středním tlačítkem
      */
     public void classDraggedMouse(MouseEvent mouseEvent){
         if(mouseEvent.getButton() == MouseButton.MIDDLE) {

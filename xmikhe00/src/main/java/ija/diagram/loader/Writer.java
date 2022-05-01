@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 /**
- * Ulozi diagramu trid do JSON souboru
+ * Uloží diagramu třídu do JSON souboru
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
  * @version 0.0.5

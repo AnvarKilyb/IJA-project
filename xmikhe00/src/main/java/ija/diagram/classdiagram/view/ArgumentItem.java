@@ -10,8 +10,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
- * Reprezentuje zobrazeni argumentu ve tride
- * obsahuje metody pro vytvoření a zmenu argumentu
+ * Reprezentuje zobrazení argumentu ve třídě
+ * obsahuje metody pro vytvoření a změnu argumentu
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
  * @version 0.0.5

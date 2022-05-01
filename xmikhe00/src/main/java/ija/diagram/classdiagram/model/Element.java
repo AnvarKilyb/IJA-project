@@ -2,7 +2,7 @@ package ija.diagram.classdiagram.model;
 
 
 /**
- * Abstraktni trida reprezentuje jednotlivy element
+ * Abstraktni třída reprezentuje jednotlivý element
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
  * @version 0.0.5

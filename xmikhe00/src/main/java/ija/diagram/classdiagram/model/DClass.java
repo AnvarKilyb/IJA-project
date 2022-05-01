@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Reprezentuje tridu v diagrame trid
- * obsahuje metody pro vytvoření a odstranění metod a argumentů
+ * Reprezentuje třídu v diagramu tříd
+ * obsahuje metody pro vytvaření a odstranění metod a argumentů
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
  * @version 0.0.5
@@ -38,10 +38,10 @@ public class DClass extends Element{
     }
 
     /**
-     * Vytvari argument a ulozi ho do seznamu argumentu
-     * @param name jmeno argumentu
+     * Vytvoří argument a uloží ho do seznamu argumentů
+     * @param name jméno argumentu
      * @param accessModifier typ přístupového modifikátoru
-     * @param type typargumentu
+     * @param type typ argumentu
      */
     public Arguments addArgument(String name, Item.AccessModifier accessModifier,String type ){
         Arguments newArg = new Arguments(name,accessModifier);
@@ -51,7 +51,7 @@ public class DClass extends Element{
     }
 
     /**
-     * Vytvari a ulozi prazny argument ho do seznamu argumentu
+     * Vytvoří a uloží prázdný argument do seznamu argumentu
      */
     public Arguments addArgument(){
         Arguments newArg = new Arguments();
@@ -60,7 +60,7 @@ public class DClass extends Element{
     }
 
     /**
-     * Odstrani argument
+     * Odstraní argument
      * @param argument instance argumentu
      */
     public void argumentDelete(Arguments argument){
@@ -68,8 +68,8 @@ public class DClass extends Element{
     }
 
     /**
-     * Vytvari metod a ulozi ho do seznamu metodu
-     * @param name jmeno metodu
+     * Vytvoří metodu a uloží ji do seznamu metod
+     * @param name jméno metodu
      * @param accessModifier typ přístupového modifikátoru
      */
     public Methods addMethod(String name, Item.AccessModifier accessModifier){
@@ -79,7 +79,7 @@ public class DClass extends Element{
     }
 
     /**
-     * Vytvari a ulozi prazny metod ho do seznamu argumentu
+     * Vytvoří a uloží prázdnou metodu do seznamu argumentů
      */
     public Methods addMethod(){
         Methods methods = new Methods();
@@ -88,15 +88,15 @@ public class DClass extends Element{
     }
 
     /**
-     * Odstrani metod
-     * @param method instance metodu
+     * Odstraní metodu
+     * @param method instance metod
      */
     public void methodDelete(Methods method){
         this.methodsList.remove(method);
     }
 
     /**
-     * @deprecated bude zmeneno a z tridy reprezentace trid presunuto do tridy {@link ClassDiagram}
+     * @deprecated bude změněno a z třídy reprezentace tříd přesunuto do třídy {@link ClassDiagram}
      */
     public Relationships addRelationship(String nameClassTo, Relationships.Type typeFrom, Relationships.Type typeTo){
         Relationships relationships = new Relationships(nameClassTo,typeFrom,typeTo);
@@ -105,7 +105,7 @@ public class DClass extends Element{
     }
 
     /**
-     * @deprecated bude zmeneno a z tridy reprezentace trid presunuto do tridy {@link ClassDiagram}
+     * @deprecated bude změněno a z třídy reprezentace tříd přesunuto do třídy {@link ClassDiagram}
      */
     public Relationships addRelationship(String nameClassTo, Relationships.Type typeFrom, Relationships.Type typeTo,
                                          double startX, double startY, double endX, double endY){
@@ -115,7 +115,7 @@ public class DClass extends Element{
     }
 
     /**
-     * @deprecated bude zmeneno a z tridy reprezentace trid presunuto do tridy {@link ClassDiagram}
+     * @deprecated bude změněno a z třídy reprezentace tříd přesunuto do třídy {@link ClassDiagram}
      */
     public Relationships addRelationship(String nameClassTo){
         Relationships relationships = new Relationships(nameClassTo);
@@ -124,14 +124,14 @@ public class DClass extends Element{
     }
 
     /**
-     * @deprecated bude zmeneno a z tridy reprezentace trid presunuto do tridy {@link ClassDiagram}
+     * @deprecated bude změněno a z třídy reprezentace tříd přesunuto do třídy {@link ClassDiagram}
      */
     public void relationshipDelete(Relationships relationships){
         this.relationshipsList.remove(relationships);
     }
 
     /**
-     * @deprecated bude zmeneno a z tridy reprezentace trid presunuto do tridy {@link ClassDiagram}
+     * @deprecated bude změněno a z třídy reprezentace tříd přesunuto do třídy {@link ClassDiagram}
      */
     public List<Relationships> returnRelationShipList(){
         return relationshipsList;

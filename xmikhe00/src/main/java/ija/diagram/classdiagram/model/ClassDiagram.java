@@ -4,24 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Trida reprezentuje diagramu trid
- * obsahuje metody pro manipulave s jednotlivami tridami a vzthami
+ * Třída reprezentuje diagram tříd
+ * obsahuje metody pro manipulaci s jednotlivými třídami a vztahy
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
  * @version 0.0.5
  */
 public class ClassDiagram {
     /**
-     * Seznam pro uchovani jednotlivych trid
+     * Seznam pro uchovaní jednotlivých tříd
      */
     private List<DClass> dClassList = new ArrayList<DClass>();
-    /**Automaticke jmeno pro tridu vytvarenu uzivatelem**/
+    /**Automatické jméno pro třídu vytvářenou uživatelem**/
     private int classNameCounter = 0;
 
     /**
-     * Vytvori a uchova novou tridu
-     * @param name jmeno tridy
-     * @return vrati vytvorenou tridu
+     * Vytvoří a uchová novou třídu
+     * @param name jméno třídy
+     * @return vrátí vytvořenou třídu
      */
     public DClass addClass(String name){
         DClass cl  = returnClass(name);
@@ -35,16 +35,16 @@ public class ClassDiagram {
     }
 
     /**
-     * Uchova novou tridu ktera byla vytvorina v jinem miste
+     * Uchová novou třídu která byla vytvořena v jiném mistě
      */
     public void addClass(DClass dClass){
         dClassList.add(dClass);
     }
 
     /**
-     * Vytvori a uchova novou tridu
-     * Jmeno doda automaticke
-     * @return vrati vytvorenou tridu
+     * Vytvoří a uchová novou třídu
+     * Jméno dodá automaticky
+     * @return vrátí vytvořenou třídu
      */
     public DClass addClass(){
         String name = Integer.toString(classNameCounter);
@@ -55,7 +55,7 @@ public class ClassDiagram {
     }
 
     /**
-     * Zmeni jmeno tridy
+     * Změní jméno třídy
      */
     public void classChange(String name){
         DClass cl = returnClass(name);
@@ -63,23 +63,23 @@ public class ClassDiagram {
     }
 
     /**
-     * Odstrani tridu
-     * @param name jmeno tridy
+     * Odstraní třídu
+     * @param name jméno třídy
      */
     public void classDelete(String name){
         this.dClassList.remove(returnClass(name));
     }
 
     /**
-     * Odstrani tridu
-     * @param dClass instance tridy
+     * Odstraní třídu
+     * @param dClass instance třídy
      */
     public void classDelete(DClass dClass){
         this.dClassList.remove(dClass);
     }
 
     /**
-     * @return vrati instance tridy
+     * @return vrátí instanci třídy
      */
     public DClass returnClass(String name){
         for(DClass cl: dClassList){
@@ -100,9 +100,13 @@ public class ClassDiagram {
 //    }
 
     /**
-     * @return vrati seznam trid
+     * @return vráti seznam tříd
      */
     public List<DClass> getdClassList(){
         return dClassList;
+    }
+
+    public void deleteAll(){
+        dClassList.clear();
     }
 }

@@ -8,7 +8,7 @@ import ija.diagram.loader.Parser;
 import java.util.ArrayList;
 
 /**
- * Trida uz soubory ktery byli z analizirovany prevadi do modeli
+ * Třída převádí do modelu dat již analyzované soubory
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
  * @version 0.0.5
@@ -20,6 +20,9 @@ public class Loader {
 
     public void classLoad(){
         list = parser.parseJSON();
+        if(list == null){
+            return;
+        }
         for(objectJSON item: list){
             if(item.getType() == objectJSON.ItemType.CLASS){
                 classDiagram.addClass(parseDiagram(item));

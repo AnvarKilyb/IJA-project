@@ -1,7 +1,7 @@
 package ija.diagram.classdiagram.model;
 
 /**
- * Abstraktni trida reprezentuje jednotlivy item v tride
+ * Abstraktní třída reprezentuje jednotlivý item v třídě
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
  * @version 0.0.5
@@ -36,7 +36,7 @@ abstract public class Item extends Element{
     }
 
     /**
-     * Method prevadi enum typ v String
+     * Metoda převádí enum typ v String
      * @param accessModifier enum přístupový modifikátor
      * @return String
      */

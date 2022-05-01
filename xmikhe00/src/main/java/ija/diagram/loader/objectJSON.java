@@ -3,8 +3,8 @@ package ija.diagram.loader;
 import java.util.ArrayList;
 import java.util.List;
 /**
- * Trida reprezentuje jednotlivu reprezentace tridy nebo vztahu v JSON souboru
- * obsahuje metody pro uchovani polozek a prace s nima
+ * Třída reprezentuje jednotlivou reprezentaci třídy nebo vztahu v JSON souboru
+ * obsahuje metody pro uchování položek a práci s nimi
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
  * @version 0.0.5

@@ -25,7 +25,7 @@ public class Main extends Application {
 
     /**
      *Metoda main vytváří okno uživatelského rozhraní,
-     * tak ze slouží bufferom pro zavádění instance ovladač{@link ControllerMain} a hlavni třidy pro model {@link ClassDiagram} a view {@link ViewDiagram}
+     * slouží bufferem pro zavádění instance ovladač{@link ControllerMain} a hlavní třídy pro model {@link ClassDiagram} a view {@link ViewDiagram}
      */
     @Override
     public void start(Stage stage) throws IOException {

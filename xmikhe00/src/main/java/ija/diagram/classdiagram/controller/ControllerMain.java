@@ -15,7 +15,7 @@ import javafx.scene.shape.Line;
 import java.util.List;
 /**
  * Hlavní ovladač,
- * kontroluje hlavni rozhraní
+ * kontroluje hlavní rozhraní
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
  * @version 0.0.5
@@ -28,7 +28,7 @@ public class ControllerMain {
 
     /**
      * Konstruktér ovladače
-     * předáváme do lokálních parametru instance tříd
+     * předáváme do lokálních parametrů instance tříd
      * @param classDiagram instance třídy {@link ClassDiagram}
      * @param viewDiagram instance třídy {@link ViewDiagram}
      */
@@ -62,7 +62,7 @@ public class ControllerMain {
     private Pane mainPane;
 
     /**
-     * Method spuštěn jen jednou pri spuštění programu, pro inicializace ovladače
+     * Metoda je spuštěna jen jednou při spuštění programu, pro inicializaci ovladače
      * pro elementy hlavního rozhraní (add,load)
      */
     public void initialize(){
@@ -72,9 +72,9 @@ public class ControllerMain {
     }
 
     /**
-     * Metod bude spušten pri ztlaceni tlacitka add
-     * vytvorit model a view třídy a zobrazí je
-     * @param event prenaší akce tlaceni na tlacitko
+     * Metoda bude spuštěna při zatlačeni tlačítka add
+     * vytvoří model a view třídy a zobrazí je
+     * @param event přenáší akce tlačení na tlačítko
      */
     private void addClassAction(ActionEvent event){
         DClass dClass = classDiagram.addClass();
@@ -89,12 +89,22 @@ public class ControllerMain {
     }
 
     /**
-     * Metod bude spušten pri ztlaceni tlacitka load
-     * spustí parser souboru s data a vytvori nove tridy a zobrazi
-     * @param event prenaší akce tlaceni na tlacitko
+     * Metoda bude spuštěna při zatlačení tlačítka load
+     * spustí parser pro soubor s daty a vytvoří nové třídy a zobrazí je
+     * @param event přenáší akce tlačení na tlačítko
      */
     private void loadFile(ActionEvent event){
         //todo delete old diagram
+        for(ViewClass viewClass : viewDiagram.getDiagramClassMap().keySet()){
+            mainPane.getChildren().remove(viewClass);
+        }
+        for(Line line : viewDiagram.getRelationshipsLineMap().keySet()){
+            mainPane.getChildren().remove(line);
+        }
+        classDiagram.deleteAll();
+        viewDiagram.deleteAll();
+
+
         Loader loader = new Loader(classDiagram);
         loader.classLoad();
         for(DClass dClass : classDiagram.getdClassList()){

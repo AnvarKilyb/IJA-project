@@ -12,8 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Reprezentuje zobrazeni tridy v diagrame trid
- * obsahuje metody pro vytvoření a odstranění zobrazeni metod a zobrazeni argumentů
+ * Reprezentuje zobrazení třídy v diagramu tříd
+ * obsahuje metody pro vytvoření a odstranění zobrazení metod a zobrazení argumentů
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
  * @version 0.0.5
@@ -39,8 +39,8 @@ public class ViewClass extends VBox {
     }
 
     /**
-     * Nastavi paramenty pro nirmalni zabrazeni
-     * @param classContextController ovladac
+     * Nastaví parametry pro normální zařazení
+     * @param classContextController ovladač
      */
     private void mainConstructClass(ClassContextController classContextController){
         this.addContextMenu(classContextController);
@@ -54,10 +54,11 @@ public class ViewClass extends VBox {
         super.getChildren().add(arguments);
         super.getChildren().add(methods);
     }
+
     /**
      *
-     * Nastavi kontextovu nabídka pro zobrazeni tridy
-     * @param classContextController ovladac pro kontextovu nabídku
+     * Nastaví kontextovou nabídku pro zobrazení třídy
+     * @param classContextController ovladač pro kontextovou nabídku
      */
     private void addContextMenu(ClassContextController classContextController){
         MenuItem menuItem1 = new MenuItem("Add new argument");
@@ -73,9 +74,9 @@ public class ViewClass extends VBox {
     }
 
     /**
-     * Nastavi ovladaci pro zobrazeni tridy a priprai ji k zobrazeni
-     * @param classContextController ovladac
-     * @param viewClassController  ovladac
+     * Nastaví ovladač pro zobrazení třídy a připraví ji k zobrazení
+     * @param classContextController ovladač
+     * @param viewClassController  ovladač
      */
     public void show(ClassContextController classContextController, ViewClassController viewClassController){
         this.mainConstructClass(classContextController);
@@ -97,9 +98,9 @@ public class ViewClass extends VBox {
 //    }
 
     /**
-     * Vyvori instance zobrazeni argumentu a nastavi ovladaci
+     * Vytvoří instance zobrazení argumentu a nastaví ovladač
      * @param argument argument
-     * @param classContextController ovladac
+     * @param classContextController ovladač
      */
     public void addArgument(Arguments argument, ClassContextController classContextController){
         ArgumentItem argumentItem = new ArgumentItem();
@@ -113,9 +114,9 @@ public class ViewClass extends VBox {
     }
 
     /**
-     * Vyvori instance zobrazeni metodu a nastavi ovladaci
+     * Vytvoří instance zobrazeni metodu a nastaví ovladač
      * @param method metod
-     * @param classContextController ovladac
+     * @param classContextController ovladač
      */
     public void addMethod(Methods method ,ClassContextController classContextController){
         MethodItem methodItem = new MethodItem();

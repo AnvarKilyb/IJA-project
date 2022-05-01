@@ -2,8 +2,8 @@ package ija.diagram.classdiagram.model;
 
 
 /**
- * Argument tridy
- * obsahuje metody pro dadani argumentu a jeho zmeny
+ * Argument třídy
+ * obsahuje metody pro dadání položek argumentu a jeho změny
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
  * @version 0.0.5

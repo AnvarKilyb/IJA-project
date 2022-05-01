@@ -1,7 +1,7 @@
 package ija.diagram.classdiagram.model;
 
 /**
- * Trida reprezentuje jednotlivy method ve tride
+ * Třída reprezentuje jednotlivou metodu ve třídě
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
  * @version 0.0.5

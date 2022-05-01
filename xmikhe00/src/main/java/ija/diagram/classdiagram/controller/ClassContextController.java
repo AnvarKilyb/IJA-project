@@ -12,8 +12,8 @@ import javafx.scene.layout.VBox;
 
 /**
  * Ovladač pro kontextovou nabídku třídy
- * obsahuje metody pro vytvoření a odstranění metod a argumentů a take odstranění třídy
- * @author Vladislav Mikheda : xmikhe00
+ * obsahuje metody pro vytvoření a odstranění metod, argumentů a odstranění třídy
+ * @author Vladislav Mikheda : xmikhe0
  * @author Anvar Kilybayev : xkilyb00
  * @version 0.0.5
  */
@@ -28,8 +28,8 @@ public class ClassContextController {
     }
 
     /**
-     * Pridava argument do tridy
-     * @param mouseEvent akce vyuzite kontextovou nabídku pro dodani argumentu
+     * Přidává argument do třídy
+     * @param mouseEvent akce využívání kontextové nabídky pro dodání argumentu
      */
     public void addArgument(Event mouseEvent){
         MenuItem menuItem = (MenuItem) mouseEvent.getSource();
@@ -40,8 +40,8 @@ public class ClassContextController {
     }
 
     /**
-     * Pridava metod do tridy
-     * @param mouseEvent akce vyuzite kontextovou nabídku pro dodani metodu
+     * Přidává metod do třídy
+     * @param mouseEvent akce využívání kontextové nabídky pro dodání metod
      */
     public void addMethod(Event mouseEvent){
         MenuItem menuItem = (MenuItem) mouseEvent.getSource();
@@ -52,8 +52,8 @@ public class ClassContextController {
     }
 
     /**
-     * Odstrani argument do tridy
-     * @param mouseEvent akce vyuzite kontextovou nabídku pro odstraneni argumentu
+     * Odstraní argument z třídy
+     * @param mouseEvent akce využívaní kontextové nabídky pro odstranění argumentu
      */
     public void deleteArgument(Event mouseEvent){
         MenuItem menuItem = (MenuItem) mouseEvent.getSource();
@@ -68,8 +68,8 @@ public class ClassContextController {
     }
 
     /**
-     * Odstrani metod do tridy
-     * @param mouseEvent akce vyuzite kontextovou nabídku pro odstraneni metodu
+     * Odstraní metodu z třídy
+     * @param mouseEvent akce využívaní kontextové nabídky pro odstranění metod
      */
     public void deleteMethod(Event mouseEvent){
         MenuItem menuItem = (MenuItem) mouseEvent.getSource();
@@ -84,8 +84,8 @@ public class ClassContextController {
     }
 
     /**
-     * Odstrani tridu
-     * @param mouseEvent akce vyuzite kontextovou nabídku pro odstraneni tridy
+     * Odstraní třídu
+     * @param mouseEvent akce využívaní kontextové nabídky pro odstranění třídy
      */
     public void deleteClass(Event mouseEvent){
         MenuItem menuItem = (MenuItem) mouseEvent.getSource();

@@ -1,7 +1,7 @@
 package ija.diagram.classdiagram.model;
 
 /**
- * Trida reprezentuje vztahy mezi tridami
+ * Třída reprezentuje vztahy mezi třídami
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
  * @version 0.0.5
@@ -32,10 +32,10 @@ public class Relationships{
         }
 
     /**
-     * Vytvori instance vztahu
-     * @param nameClassTo jmeno tridy do ktere jde vztah
-     * @param typeFrom typ zacatku vztahu
-     * @param typeTo typ konca vztahu
+     * Vytvoří instance vztahů
+     * @param nameClassTo jméno třídy do které jde vztah
+     * @param typeFrom typ začátku vztahu
+     * @param typeTo typ konce vztahu
      */
     public Relationships(String nameClassTo, Type typeFrom, Type typeTo){
         this.nameClassTo = nameClassTo;
@@ -44,14 +44,14 @@ public class Relationships{
     }
 
     /**
-     * Vytvori instance vztahu
-     * @param nameClassTo jmeno tridy do ktere jde vztah
-     * @param typeFrom typ zacatku vztahu
-     * @param typeTo typ konca vztahu
+     * Vytvoří instance vztahu
+     * @param nameClassTo jméno třídy ke které jde vztah
+     * @param typeFrom typ začátku vztahu
+     * @param typeTo typ konce vztahu
      * @param startX souřadnice začátku
      * @param startY souřadnice začátku
-     * @param endX koncové souřadnice
-     * @param endY koncové souřadnice
+     * @param endX koncová souřadnice
+     * @param endY koncová souřadnice
      */
     public Relationships(String nameClassTo, Type typeFrom, Type typeTo, double startX, double startY, double endX, double endY){
         this.nameClassTo = nameClassTo;
@@ -64,10 +64,10 @@ public class Relationships{
     }
 
     /**
-     * Vytvori instance vztahu
-     * automaticke dodava typ přístupových modifikátoru
-     * @param nameClassTo jmeno tridy do ktere jde vztah
-    */
+     * Vytvoří instance vztahu
+     * automaticky dodává typ přístupových modifikátoru
+     * @param nameClassTo jméno třídy ke které jde vztah
+     */
     public Relationships(String nameClassTo){
         this.nameClassTo = nameClassTo;
         this.typeFrom = Type.ASSOCIATION;

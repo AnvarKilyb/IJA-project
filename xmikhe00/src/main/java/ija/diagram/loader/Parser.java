@@ -9,7 +9,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 /**
- * Parser pro načten souboru
+ * Parser pro načtení souboru
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
  * @version 0.0.5
@@ -18,13 +18,13 @@ public class Parser {
     private ArrayList<objectJSON> itemList = new ArrayList<>();
 
     /**
-     * Parsuje JSON soubor ze souboru input.json.
+     * Analyzuje JSON soubor ze souboru input.json.
      * Vytvoří seznam objektů, které jsou reprezentovány jako třídy a vztahy.
      * Každý zadaný objekt obsahuje:
      *      název, typ (třída, vztah), seznam atributů, seznam metod, výška, šířka, Osa x, osa y.
      *      počáteční relace, koncová relace, typ relace (asociace, agregace, e.t. c).
      * Vrací výše uvedený seznam.
-     * */
+     */
     public ArrayList<objectJSON> parseJSON(){
         JSONArray jsonArr = fileOpen();
 
@@ -63,7 +63,7 @@ public class Parser {
             System.err.println("Invalid input file");
             return null;
         } catch (IOException | ParseException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             return null;
         }
     }
