@@ -28,15 +28,24 @@ public class MethodItem extends HBox implements ViewItem{
         accessModifier.getItems().add("+");
         accessModifier.getItems().add("#");
         accessModifier.getItems().add("~");
+
     }
 
     public void mainConstruct(ClassContextController classContextController){
+        accessModifier.setId("classChoice");
+        argumentName.setId("classField2");
         super.getChildren().add(accessModifier);
         super.getChildren().add(argumentName);
         initContextMenu(classContextController);
         accessModifier.setContextMenu(contextMenu);
         argumentName.setContextMenu(contextMenu);
         argumentName.setPrefWidth(212); //todo normal
+
+
+        argumentName.setPrefHeight(27);
+        accessModifier.setPrefWidth(45);
+        argumentName.setPrefWidth(119);
+
     }
 
     private void initContextMenu(ClassContextController classContextController){

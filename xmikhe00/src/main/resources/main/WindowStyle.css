@@ -66,21 +66,89 @@
 
 
 #mainPane{
-    /* -fx-background-color:rgb(48, 47, 46); */
+     -fx-background-color: rgb(121, 121, 120);
     -fx-background-image: url('./grid.png');
     -fx-background-repeat: repeat; 
-    -fx-background-size: 40 40; 
+    -fx-background-size: 40 40;
     /* -fx-background-position: center center; */
 }
 #labelWarning{
     -fx-background-color:rgb(48, 47, 46);
     -fx-text-fill:rgb(255, 161, 110);
 }
+
+/********************Class*****************************/
+#classLabel{
+    -fx-background-image: url(./menu.png);
+    -fx-background-size: 10 10;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 10 center;
+    -fx-border-color: rgb(255,255,255);
+    -fx-border-width: 0 0 1 0;
+    -fx-text-fill: rgb(255,255,255);
+    -fx-alignment: center center;
+}
+
+#classBox{
+    -fx-background-color: rgb(48, 47, 46);
+    -fx-border-color: rgb(255,255,255);
+    -fx-border-width: 2 2 0 2;
+}
+
+#classChoice{
+    -fx-background-color: rgb(48, 47, 46);
+    -fx-border-color: rgb(255,255,255);
+    -fx-border-width: 0 0 1 0;
+    -fx-text-fill: rgb(255,255,255);
+    /*-fx-padding: 1 1 1 1;*/
+
+}
+
+#classField2{
+    -fx-background-color: rgb(48, 47, 46);
+    -fx-border-color: rgb(255,255,255);
+    -fx-border-width: 0 0 1 0;
+    -fx-text-fill: rgb(255,255,255);
+    -fx-font-size: 10;
+}
+
+#classField1{
+    -fx-background-color: rgb(48, 47, 46);
+    -fx-border-color: rgb(255,255,255);
+    -fx-border-width: 0 1 1 0;
+    -fx-text-fill: rgb(255,255,255);
+    /*-fx-font: system;*/
+    -fx-font-size: 10;
+}
+
+
+#className{
+    -fx-background-color: rgb(48, 47, 46);
+    -fx-border-color: rgb(255,255,255);
+    -fx-border-width: 0 0 1 0;
+    -fx-text-fill: rgb(255,255,255);
+    -fx-alignment: center;
+    -fx-font-size: 10;
+}
+
+#classHbox{
+    /*-fx-background-color: rgb(48, 47, 46);*/
+    /*-fx-border-color: rgb(255,255,255);*/
+    /*-fx-border-width: 0 0 1 0;*/
+    /*-fx-text-fill: rgb(255,255,255);*/
+    -fx-alignment:center center ;
+}
+/*#classArg{*/
+/*    -fx-border-color: rgb(255,255,255);*/
+/*    -fx-border-width: 0 0 3 0;*/
+/*}*/
+
+#relation{
+    -fx-stroke: rgb(255,255,255);
+    -fx-stroke-width: 3;
+    /*-fx-fill: rgb(255,255,255);*/
+}
+
 /* 
 black rgb(15, 15, 15)
-grea
-
-
-
-
 */

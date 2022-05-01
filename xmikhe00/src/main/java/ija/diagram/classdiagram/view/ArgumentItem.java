@@ -29,7 +29,7 @@ public class ArgumentItem extends HBox implements ViewItem {
         accessModifier.getItems().add("+");
         accessModifier.getItems().add("#");
         accessModifier.getItems().add("~");
-        argumentType.setPrefWidth(50);
+
     }
 
     private void initContextMenu(ClassContextController classContextController){
@@ -40,6 +40,9 @@ public class ArgumentItem extends HBox implements ViewItem {
     }
 
     public void mainConstruct(ClassContextController classContextController){
+        accessModifier.setId("classChoice");
+        argumentName.setId("classField1");
+        argumentType.setId("classField2");
         super.getChildren().add(accessModifier);
         super.getChildren().add(argumentName);
         super.getChildren().add(argumentType);
@@ -47,6 +50,13 @@ public class ArgumentItem extends HBox implements ViewItem {
         accessModifier.setContextMenu(contextMenu);
         argumentName.setContextMenu(contextMenu);
         argumentType.setContextMenu(contextMenu);
+//        accessModifier.setPrefHeight(22);
+        argumentName.setPrefHeight(27);
+        argumentType.setPrefHeight(27);
+        argumentType.setPrefWidth(49);
+        accessModifier.setPrefWidth(45);
+        argumentName.setPrefWidth(70);
+
     }
 
     public void setArgumentName(String argumentName){

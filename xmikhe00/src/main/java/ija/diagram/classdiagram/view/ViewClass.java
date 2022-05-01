@@ -23,7 +23,7 @@ public class ViewClass extends VBox {
     private VBox arguments;
     private VBox methods;
     private TextField className = new TextField(); //todo add setUserData
-    private Label mainLabel = new Label("              ");
+    private Label mainLabel = new Label("Class");
     private ContextMenu contextMenu = new ContextMenu();
     private Map<ArgumentItem, Arguments> argumentsMap = new HashMap<ArgumentItem, Arguments>();
     private Map<MethodItem, Methods> methodsMap = new HashMap<MethodItem, Methods>();
@@ -33,9 +33,10 @@ public class ViewClass extends VBox {
     }
 
     private void setVisualOptions(){
-        super.setWidth(100);
-        super.setHeight(100);
-        super.setStyle("-fx-background-color: black;");
+//        super.setWidth(161);
+//        super.setHeight(130);
+//        super.setStyle("-fx-background-color: black");
+        super.setId("classBox");
     }
 
     /**
@@ -45,10 +46,15 @@ public class ViewClass extends VBox {
     private void mainConstructClass(ClassContextController classContextController){
         this.addContextMenu(classContextController);
         mainLabel.setContextMenu(contextMenu);
+//        mainLabel.setPrefWidth();
+        mainLabel.setId("classLabel");
+        mainLabel.setPrefWidth(164);
+        className.setId("className");
         super.getChildren().add(mainLabel);
         super.getChildren().add(className);
         arguments = new VBox();
         methods = new VBox();
+        arguments.setId("classArg");
         arguments.setUserData(this);
         methods.setUserData(this);
         super.getChildren().add(arguments);

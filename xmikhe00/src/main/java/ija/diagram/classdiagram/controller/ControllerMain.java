@@ -112,6 +112,7 @@ public class ControllerMain {
             List<Relationships> relationshipsList= dClass.getRelationshipsList();
             for(Relationships relationships : relationshipsList){
                 Line line = viewDiagram.addRelationships(relationships);
+                line.setId("relation");
                 this.mainPane.getChildren().add(line);
             }
             this.mainPane.getChildren().add(viewClass);
