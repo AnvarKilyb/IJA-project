@@ -30,16 +30,19 @@ public class ControllerMain {
     private final ViewDiagram viewDiagram;
     private Stage stage;
 
+    private FileChooser fileChooser;
+
     /**
      * Konstruktér ovladače
      * předáváme do lokálních parametrů instance tříd
      * @param classDiagram instance třídy {@link ClassDiagram}
      * @param viewDiagram instance třídy {@link ViewDiagram}
      */
-    public ControllerMain(ClassDiagram classDiagram, ViewDiagram viewDiagram, Stage stage){
+    public ControllerMain(ClassDiagram classDiagram, ViewDiagram viewDiagram, FileChooser fileChooser, Stage stage){
             this.classDiagram = classDiagram;
             this.viewDiagram = viewDiagram;
             this.stage = stage;
+            this.fileChooser = fileChooser;
     }
 
     /**
@@ -88,7 +91,14 @@ public class ControllerMain {
     }
 
     private void saveFile(ActionEvent event){
-        Writer writer = new Writer();
+        File file = fileChooser.showSaveDialog(stage);
+        if(file == null){
+            return;
+        }
+
+        String path = file.getAbsolutePath();
+
+        Writer writer = new Writer(path);
         List<DClass> dClassList = classDiagram.getdClassList();
         writer.writeJSON(dClassList);
     }
@@ -100,7 +110,7 @@ public class ControllerMain {
      */
     private void loadFile(ActionEvent event){
 
-        FileChooser fileChooser = new FileChooser();
+
         File file = fileChooser.showOpenDialog(this.stage);
 
         if(file == null){

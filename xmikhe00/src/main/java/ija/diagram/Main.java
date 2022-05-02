@@ -7,6 +7,7 @@ import ija.diagram.classdiagram.view.ViewDiagram;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -31,7 +32,11 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         ClassDiagram classDiagram = new ClassDiagram();
         ViewDiagram viewDiagram = new ViewDiagram();
-        ControllerMain controllerMain = new ControllerMain(classDiagram, viewDiagram, stage);
+        FileChooser fileChooser = new FileChooser();
+//        fileChooser.getExtensionFilters().add(
+//            new FileChooser.ExtensionFilter("JSON file","*.json")
+//        );
+        ControllerMain controllerMain = new ControllerMain(classDiagram, viewDiagram, fileChooser, stage);
         viewDiagram.setControllerMain(controllerMain);
         ViewClassController viewClassController = new ViewClassController(controllerMain);
         ClassContextController classContextController = new ClassContextController(controllerMain);

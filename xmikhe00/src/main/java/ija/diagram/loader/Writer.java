@@ -18,6 +18,12 @@ import java.util.Locale;
  * @version 0.0.5
  */
 public class Writer {
+    String path;
+
+    public Writer(String path){
+        this.path = path;
+    }
+
     /**
      * Získá dCLassList s daty ve třídách a vypíše vše do souboru ve formátu JSON
      */
@@ -54,7 +60,7 @@ public class Writer {
             classList.put("class", classParams);
             mainList.add(classList);
         }
-        try (FileWriter file = new FileWriter("data/output.json")) {
+        try (FileWriter file = new FileWriter(path)) {
             file.write(mainList.toJSONString());
             file.flush();
 
