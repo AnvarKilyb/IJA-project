@@ -17,19 +17,17 @@ import java.util.Map;
  * @version 0.0.5
  */
 public class ViewDiagram {
-    /**
-     * Uchovává instance třídy a instance která reprezentuje zobrazení třídy
-     */
+
+    /**Uchovává instance třídy a instance která reprezentuje zobrazení třídy*/
     private Map<ViewClass, DClass> diagramClassMap = new HashMap<ViewClass, DClass>();
     private ControllerMain controllerMain;
+
+    /**Uchovává instance vztahu a instance která reprezentuje zobrazení vztahu*/
+    private Map<Line, Relationships> relationshipsLineMap = new HashMap<Line, Relationships>(); //todo
 
     public void setControllerMain(ControllerMain controllerMain){
         this.controllerMain = controllerMain;
     }
-    /**
-     * Uchovává instance vztahu a instance která reprezentuje zobrazení vztahu
-     */
-    private Map<Line, Relationships> relationshipsLineMap = new HashMap<Line, Relationships>(); //todo
 
     /**
      * Vytvoří instance která reprezentuje zobrazení třídy a uchová ji

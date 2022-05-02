@@ -133,7 +133,7 @@ public class ControllerMain {
         loader.classLoad();
         for(DClass dClass : classDiagram.getdClassList()){
             ViewClass viewClass = viewDiagram.addNewClass(dClass);
-            List<Relationships> relationshipsList= dClass.getRelationshipsList();
+            List<Relationships> relationshipsList= classDiagram.getRelationshipsList();
             for(Relationships relationships : relationshipsList){
                 Line line = viewDiagram.addRelationships(relationships);
                 line.setId("relation");

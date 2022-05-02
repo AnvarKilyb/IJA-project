@@ -11,12 +11,13 @@ import java.util.List;
  * @version 0.0.5
  */
 public class ClassDiagram {
-    /**
-     * Seznam pro uchovaní jednotlivých tříd
-     */
+    /**Seznam pro uchovaní jednotlivých tříd*/
     private List<DClass> dClassList = new ArrayList<DClass>();
     /**Automatické jméno pro třídu vytvářenou uživatelem**/
     private int classNameCounter = 0;
+
+    private List<Relationships> relationshipsList = new ArrayList<Relationships>();;
+
 
     /**
      * Vytvoří a uchová novou třídu
@@ -109,4 +110,46 @@ public class ClassDiagram {
     public void deleteAll(){
         dClassList.clear();
     }
+
+
+
+    public List<Relationships> getRelationshipsList(){
+        return relationshipsList;
+    }
+
+    /**
+     * @deprecated bude změněno a z třídy reprezentace tříd přesunuto do třídy {@link ClassDiagram}
+     */
+    public Relationships addRelationship(String nameClassTo, Relationships.Type typeFrom, Relationships.Type typeTo){
+        Relationships relationships = new Relationships(nameClassTo,typeFrom,typeTo);
+        relationshipsList.add(relationships);
+        return relationships;
+    }
+
+    /**
+     * @deprecated bude změněno a z třídy reprezentace tříd přesunuto do třídy {@link ClassDiagram}
+     */
+    public Relationships addRelationship(String nameClassTo, Relationships.Type typeFrom, Relationships.Type typeTo,
+                                         double startX, double startY, double endX, double endY){
+        Relationships relationships = new Relationships(nameClassTo,typeFrom,typeTo,startX,startY,endX,endY);
+        relationshipsList.add(relationships);
+        return relationships;
+    }
+
+    /**
+     * @deprecated bude změněno a z třídy reprezentace tříd přesunuto do třídy {@link ClassDiagram}
+     */
+    public Relationships addRelationship(String nameClassTo){
+        Relationships relationships = new Relationships(nameClassTo);
+        relationshipsList.add(relationships);
+        return relationships;
+    }
+
+    /**
+     * @deprecated bude změněno a z třídy reprezentace tříd přesunuto do třídy {@link ClassDiagram}
+     */
+    public void relationshipDelete(Relationships relationships){
+        this.relationshipsList.remove(relationships);
+    }
+
 }

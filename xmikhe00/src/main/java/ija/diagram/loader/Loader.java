@@ -50,25 +50,25 @@ public class Loader {
                     double eY = relation.getEndY();
                     switch (relation.getConType()) {
                         case ASSOCIATION:
-                            dClass.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.ASSOCIATION, sX, sY, eX, eY);
+                            classDiagram.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.ASSOCIATION, sX, sY, eX, eY);
                             break;
                         case AGGREGATION:
-                            dClass.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.AGGREGATION, sX, sY, eX, eY);
+                            classDiagram.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.AGGREGATION, sX, sY, eX, eY);
                             break;
                         case REFLEXIVE_ASSOCIATION:
-                            dClass.addRelationship(relation.getEndConnection(), Relationships.Type.REFLEXIVEASSOCIATION, Relationships.Type.REFLEXIVEASSOCIATION, sX, sY, eX, eY);
+                            classDiagram.addRelationship(relation.getEndConnection(), Relationships.Type.REFLEXIVEASSOCIATION, Relationships.Type.REFLEXIVEASSOCIATION, sX, sY, eX, eY);
                             break;
                         case MULTIPLICITY:
-                            dClass.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.MULTIPLICITY, sX, sY, eX, eY);
+                            classDiagram.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.MULTIPLICITY, sX, sY, eX, eY);
                             break;
                         case COMPOSITION:
-                            dClass.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.COMPOSITION, sX, sY, eX, eY);
+                            classDiagram.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.COMPOSITION, sX, sY, eX, eY);
                             break;
                         case INHERITANCE:
-                            dClass.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.INHERITANCE_GENERALIZATION, sX, sY, eX, eY);
+                            classDiagram.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.INHERITANCE_GENERALIZATION, sX, sY, eX, eY);
                             break;
                         case REALIZATION:
-                            dClass.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.REALIZATION, sX, sY, eX, eY);
+                            classDiagram.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.REALIZATION, sX, sY, eX, eY);
                             break;
                     }
                 }

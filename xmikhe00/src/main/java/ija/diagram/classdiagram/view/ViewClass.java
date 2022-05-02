@@ -23,7 +23,7 @@ public class ViewClass extends VBox {
 
     private VBox arguments;
     private VBox methods;
-    private TextField className = new TextField(); //todo add setUserData
+    private TextField className = new TextField();
     private Label mainLabel = new Label("Class");
     private ContextMenu contextMenu = new ContextMenu();
     private Map<ArgumentItem, Arguments> argumentsMap = new HashMap<ArgumentItem, Arguments>();
