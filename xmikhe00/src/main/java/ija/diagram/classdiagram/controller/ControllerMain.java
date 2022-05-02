@@ -11,7 +11,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.List;
 /**
  * Hlavní ovladač,
@@ -25,6 +28,7 @@ public class ControllerMain {
     private ClassContextController classContextController;
     private final ClassDiagram classDiagram;
     private final ViewDiagram viewDiagram;
+    private Stage stage;
 
     /**
      * Konstruktér ovladače
@@ -32,9 +36,10 @@ public class ControllerMain {
      * @param classDiagram instance třídy {@link ClassDiagram}
      * @param viewDiagram instance třídy {@link ViewDiagram}
      */
-    public ControllerMain(ClassDiagram classDiagram, ViewDiagram viewDiagram){
+    public ControllerMain(ClassDiagram classDiagram, ViewDiagram viewDiagram, Stage stage){
             this.classDiagram = classDiagram;
             this.viewDiagram = viewDiagram;
+            this.stage = stage;
     }
 
     /**
@@ -94,7 +99,16 @@ public class ControllerMain {
      * @param event přenáší akce tlačení na tlačítko
      */
     private void loadFile(ActionEvent event){
-        //todo delete old diagram
+
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showOpenDialog(this.stage);
+
+        if(file == null){
+            return;
+        }
+
+        String path = file.getAbsolutePath();
+
         for(ViewClass viewClass : viewDiagram.getDiagramClassMap().keySet()){
             mainPane.getChildren().remove(viewClass);
         }
@@ -105,7 +119,7 @@ public class ControllerMain {
         viewDiagram.deleteAll();
 
 
-        Loader loader = new Loader(classDiagram);
+        Loader loader = new Loader(classDiagram, path);
         loader.classLoad();
         for(DClass dClass : classDiagram.getdClassList()){
             ViewClass viewClass = viewDiagram.addNewClass(dClass);

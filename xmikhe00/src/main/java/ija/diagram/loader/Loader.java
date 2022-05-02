@@ -16,7 +16,8 @@ import java.util.ArrayList;
 public class Loader {
     private final ClassDiagram classDiagram;
     private ArrayList<objectJSON> list;
-    private final Parser parser = new Parser();
+    private Parser parser;
+
 
     public void classLoad(){
         list = parser.parseJSON();
@@ -30,8 +31,9 @@ public class Loader {
         }
     }
 
-    public Loader(ClassDiagram classDiagram){
+    public Loader(ClassDiagram classDiagram, String path){
         this.classDiagram = classDiagram;
+        this.parser = new Parser(path);
     }
 
 

@@ -31,7 +31,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         ClassDiagram classDiagram = new ClassDiagram();
         ViewDiagram viewDiagram = new ViewDiagram();
-        ControllerMain controllerMain = new ControllerMain(classDiagram, viewDiagram);
+        ControllerMain controllerMain = new ControllerMain(classDiagram, viewDiagram, stage);
         viewDiagram.setControllerMain(controllerMain);
         ViewClassController viewClassController = new ViewClassController(controllerMain);
         ClassContextController classContextController = new ClassContextController(controllerMain);

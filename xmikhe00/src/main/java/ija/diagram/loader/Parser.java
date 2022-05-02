@@ -16,6 +16,12 @@ import org.json.simple.parser.ParseException;
  */
 public class Parser {
     private ArrayList<objectJSON> itemList = new ArrayList<>();
+    private String path;
+
+
+    public Parser(String path){
+        this.path = path;
+    }
 
     /**
      * Analyzuje JSON soubor ze souboru input.json.
@@ -53,7 +59,7 @@ public class Parser {
 
     private JSONArray fileOpen(){
         JSONParser jsonParser = new JSONParser();
-        try(FileReader reader = new FileReader("data/input.json")){
+        try(FileReader reader = new FileReader(path)){
             Object objects = jsonParser.parse(reader);
             JSONArray jsonArr = (JSONArray) objects;
             if (checkJSON(jsonArr) == -1)
