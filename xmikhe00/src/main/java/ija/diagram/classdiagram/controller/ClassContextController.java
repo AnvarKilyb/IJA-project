@@ -1,14 +1,19 @@
 package ija.diagram.classdiagram.controller;
 
-import ija.diagram.classdiagram.model.Arguments;
-import ija.diagram.classdiagram.model.ClassDiagram;
-import ija.diagram.classdiagram.model.DClass;
-import ija.diagram.classdiagram.model.Methods;
+import ija.diagram.classdiagram.model.*;
 import ija.diagram.classdiagram.view.*;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+
+import static ija.diagram.classdiagram.model.Item.returnModifier;
 
 /**
  * Ovladač pro kontextovou nabídku třídy
@@ -97,5 +102,71 @@ public class ClassContextController {
         classDiagram.classDelete(dClass);
         viewDiagram.deleteClass(viewClass);
         mainPane.getChildren().remove(viewClass);
+    }
+
+
+    public void inputContextMethodName(KeyEvent keyEvent){
+        TextField methodName = (TextField) keyEvent.getSource();
+        MethodItem methodItem = (MethodItem) methodName.getUserData();
+        ViewClass viewClass = (ViewClass) methodItem.getUserData();
+
+        Methods method = viewClass.returnMethod(methodItem);
+        method.setName(methodName.getText());
+    }
+
+
+    public void inputContextMethodModifier(Event event){
+        ChoiceBox modifier = (ChoiceBox) event.getSource();
+        MethodItem methodItem = (MethodItem) modifier.getUserData();
+        ViewClass viewClass = (ViewClass) methodItem.getUserData();
+
+        Methods method = viewClass.returnMethod(methodItem);
+
+        if(method == null){
+            return;
+        }
+        method.setAccessModifier(returnModifier(modifier.getValue().toString()));
+    }
+
+    public void inputContextArgumentName(KeyEvent keyEvent){
+        TextField argumentName = (TextField) keyEvent.getSource();
+        ArgumentItem argumentItem = (ArgumentItem) argumentName.getUserData();
+        ViewClass viewClass = (ViewClass) argumentItem.getUserData();
+
+        Arguments argument = viewClass.returnArgument(argumentItem);
+        argument.setName(argumentName.getText());
+    }
+
+    public void inputContextArgumentType(KeyEvent keyEvent){
+        TextField argumentType = (TextField) keyEvent.getSource();
+        ArgumentItem argumentItem = (ArgumentItem) argumentType.getUserData();
+        ViewClass viewClass = (ViewClass) argumentItem.getUserData();
+
+        Arguments argument = viewClass.returnArgument(argumentItem);
+        argument.setType(argumentType.getText());
+    }
+
+
+    public void inputContextArgumentModifier(ActionEvent event){
+        ChoiceBox modifier = (ChoiceBox) event.getSource();
+        ArgumentItem argumentItem = (ArgumentItem) modifier.getUserData();
+        ViewClass viewClass = (ViewClass) argumentItem.getUserData();
+
+        Arguments argument = viewClass.returnArgument(argumentItem);
+
+        if(argument == null){
+            return;
+        }
+        argument.setAccessModifier(returnModifier(modifier.getValue().toString()));
+    }
+
+
+    public void inputContextClassName(KeyEvent keyEvent){
+        TextField className = (TextField) keyEvent.getSource();
+        ViewClass viewClass = (ViewClass) className.getUserData();
+
+        ViewDiagram viewDiagram = controllerMain.getViewDiagram();
+        DClass dClass = viewDiagram.returnDClass(viewClass);
+        dClass.setName(className.getText());
     }
 }

@@ -1,11 +1,13 @@
 package ija.diagram.classdiagram.view;
 
 import ija.diagram.classdiagram.controller.ClassContextController;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -43,6 +45,14 @@ public class ArgumentItem extends HBox implements ViewItem {
         accessModifier.setId("classChoice");
         argumentName.setId("classField1");
         argumentType.setId("classField2");
+        accessModifier.setUserData(this);
+        argumentName.setUserData(this);
+        argumentType.setUserData(this);
+
+        accessModifier.addEventHandler(ActionEvent.ACTION,classContextController::inputContextArgumentModifier);
+        argumentName.addEventHandler(KeyEvent.ANY, classContextController::inputContextArgumentName);
+        argumentType.addEventHandler(KeyEvent.ANY, classContextController::inputContextArgumentType);
+
         super.getChildren().add(accessModifier);
         super.getChildren().add(argumentName);
         super.getChildren().add(argumentType);

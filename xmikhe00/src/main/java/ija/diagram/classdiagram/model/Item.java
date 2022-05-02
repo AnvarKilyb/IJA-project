@@ -1,5 +1,7 @@
 package ija.diagram.classdiagram.model;
 
+//import static sun.awt.X11.XBaseWindow.VISIBLE;
+
 /**
  * Abstraktní třída reprezentuje jednotlivý item v třídě
  * @author Vladislav Mikheda : xmikhe00
@@ -53,5 +55,21 @@ abstract public class Item extends Element{
             //todo add method, for read warning if access modifier not correct
         }
         return "+";
+    }
+
+
+    public static AccessModifier returnModifier(String accessModifier){
+        switch (accessModifier){
+            case "-":
+                return AccessModifier.PRIVATE;
+            case "#":
+                return  AccessModifier.PROTECTED;
+            case "+":
+                return  AccessModifier.PUBLIC;
+            case "~":
+                return  AccessModifier.VISIBLE;
+            //todo add method, for read warning if access modifier not correct
+        }
+        return AccessModifier.PUBLIC;
     }
 }

@@ -125,6 +125,26 @@
     -fx-text-fill: rgb(255,255,255);
 }
 
+.context-menu{
+    -fx-background-color: rgb(48, 47, 46);
+}
+
+.context-menu .menu-item:focused{
+    -fx-background-color: rgb(54, 48, 119);
+}
+
+.context-menu .menu-item > .label{
+    -fx-text-fill: rgb(255,255,255);
+}
+
+.context-menu .menu-item:focused > .label{
+    -fx-text-fill: rgb(255,255,255);
+}
+
+/*.context-menu > .label{*/
+/*    -fx-text-fill: rgb(255,255,255);*/
+/*}*/
+
 #classField2{
     -fx-background-color: rgb(48, 47, 46);
     -fx-border-color: rgb(255,255,255);

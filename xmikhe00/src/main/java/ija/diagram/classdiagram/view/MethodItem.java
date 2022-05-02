@@ -1,11 +1,13 @@
 package ija.diagram.classdiagram.view;
 
 import ija.diagram.classdiagram.controller.ClassContextController;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
+import javafx.event.EventType;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -33,7 +35,11 @@ public class MethodItem extends HBox implements ViewItem{
 
     public void mainConstruct(ClassContextController classContextController){
         accessModifier.setId("classChoice");
+        accessModifier.setUserData(this);
+        accessModifier.addEventHandler(ActionEvent.ACTION, classContextController::inputContextMethodModifier);
         argumentName.setId("classField2");
+        argumentName.setUserData(this);
+        argumentName.addEventHandler(KeyEvent.ANY,classContextController::inputContextMethodName);
         super.getChildren().add(accessModifier);
         super.getChildren().add(argumentName);
         initContextMenu(classContextController);

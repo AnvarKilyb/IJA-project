@@ -5,6 +5,7 @@ import ija.diagram.classdiagram.controller.ViewClassController;
 import ija.diagram.classdiagram.model.*;
 import javafx.event.Event;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
@@ -49,6 +50,8 @@ public class ViewClass extends VBox {
 //        mainLabel.setPrefWidth();
         mainLabel.setId("classLabel");
         mainLabel.setPrefWidth(164);
+        className.setUserData(this);
+        className.addEventHandler(KeyEvent.ANY, classContextController::inputContextClassName);
         className.setId("className");
         super.getChildren().add(mainLabel);
         super.getChildren().add(className);
@@ -110,6 +113,8 @@ public class ViewClass extends VBox {
      */
     public void addArgument(Arguments argument, ClassContextController classContextController){
         ArgumentItem argumentItem = new ArgumentItem();
+        argumentItem.setUserData(this);
+//        argumentItem.setUserData(this);
         argumentItem.mainConstruct(classContextController);
         argumentItem.setArgumentName(argument.getName());
         argumentItem.setArgumentType(argument.getType());
@@ -117,6 +122,7 @@ public class ViewClass extends VBox {
         argumentItem.setAccessModifier(accessModifierString);
         arguments.getChildren().add(argumentItem);
         argumentsMap.put(argumentItem, argument);
+//        arguments.setUserData(this);
     }
 
     /**
@@ -126,12 +132,14 @@ public class ViewClass extends VBox {
      */
     public void addMethod(Methods method ,ClassContextController classContextController){
         MethodItem methodItem = new MethodItem();
+        methodItem.setUserData(this);
         methodItem.mainConstruct(classContextController);
         methodItem.setMethodName(method.getName());
         String accessModifierString = Item.returnString(method.getAccessModifier());
         methodItem.setAccessModifier(accessModifierString);
         methods.getChildren().add(methodItem);
         methodsMap.put(methodItem, method);
+//        methods.setUserData(this);
     }
 
     public void deleteArgument(ArgumentItem argumentItem){
