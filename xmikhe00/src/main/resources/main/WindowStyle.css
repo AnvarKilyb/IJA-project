@@ -99,9 +99,30 @@
     -fx-background-color: rgb(48, 47, 46);
     -fx-border-color: rgb(255,255,255);
     -fx-border-width: 0 0 1 0;
-    -fx-text-fill: rgb(255,255,255);
+    -fx-mark-color: rgb(61, 84, 133);
+    /*-fx-text-fill: rgb(255,255,255);*/
     /*-fx-padding: 1 1 1 1;*/
 
+}
+
+#classChoice .context-menu{
+    -fx-background-color: rgb(48, 47, 46);
+}
+
+#classChoice .menu-item:focused{
+    -fx-background-color: rgb(54, 48, 119);
+}
+
+#classChoice .menu-item > .label{
+    -fx-text-fill: rgb(255,255,255);
+}
+
+#classChoice .menu-item:focused > .label{
+    -fx-text-fill: rgb(255,255,255);
+}
+
+#classChoice > .label{
+    -fx-text-fill: rgb(255,255,255);
 }
 
 #classField2{
