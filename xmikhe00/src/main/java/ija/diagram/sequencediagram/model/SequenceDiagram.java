@@ -1,9 +1,12 @@
 package ija.diagram.sequencediagram.model;
 
+import ija.diagram.classdiagram.model.DClass;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class SequenceDiagram {
+    private int nameCounter = 0;
     private List<SObject> objectList = new ArrayList<>();
     private List<Message> messageList = new ArrayList<>();
 
@@ -13,7 +16,7 @@ public class SequenceDiagram {
 
     public void addObject(SObject object){objectList.add(object);}
 
-    public void addObject(String name){
+    public SObject addObject(String name){
         SObject obj = returnObject(name);
         if(obj != null){
             System.out.println("WARNING TODO");
@@ -21,6 +24,14 @@ public class SequenceDiagram {
         }
         SObject object = new SObject(name);
         objectList.add(object);
+        return object;
+    }
+    public SObject addObject(){
+        String name = Integer.toString(nameCounter);
+        nameCounter++;
+        SObject object = new SObject(name);
+        objectList.add(object);
+        return object;
     }
 
     public void changeName(String name){

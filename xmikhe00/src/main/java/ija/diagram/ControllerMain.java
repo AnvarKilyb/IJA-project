@@ -9,14 +9,15 @@ import ija.diagram.classdiagram.view.ViewDiagram;
 import ija.diagram.classdiagram.view.ViewRelationships;
 import ija.diagram.loader.Loader;
 import ija.diagram.loader.Writer;
+import ija.diagram.sequencediagram.model.SObject;
+import ija.diagram.sequencediagram.model.SequenceDiagram;
+import ija.diagram.sequencediagram.view.ViewObject;
+import ija.diagram.sequencediagram.view.ViewSequenceDiagram;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Path;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -32,6 +33,8 @@ import java.util.List;
 public class ControllerMain {
     private ViewClassController viewClassController;
     private ClassContextController classContextController;
+    private final SequenceDiagram sequenceDiagram;
+    private final ViewSequenceDiagram viewSequenceDiagram;
     private final ClassDiagram classDiagram;
     private final ViewDiagram viewDiagram;
     private Stage stage;
@@ -63,7 +66,13 @@ public class ControllerMain {
     private Pane mainPane;
 
     @FXML
+    private Pane sequencePane;
+
+    @FXML
     private Button buttonAddRelation;
+
+    @FXML
+    private Button buttonNewSequence;
 
     /**
      * Konstruktér ovladače
@@ -71,9 +80,12 @@ public class ControllerMain {
      * @param classDiagram instance třídy {@link ClassDiagram}
      * @param viewDiagram instance třídy {@link ViewDiagram}
      */
-    public ControllerMain(ClassDiagram classDiagram, ViewDiagram viewDiagram, FileChooser fileChooser, Stage stage){
+    public ControllerMain(ClassDiagram classDiagram, ViewDiagram viewDiagram,
+                          SequenceDiagram sequenceDiagram, ViewSequenceDiagram viewSequenceDiagram, FileChooser fileChooser, Stage stage){
             this.classDiagram = classDiagram;
             this.viewDiagram = viewDiagram;
+            this.sequenceDiagram = sequenceDiagram;
+            this.viewSequenceDiagram = viewSequenceDiagram;
             this.stage = stage;
             this.fileChooser = fileChooser;
     }
@@ -88,6 +100,7 @@ public class ControllerMain {
         buttonLoad.addEventFilter(ActionEvent.ACTION,this::loadFile);
         buttonSave.addEventFilter(ActionEvent.ACTION,this::saveFile);
         buttonAddRelation.addEventHandler(ActionEvent.ACTION, this::addRelation);
+        buttonNewSequence.addEventFilter(ActionEvent.ACTION, this::newSequence);
     }
 
     /**
@@ -105,6 +118,12 @@ public class ControllerMain {
         ViewRelationships relationships = new ViewRelationships();
         relationships.setController(viewClassController);
         mainPane.getChildren().add(relationships);
+    }
+
+    private void newSequence(ActionEvent event){
+        SObject sObject = sequenceDiagram.addObject();
+        ViewObject viewObject = viewSequenceDiagram.addNewObject(sObject);
+        this.sequencePane.getChildren().add(viewObject);
     }
 
     private void saveFile(ActionEvent event){
@@ -177,6 +196,14 @@ public class ControllerMain {
 
     public void setViewClassController(ViewClassController viewClassController){
         this.viewClassController = viewClassController;
+    }
+
+    public SequenceDiagram getSequenceDiagram() {
+        return sequenceDiagram;
+    }
+
+    public ViewSequenceDiagram getViewSequenceDiagram() {
+        return viewSequenceDiagram;
     }
 
     public ClassDiagram getClassDiagram(){

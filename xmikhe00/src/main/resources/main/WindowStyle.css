@@ -72,6 +72,13 @@
     -fx-background-size: 40 40;
     /* -fx-background-position: center center; */
 }
+#sequencePane{
+     -fx-background-color: rgb(121, 121, 120);
+    -fx-background-image: url('./grid.png');
+    -fx-background-repeat: repeat;
+    -fx-background-size: 40 40;
+    /* -fx-background-position: center center; */
+}
 #labelWarning{
     -fx-background-color:rgb(48, 47, 46);
     -fx-text-fill:rgb(255, 161, 110);
@@ -94,6 +101,7 @@
     -fx-border-color: rgb(255,255,255);
     -fx-border-width: 2 2 0 2;
 }
+
 
 #classChoice{
     -fx-background-color: rgb(48, 47, 46);
@@ -191,6 +199,21 @@
 }
 
 
+#objectBox{
+    -fx-background-color: rgb(48, 47, 46);
+    -fx-border-color: rgb(255,255,255);
+    -fx-border-width: 2 2 2 2;
+}
+
+#objectLabel{
+    -fx-background-size: 10 10;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 10 center;
+    -fx-border-color: rgb(255,255,255);
+    -fx-border-width: 0 0 1 0;
+    -fx-text-fill: rgb(255,255,255);
+    -fx-alignment: center center;
+}
 
 
 /* 
