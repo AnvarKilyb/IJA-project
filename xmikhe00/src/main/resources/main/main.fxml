@@ -14,7 +14,7 @@
    <children>
       <AnchorPane fx:id="leftBar" layoutY="-1.0" prefHeight="740.0" prefWidth="267.0" stylesheets="@WindowStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox prefHeight="369.0" prefWidth="268.0">
+            <VBox prefHeight="475.0" prefWidth="268.0">
                <children>
                   <Pane prefHeight="30.0" prefWidth="268.0" />
                   <Button fx:id="buttonSave" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="0.0" prefWidth="268.0" stylesheets="@WindowStyle.css" text="Save" textAlignment="CENTER" textFill="#969696">
@@ -44,10 +44,15 @@
                      </font>
                   </Button>
                   <Pane prefHeight="24.0" prefWidth="268.0" />
-               </children>
-            </VBox>
-            <VBox layoutX="-1.0" layoutY="318.0" prefHeight="92.0" prefWidth="268.0" AnchorPane.bottomAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="370.0">
-               <children>
+                  <Button fx:id="buttonAddRelation" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="0.0" prefWidth="270.0" stylesheets="@WindowStyle.css" text="Add Relation" textAlignment="CENTER" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                     <font>
+                        <Font name="LEMON MILK Regular" size="16.0" />
+                     </font>
+                  </Button>
+                  <Pane prefHeight="24.0" prefWidth="268.0" />
                   <Button fx:id="sequenceDiagram1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="64.0" prefWidth="310.0" stylesheets="@WindowStyle.css" text="New sequence diagram" textAlignment="CENTER" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
@@ -59,7 +64,7 @@
                   <Pane prefHeight="24.0" prefWidth="268.0" />
                </children>
             </VBox>
-            <Label id="labelWarning" alignment="TOP_LEFT" layoutX="19.0" layoutY="461.0" prefHeight="251.0" prefWidth="268.0" text="Warning!!!" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="461.0" />
+            <Label id="labelWarning" alignment="TOP_LEFT" layoutX="19.0" layoutY="476.0" prefHeight="236.0" prefWidth="268.0" text="Warning!!!" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="476.0" />
          </children>
       </AnchorPane>
       <TabPane id="topbar" layoutX="245.0" prefHeight="733.0" prefWidth="913.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="268.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

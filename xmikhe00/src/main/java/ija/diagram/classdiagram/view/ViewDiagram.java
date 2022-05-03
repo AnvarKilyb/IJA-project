@@ -1,6 +1,6 @@
 package ija.diagram.classdiagram.view;
 
-import ija.diagram.classdiagram.controller.ControllerMain;
+import ija.diagram.ControllerMain;
 import ija.diagram.classdiagram.model.*;
 import javafx.scene.shape.Line;
 

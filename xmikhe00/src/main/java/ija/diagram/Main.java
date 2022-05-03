@@ -1,6 +1,5 @@
 package ija.diagram;
 import ija.diagram.classdiagram.controller.ClassContextController;
-import ija.diagram.classdiagram.controller.ControllerMain;
 import ija.diagram.classdiagram.controller.ViewClassController;
 import ija.diagram.classdiagram.model.ClassDiagram;
 import ija.diagram.classdiagram.view.ViewDiagram;

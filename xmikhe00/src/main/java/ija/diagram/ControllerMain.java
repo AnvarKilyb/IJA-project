@@ -1,16 +1,22 @@
-package ija.diagram.classdiagram.controller;
+package ija.diagram;
+import ija.diagram.classdiagram.controller.ClassContextController;
+import ija.diagram.classdiagram.controller.ViewClassController;
 import ija.diagram.classdiagram.model.ClassDiagram;
 import ija.diagram.classdiagram.model.DClass;
 import ija.diagram.classdiagram.model.Relationships;
 import ija.diagram.classdiagram.view.ViewClass;
 import ija.diagram.classdiagram.view.ViewDiagram;
+import ija.diagram.classdiagram.view.ViewRelationships;
 import ija.diagram.loader.Loader;
 import ija.diagram.loader.Writer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Path;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -31,19 +37,6 @@ public class ControllerMain {
     private Stage stage;
 
     private FileChooser fileChooser;
-
-    /**
-     * Konstruktér ovladače
-     * předáváme do lokálních parametrů instance tříd
-     * @param classDiagram instance třídy {@link ClassDiagram}
-     * @param viewDiagram instance třídy {@link ViewDiagram}
-     */
-    public ControllerMain(ClassDiagram classDiagram, ViewDiagram viewDiagram, FileChooser fileChooser, Stage stage){
-            this.classDiagram = classDiagram;
-            this.viewDiagram = viewDiagram;
-            this.stage = stage;
-            this.fileChooser = fileChooser;
-    }
 
     /**
      * Obsahuje instance třídy tlačítka pro dodávaná třídy
@@ -69,6 +62,23 @@ public class ControllerMain {
     @FXML
     private Pane mainPane;
 
+    @FXML
+    private Button buttonAddRelation;
+
+    /**
+     * Konstruktér ovladače
+     * předáváme do lokálních parametrů instance tříd
+     * @param classDiagram instance třídy {@link ClassDiagram}
+     * @param viewDiagram instance třídy {@link ViewDiagram}
+     */
+    public ControllerMain(ClassDiagram classDiagram, ViewDiagram viewDiagram, FileChooser fileChooser, Stage stage){
+            this.classDiagram = classDiagram;
+            this.viewDiagram = viewDiagram;
+            this.stage = stage;
+            this.fileChooser = fileChooser;
+    }
+
+
     /**
      * Metoda je spuštěna jen jednou při spuštění programu, pro inicializaci ovladače
      * pro elementy hlavního rozhraní (add,load)
@@ -77,6 +87,7 @@ public class ControllerMain {
         buttonAdd.addEventFilter(ActionEvent.ACTION,this::addClassAction);
         buttonLoad.addEventFilter(ActionEvent.ACTION,this::loadFile);
         buttonSave.addEventFilter(ActionEvent.ACTION,this::saveFile);
+        buttonAddRelation.addEventHandler(ActionEvent.ACTION, this::addRelation);
     }
 
     /**
@@ -88,6 +99,12 @@ public class ControllerMain {
         DClass dClass = classDiagram.addClass();
         ViewClass viewClass = viewDiagram.addNewClass(dClass);
         this.mainPane.getChildren().add(viewClass);
+    }
+
+    private void addRelation(ActionEvent event){
+        ViewRelationships relationships = new ViewRelationships();
+        relationships.setController(viewClassController);
+        mainPane.getChildren().add(relationships);
     }
 
     private void saveFile(ActionEvent event){

@@ -1,8 +1,11 @@
 
 package ija.diagram.classdiagram.controller;
+import ija.diagram.ControllerMain;
 import ija.diagram.classdiagram.model.DClass;
 import ija.diagram.classdiagram.view.ViewClass;
+import ija.diagram.classdiagram.view.ViewRelationships;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
@@ -23,8 +26,8 @@ public class ViewClassController{
     /**
      * Proměna pro zavádění vztahu
      */
-    private Line newLine;
-
+    private Line newLine = null;
+    private boolean setStart = false;
     public ViewClassController(ControllerMain controllerMain){
         this.controllerMain = controllerMain;
     }
@@ -40,6 +43,7 @@ public class ViewClassController{
             ViewClass viewClass = (ViewClass) mouseEvent.getSource();
             newLine = new Line();
             if(X < 4 || X > viewClass.getWidth() - 4 || Y < 4 || Y > viewClass.getHeight() -4){
+                newLine.setId("relation");
 //                ViewClass viewClass = (ViewClass) mouseEvent.getSource();
                 Pane mainPane = (Pane) viewClass.getParent();
                 newLine.setStartX(viewClass.getLayoutX() + X);
@@ -47,8 +51,8 @@ public class ViewClassController{
                 newLine.setEndX(viewClass.getLayoutX() + X);
                 newLine.setEndY(viewClass.getLayoutY() + Y);
                 mainPane.getChildren().add(newLine);
-        //        lineStartX = mouseEvent.getX();
-        //        lineStartY = mouseEvent.getY();
+                //        lineStartX = mouseEvent.getX();
+                //        lineStartY = mouseEvent.getY();
             }
         }
     }
@@ -72,10 +76,26 @@ public class ViewClassController{
                 viewClass.setLayoutX(nx);
                 viewClass.setLayoutY(ny);
             }
-            dClass.setX(nx); //todo new stream?
+            dClass.setX(nx);
             dClass.setY(ny);
+        } else if(mouseEvent.getButton() == MouseButton.PRIMARY){
+            ViewClass viewClass = (ViewClass) mouseEvent.getSource();
+            Pane mainPane = (Pane) viewClass.getParent();
+            double X = mouseEvent.getX();
+            double Y = mouseEvent.getY();
+            double endX = viewClass.getLayoutX() + X;
+            double endY = viewClass.getLayoutY() + Y;
+            if (endX < 0 && endY > 0) {
+                newLine.setEndY(endY);
+            } else if (endY < 0 && endX > 0) {
+                newLine.setEndX(endX);
+            } else if (endX > 0 && endY > 0) {
+                newLine.setEndX(endX);
+                newLine.setEndY(endY);
+            }
+
+
         }
-//        else if(mouseEvent.getButton() == MouseButton.PRIMARY){
 //            ViewClass viewClass = (ViewClass) mouseEvent.getSource();
 //            Pane mainPane = (Pane) viewClass.getParent();
 //            double X = mouseEvent.getX();
@@ -90,14 +110,111 @@ public class ViewClassController{
 //                newLine.setEndX(endX);
 //                newLine.setEndY(endY);
 //            }
-//
-//
-//        }
+
+
+
+
     }
 
-    public void classMenu(MouseEvent mouseButton) {
+//    public void relationMoved(MouseEvent mouseEvent){
+//        if(mouseEvent.getEventType() ==  MouseEvent.MOUSE_DRAGGED && mouseEvent.getButton() ==  MouseButton.PRIMARY ){
+////            System.out.println("________");
+//            double X = mouseEvent.getX();
+//            double Y = mouseEvent.getY();
+//            System.out.println(X + "," + Y);
+//            if(!setStart){
+//                System.out.println("________");
+////                double X = mouseEvent.getX();
+////                double Y = mouseEvent.getY();
+//                System.out.println(X + "," + Y);
+//                ViewClass viewClass = (ViewClass) mouseEvent.getSource();
+//                Pane mainPane = (Pane) viewClass.getParent();
+//
+//                if(X >= 0 && Y <= 0){
+//                    System.out.println("sadasdas");
+//                    newLine.setStartX(viewClass.getLayoutX() + X);
+//                    newLine.setStartY(viewClass.getLayoutY());
+//                    newLine.setEndX(viewClass.getLayoutX() + X);
+//                    newLine.setEndY(viewClass.getLayoutY() + Y);
+//                }
+//
+////                if(X <= 0 || X >= viewClass.getWidth() || Y <= 0 || Y >= viewClass.getHeight()){
+////                    newLine.setStartX(viewClass.getLayoutX() + X);
+////                    newLine.setStartY(viewClass.getLayoutY() + Y);
+////                    newLine.setEndX(viewClass.getLayoutX() + X);
+////                    newLine.setEndY(viewClass.getLayoutY() + Y);
+////                    mainPane.getChildren().add(newLine);
+////                }
+//
+//                setStart = true;
+//            }else{
+//                ViewClass viewClass = (ViewClass) mouseEvent.getSource();
+//                Pane mainPane = (Pane) viewClass.getParent();
+////                double X = mouseEvent.getX();
+////                double Y = mouseEvent.getY();
+//                double endX = viewClass.getLayoutX() + X;
+//                double endY = viewClass.getLayoutY() + Y;
+//                if (endX < 0 && endY > 0) {
+//                    newLine.setEndY(endY);
+//                } else if (endY < 0 && endX > 0) {
+//                    newLine.setEndX(endX);
+//                } else if (endX > 0 && endY > 0) {
+//                    newLine.setEndX(endX);
+//                    newLine.setEndY(endY);
+//                }
+//            }
+//        }
+//    }
+
+
+    public void extensionLine(MouseEvent mouseEvent){
+        if(mouseEvent.getButton() == MouseButton.MIDDLE) {
+            ViewRelationships relationships = (ViewRelationships) mouseEvent.getSource();
+            double X = mouseEvent.getX();
+            double Y = mouseEvent.getY();
+//            System.out.println(relationships.getStartX());
+
+//            double nxe = X - (X - (relationships.getEndX())) + X;
+//            double nye =  Y;
+//            double nxs = X - (X - (relationships.getStartX())) +X ;
+//            double nys = Y;
+
+//            double nxe =  (X - (relationships.getEndX() - X));
+//            double nye =  Y;
+//            double nxs =  (X + (X - relationships.getStartX()));
+//            double nys = Y;
+
+
+            double nxe =  (X - ((relationships.getEndX() - relationships.getStartX()) /2));
+            double nye =  Y;
+            double nxs =  (X + ((relationships.getEndX() - relationships.getStartX()) /2));
+            double nys = Y;
+
+            relationships.setEndX(nxe);
+            relationships.setEndY(nye);
+            relationships.setStartX(nxs);
+            relationships.setStartY(nys);
+
+        }
+    }
+
+
+
+
+    public void classMenu(MouseDragEvent mouseButton) {
         if(mouseButton.getButton() == MouseButton.SECONDARY){
             System.out.println("Hello");
         }
     }
 }
+
+
+//
+//    double nxe =  (X - (relationships.getEndX() - X));
+//    double nye =  Y;
+//    double nxs =  (X - (X - relationships.getStartX()));
+//    double nys = Y;
+
+
+// line.startXProperty().bind(viewClass.layoutXProperty().add(viewClass.widthProperty().divide(2)));
+//         line.startYProperty().bind(viewClass.layoutYProperty().add(0));

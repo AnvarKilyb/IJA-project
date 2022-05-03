@@ -5,7 +5,9 @@ import ija.diagram.classdiagram.controller.ViewClassController;
 import ija.diagram.classdiagram.model.*;
 import javafx.event.Event;
 import javafx.scene.control.*;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
@@ -91,20 +93,10 @@ public class ViewClass extends VBox {
         this.mainConstructClass(classContextController);
         this.setVisualOptions();
         super.addEventFilter(MouseEvent.MOUSE_DRAGGED, viewClassController::classDraggedMouse);
-//        super.addEventFilter(MouseEvent.MOUSE_PRESSED, viewClassController::clickToLine);
+        super.addEventFilter(MouseEvent.MOUSE_PRESSED, viewClassController::clickToLine);
+//        super.addEventFilter(MouseEvent.ANY, viewClassController::relationMoved);
     }
 //------------------------------------------------------------------------------------------------------//
-//    public void addArgument(Arguments argument, ClassContextController classContextController){
-//        ArgumentItem argumentItem = new ArgumentItem();
-//        argumentItem.mainConstruct(classContextController);
-//        arguments.getChildren().add(argumentItem);
-//        argumentsMap.put(argumentItem, argument);
-//    }
-//    public void addMethod(Methods methods, ClassContextController classContextController){
-//        MethodItem methodItem = new MethodItem();
-//        methodItem.mainConstruct(classContextController);
-//        methods.getChildren().add(methodItem);
-//    }
 
     /**
      * Vytvoří instance zobrazení argumentu a nastaví ovladač

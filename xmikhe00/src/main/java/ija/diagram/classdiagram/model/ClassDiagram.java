@@ -117,18 +117,14 @@ public class ClassDiagram {
         return relationshipsList;
     }
 
-    /**
-     * @deprecated bude změněno a z třídy reprezentace tříd přesunuto do třídy {@link ClassDiagram}
-     */
+
     public Relationships addRelationship(String nameClassTo, Relationships.Type typeFrom, Relationships.Type typeTo){
         Relationships relationships = new Relationships(nameClassTo,typeFrom,typeTo);
         relationshipsList.add(relationships);
         return relationships;
     }
 
-    /**
-     * @deprecated bude změněno a z třídy reprezentace tříd přesunuto do třídy {@link ClassDiagram}
-     */
+
     public Relationships addRelationship(String nameClassTo, Relationships.Type typeFrom, Relationships.Type typeTo,
                                          double startX, double startY, double endX, double endY){
         Relationships relationships = new Relationships(nameClassTo,typeFrom,typeTo,startX,startY,endX,endY);
@@ -136,18 +132,14 @@ public class ClassDiagram {
         return relationships;
     }
 
-    /**
-     * @deprecated bude změněno a z třídy reprezentace tříd přesunuto do třídy {@link ClassDiagram}
-     */
+
     public Relationships addRelationship(String nameClassTo){
         Relationships relationships = new Relationships(nameClassTo);
         relationshipsList.add(relationships);
         return relationships;
     }
 
-    /**
-     * @deprecated bude změněno a z třídy reprezentace tříd přesunuto do třídy {@link ClassDiagram}
-     */
+
     public void relationshipDelete(Relationships relationships){
         this.relationshipsList.remove(relationships);
     }

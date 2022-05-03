@@ -1,5 +1,6 @@
 package ija.diagram.classdiagram.controller;
 
+import ija.diagram.ControllerMain;
 import ija.diagram.classdiagram.model.*;
 import ija.diagram.classdiagram.view.*;
 import javafx.event.ActionEvent;
@@ -8,8 +9,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
