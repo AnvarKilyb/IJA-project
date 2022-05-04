@@ -3,20 +3,30 @@ package ija.diagram.sequencediagram.view;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 
 public class ViewObject extends BorderPane {
     private Label mainLabel = new Label("Object");
+    private Line lifeLine = new Line();
 
     public ViewObject(){
         super();
     }
     private void setVisualOptions(){
         mainLabel.setId("objectLabel");
-        mainLabel.setPrefWidth(150);
-        mainLabel.setPrefHeight(150);
-        super.setCenter(mainLabel);
-        super.setId("objectBox");
+        lifeLine.setId("lifeLine");
+        lifeLine.setStartX(40);
+        lifeLine.setStartY(80);
+        lifeLine.setEndX(40);
+        lifeLine.setEndY(600);
+        mainLabel.setPrefWidth(80);
+        mainLabel.setPrefHeight(80);
+        super.setPrefHeight(600);
+        super.setPrefWidth(80);
+        super.setCenter(lifeLine);
+        super.setTop(mainLabel);
+        //super.setId("objectBox");
     }
 
     public void show(){
@@ -27,6 +37,10 @@ public class ViewObject extends BorderPane {
         super.setLayoutX(x);
     }
     public void setY(double y){
-        this.setLayoutY(y);
+        super.setLayoutY(y);
+    }
+
+    public void setObjectName(String objectName) {
+        this.mainLabel.setText(objectName);
     }
 }

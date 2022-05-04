@@ -64,7 +64,7 @@
                   <Pane prefHeight="24.0" prefWidth="268.0" />
                </children>
             </VBox>
-            <Label id="labelWarning" alignment="TOP_LEFT" layoutX="19.0" layoutY="476.0" prefHeight="236.0" prefWidth="268.0" text="Warning!!!" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="476.0" />
+            <Label fx:id="labelWarning" id="labelWarning" alignment="TOP_LEFT" layoutX="19.0" layoutY="476.0" prefHeight="236.0" prefWidth="268.0" text="Warning!!!" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="476.0" />
          </children>
       </AnchorPane>
       <TabPane id="topbar" layoutX="245.0" prefHeight="733.0" prefWidth="913.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="268.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

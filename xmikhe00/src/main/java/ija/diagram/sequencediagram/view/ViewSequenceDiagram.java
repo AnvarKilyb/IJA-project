@@ -23,6 +23,7 @@ public class ViewSequenceDiagram {
 
     public ViewObject addNewObject(SObject modelObject){
         ViewObject viewObject = new ViewObject();
+        viewObject.setObjectName(modelObject.getName());
         viewObject.show();
         objectSequenceMap.put(viewObject, modelObject);
         viewObject.setX(modelObject.getX());

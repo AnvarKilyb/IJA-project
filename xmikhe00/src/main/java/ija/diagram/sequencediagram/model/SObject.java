@@ -3,7 +3,7 @@ package ija.diagram.sequencediagram.model;
 public class SObject {
     private String name;
     private double X = 0;
-    private double Y = 0;
+    private double Y = 30;
 
     public SObject(){this.name = "";}
 

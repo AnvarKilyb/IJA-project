@@ -16,6 +16,8 @@ import ija.diagram.sequencediagram.view.ViewSequenceDiagram;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
@@ -67,6 +69,9 @@ public class ControllerMain {
 
     @FXML
     private Pane sequencePane;
+
+    @FXML
+    private Label labelWarning;
 
     @FXML
     private Button buttonAddRelation;
@@ -121,9 +126,30 @@ public class ControllerMain {
     }
 
     private void newSequence(ActionEvent event){
-        SObject sObject = sequenceDiagram.addObject();
-        ViewObject viewObject = viewSequenceDiagram.addNewObject(sObject);
-        this.sequencePane.getChildren().add(viewObject);
+        Pane content = new Pane();
+        content.setId("sequencePane");
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setPrefSize(880, 682);
+        scrollPane.setStyle("-fx-background: transparent; -fx-background-color: transparent;");
+        SObject actor = sequenceDiagram.addActor();
+        ViewObject viewObject = viewSequenceDiagram.addNewObject(actor);
+        content.getChildren().add(viewObject);
+        if(classDiagram.getdClassList().isEmpty()){
+            labelWarning.setText("Transformation warning:\n---There are no entities.");
+            return;
+        }
+        short count = 2;
+        for(DClass dClass: classDiagram.getdClassList()){
+            SObject sObject = new SObject();
+            sObject.setName(dClass.getName());
+            sObject.setX(160*count);
+            count++;
+            sequenceDiagram.addObject(sObject);
+            content.getChildren().add(viewSequenceDiagram.addNewObject(sObject));
+        }
+        scrollPane.setContent(content);
+        this.sequencePane.getChildren().add(scrollPane);
+
     }
 
     private void saveFile(ActionEvent event){

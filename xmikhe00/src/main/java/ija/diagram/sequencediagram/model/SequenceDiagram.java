@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SequenceDiagram {
-    private int nameCounter = 0;
     private List<SObject> objectList = new ArrayList<>();
     private List<Message> messageList = new ArrayList<>();
 
@@ -26,10 +25,11 @@ public class SequenceDiagram {
         objectList.add(object);
         return object;
     }
-    public SObject addObject(){
-        String name = Integer.toString(nameCounter);
-        nameCounter++;
+    public SObject addActor(){
+        String name = "Actor";
         SObject object = new SObject(name);
+        object.setX(20);
+        object.setY(30);
         objectList.add(object);
         return object;
     }
