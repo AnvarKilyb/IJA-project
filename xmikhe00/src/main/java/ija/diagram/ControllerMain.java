@@ -1,6 +1,8 @@
 package ija.diagram;
 import ija.diagram.classdiagram.controller.ClassContextController;
+import ija.diagram.classdiagram.controller.NameRepeatedController;
 import ija.diagram.classdiagram.controller.ViewClassController;
+import ija.diagram.classdiagram.controller.ViewRelationshipController;
 import ija.diagram.classdiagram.model.ClassDiagram;
 import ija.diagram.classdiagram.model.DClass;
 import ija.diagram.classdiagram.model.Relationships;
@@ -15,16 +17,23 @@ import ija.diagram.sequencediagram.view.ViewObject;
 import ija.diagram.sequencediagram.view.ViewSequenceDiagram;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 /**
  * Hlavní ovladač,
@@ -153,6 +162,31 @@ public class ControllerMain {
     }
 
     private void saveFile(ActionEvent event){
+
+        if(classDiagram.checkAllClassName()){
+            FXMLLoader loader = new FXMLLoader(ControllerMain.class.getResource("/main/nameRepeat.fxml"));
+            NameRepeatedController nameRepeatedController = new NameRepeatedController();
+            nameRepeatedController.setControllerMain(this);
+            loader.setController(nameRepeatedController);
+            Scene scene = null;
+            try {
+                scene = new Scene(loader.load());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            Stage repeatWindow = new Stage();
+            repeatWindow.setScene(scene);
+            repeatWindow.initModality(Modality.APPLICATION_MODAL);
+            repeatWindow.setResizable(false);
+            repeatWindow.showAndWait();
+
+            labelWarning.setPrefHeight(labelWarning.getHeight() + 15);
+            DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+            Date date = new Date();
+            labelWarning.setText(labelWarning.getText() + "\n[" + dateFormat.format(date) + "] Please save again ");
+            return;
+        }
+
         File file = fileChooser.showSaveDialog(stage);
         if(file == null){
             return;
@@ -192,16 +226,30 @@ public class ControllerMain {
 
         Loader loader = new Loader(classDiagram, path);
         loader.loading();
-        for(DClass dClass : classDiagram.getdClassList()){
+        classDiagram.setAllReaped();
+        List<DClass> dClassListCopy = new ArrayList<>(classDiagram.getdClassList());
+        for(DClass dClass : dClassListCopy){
+            if(dClass.getReapedName()){
+                labelWarning.setPrefHeight(labelWarning.getHeight() + 30);
+                DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                Date date = new Date();
+                labelWarning.setText(labelWarning.getText() + "\n[" + dateFormat.format(date) + "] class named " + dClass.getName() + "\nremoved due to name repetition \nand its relation ");
+                continue;
+            }
             ViewClass viewClass = viewDiagram.addNewClass(dClass);
             this.mainPane.getChildren().add(viewClass);
         }
         List<Relationships> relationshipsList = classDiagram.getRelationshipsList();
-        for(Relationships relationships : relationshipsList){
+        List<Relationships> relationshipsListCopy =  new ArrayList<>(relationshipsList);
+        for(Relationships relationships : relationshipsListCopy){
             ViewRelationships line = new ViewRelationships();
             this.mainPane.getChildren().add(line);
             line.setViewClassController(viewClassController);
-            viewDiagram.addRelationships(relationships,line);
+            if(viewDiagram.addRelationships(relationships,line) == null){
+                this.mainPane.getChildren().remove(line);
+                classDiagram.deleteRelation(relationships);
+                continue;
+            }
             line.setUserData(mainPane);
             line.setMainPane(mainPane);
             line.addArrow();

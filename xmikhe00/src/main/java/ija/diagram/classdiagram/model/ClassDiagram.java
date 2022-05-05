@@ -38,6 +38,7 @@ public class ClassDiagram {
     public boolean setClassName(String name, DClass dClass){
         DClass cl  = checkName(name,dClass);
         if(cl != null){
+            dClass.setName(name);
             return false;
         }
         dClass.setName(name);
@@ -125,6 +126,24 @@ public class ClassDiagram {
         relationshipsList.clear();
     }
 
+    public boolean checkAllClassName(){
+        for (DClass dClass: dClassList){
+            if(dClass.getReapedName()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void setAllReaped(){
+        for(int i = 0; i < dClassList.size() - 1 ; i++){
+            for(int j = i + 1; j < dClassList.size(); j++){
+                if(dClassList.get(i).getName().equals(dClassList.get(j).getName())){
+                    dClassList.get(i).setReapedName(true);
+                }
+            }
+        }
+    }
 
 
     public List<Relationships> getRelationshipsList(){
@@ -168,5 +187,7 @@ public class ClassDiagram {
     public void relationshipDelete(Relationships relationships){
         this.relationshipsList.remove(relationships);
     }
+
+
 
 }

@@ -15,6 +15,7 @@ public class DClass extends Element{
     private List<Methods> methodsList;
     private double X = 0;
     private double Y = 0;
+    private boolean reapedName = false;
     //todo coordinates
 
     public DClass(String name){
@@ -107,5 +108,12 @@ public class DClass extends Element{
         return this.Y;
     }
 
+    public boolean getReapedName() {
+        return reapedName;
+    }
+
+    public void setReapedName(boolean reapedName) {
+        this.reapedName = reapedName;
+    }
 
 }

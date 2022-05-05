@@ -2,8 +2,11 @@ package ija.diagram.classdiagram.view;
 
 import ija.diagram.ControllerMain;
 import ija.diagram.classdiagram.model.*;
+import javafx.scene.control.Label;
 import javafx.scene.shape.Line;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -107,10 +110,15 @@ public class ViewDiagram {
         if(classFrom != null){
             viewRelation.startXProperty().bind(classFrom.layoutXProperty().add(relationships.getStartX()));
             viewRelation.startYProperty().bind(classFrom.layoutYProperty().add(relationships.getStartY()));
+        }else{
+            return null;
         }
+
         if(classTo != null){
             viewRelation.endXProperty().bind(classTo.layoutXProperty().add(relationships.getEndX()));
             viewRelation.endYProperty().bind(classTo.layoutYProperty().add(relationships.getEndY()));
+        }else {
+            return null;
         }
         viewRelation.setClassFrom(classFrom);
         viewRelation.setClassTo(classTo);

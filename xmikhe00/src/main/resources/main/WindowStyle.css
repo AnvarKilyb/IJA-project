@@ -181,6 +181,16 @@
     /*-fx-padding: 0 0 0 0;*/
 }
 
+#classNameWarning{
+    -fx-background-color: rgb(48, 47, 46);
+    -fx-border-color: rgb(255,255,255);
+    -fx-border-width: 0 0 1 0;
+    -fx-text-fill: rgb(255, 0, 0);
+    -fx-alignment: center;
+    -fx-font-size: 10;
+    /*-fx-padding: 0 0 0 0;*/
+}
+
 #classHbox{
     /*-fx-background-color: rgb(48, 47, 46);*/
     /*-fx-border-color: rgb(255,255,255);*/
@@ -302,6 +312,18 @@
     -fx-background-repeat: no-repeat;
 }
 
+
+
+#windowLabel{
+    /*-fx-border-color: rgb(255,255,255);*/
+    /*-fx-border-width: 0 0 1 0;*/
+    -fx-text-fill: rgb(255,255,255);
+    /*-fx-alignment: center center;*/
+}
+
+#windowPanel{
+    -fx-background-color: rgb(15, 15, 15);
+}
 
 /* 
 black rgb(15, 15, 15)

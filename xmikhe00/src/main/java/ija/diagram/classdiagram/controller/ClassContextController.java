@@ -16,9 +16,11 @@ import javafx.scene.layout.VBox;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Timer;
 
 import static ija.diagram.classdiagram.model.Item.returnModifier;
+import static javafx.scene.input.KeyEvent.*;
 
 /**
  * Ovladač pro kontextovou nabídku třídy
@@ -169,17 +171,23 @@ public class ClassContextController {
     public void inputContextClassName(KeyEvent keyEvent){
         TextField className = (TextField) keyEvent.getSource();
         ViewClass viewClass = (ViewClass) className.getUserData();
-
         ViewDiagram viewDiagram = controllerMain.getViewDiagram();
         DClass dClass = viewDiagram.returnDClass(viewClass);
         ClassDiagram classDiagram = controllerMain.getClassDiagram();
         if(!classDiagram.setClassName(className.getText(),dClass)){
-            Label labelWarning = controllerMain.getLabelWarning();
-            labelWarning.setPrefHeight(labelWarning.getHeight() + 15);
-            DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-            Date date = new Date();
-            labelWarning.setText(labelWarning.getText() + "\n[" + dateFormat.format(date) +"] сlass name already exists ");
-            className.setText(dClass.getName());
+            if(keyEvent.getEventType() == KEY_TYPED){
+                Label labelWarning = controllerMain.getLabelWarning();
+                labelWarning.setPrefHeight(labelWarning.getHeight() + 15);
+                DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                Date date = new Date();
+                labelWarning.setText(labelWarning.getText() + "\n[" + dateFormat.format(date) + "] сlass name already exists ");
+//            className.setText(dClass.getName());
+            }
+            className.setId("classNameWarning");
+            dClass.setReapedName(true);
+        }else{
+            className.setId("className");
+            dClass.setReapedName(false);
         }
     }
 }
