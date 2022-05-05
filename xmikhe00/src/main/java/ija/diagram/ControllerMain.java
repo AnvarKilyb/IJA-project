@@ -77,6 +77,8 @@ public class ControllerMain {
     @FXML
     private Button buttonAddRelation;
 
+    @FXML
+    private  Button buttonNewSequence;
     /**
      * Konstruktér ovladače
      * předáváme do lokálních parametrů instance tříd
