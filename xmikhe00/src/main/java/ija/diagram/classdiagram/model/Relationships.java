@@ -8,55 +8,65 @@ package ija.diagram.classdiagram.model;
  */
 public class Relationships{
 //    private String nameClassFrom; // todo String ?
-    private String nameClassTo;   // todo String ?
-    private String name;
-    private Type typeFrom;
-    private Type typeTo;
+    private DClass classTo;   // todo String ?
+    private DClass classFrom;
+    private Type typeShip;
+    private String name = "";
 
     private double startX;
     private double startY;
     private double endX;
     private double endY;
 
+
     /**
      * Enum přístupových modifikátoru
      */
     public enum Type{
         ASSOCIATION,
-        REFLEXIVEASSOCIATION,
-        MULTIPLICITY,
+        /*--------------*/
+//        REFLEXIVE,
         AGGREGATION,
+        /*------------<>*/
         COMPOSITION,
+        /*-------------<<>>*/
         INHERITANCE_GENERALIZATION,
+        /*--------------|>*/
         REALIZATION,
+        /*- - - - - - - */
         }
 
     /**
      * Vytvoří instance vztahů
-     * @param nameClassTo jméno třídy do které jde vztah
-     * @param typeFrom typ začátku vztahu
-     * @param typeTo typ konce vztahu
+     * @param classFrom jméno třídy od které jde vztah
+     * @param typeShip typ
      */
-    public Relationships(String nameClassTo, Type typeFrom, Type typeTo){
-        this.nameClassTo = nameClassTo;
-        this.typeFrom = typeFrom;
-        this.typeTo = typeTo;
+    public Relationships(DClass classFrom, Type typeShip){
+        this.classFrom = classFrom;
+        this.typeShip = typeShip;
     }
 
     /**
      * Vytvoří instance vztahu
-     * @param nameClassTo jméno třídy ke které jde vztah
+     * @param classFrom jméno třídy ke které jde vztah
      * @param typeFrom typ začátku vztahu
-     * @param typeTo typ konce vztahu
      * @param startX souřadnice začátku
      * @param startY souřadnice začátku
      * @param endX koncová souřadnice
      * @param endY koncová souřadnice
      */
-    public Relationships(String nameClassTo, Type typeFrom, Type typeTo, double startX, double startY, double endX, double endY){
-        this.nameClassTo = nameClassTo;
-        this.typeFrom = typeFrom;
-        this.typeTo = typeTo;
+    public Relationships(DClass classFrom, Type typeFrom, double startX, double startY, double endX, double endY){
+        this.classFrom = classFrom;
+        this.typeShip = typeFrom;
+        this.startX = startX;
+        this.startY = startY;
+        this.endX = endX;
+        this.endY = endY;
+    }
+    public Relationships(DClass classFrom, DClass classTo, Type typeFrom, double startX, double startY, double endX, double endY){
+        this.classFrom = classFrom;
+        this.classTo = classTo;
+        this.typeShip = typeFrom;
         this.startX = startX;
         this.startY = startY;
         this.endX = endX;
@@ -66,53 +76,76 @@ public class Relationships{
     /**
      * Vytvoří instance vztahu
      * automaticky dodává typ přístupových modifikátoru
-     * @param nameClassTo jméno třídy ke které jde vztah
+     * @param classFrom jméno třídy ke které jde vztah
      */
-    public Relationships(String nameClassTo){
-        this.nameClassTo = nameClassTo;
-        this.typeFrom = Type.ASSOCIATION;
-        this.typeTo = Type.ASSOCIATION;
+    public Relationships(DClass classFrom){
+        this.classFrom = classFrom;
+        this.typeShip= Type.ASSOCIATION;
     }
 
-    public void setName(String name){
-        this.name = name;
+    public DClass getClassTo() {
+        return this.classTo;
     }
 
-    public String getName(){
-        return this.name;
+    public void setClassTo(DClass classTo) {
+        this.classTo = classTo;
     }
 
-//    public String getNameClassFrom() {
-//        return nameClassFrom;
-//    }
-//
-//    public void setNameClassFrom(String nameClassFrom) {
-//        this.nameClassFrom = nameClassFrom;
-//    }
-
-    public String getNameClassTo() {
-        return nameClassTo;
+    public DClass getClassFrom() {
+        return this.classFrom;
     }
 
-    public void setNameClassTo(String nameClassTo) {
-        this.nameClassTo = nameClassTo;
+    public void setClassFrom(DClass classFrom) {
+        this.classFrom = classFrom;
     }
 
-    public Type getTypeFrom() {
-        return typeFrom;
+    public Type getTypeShip() {
+        return typeShip;
     }
 
-    public void setTypeFrom(Type typeFrom) {
-        this.typeFrom = typeFrom;
+    public String getTypeShipString() {
+        switch (typeShip){
+            case ASSOCIATION:
+                return "association";
+//            case REFLEXIVE:
+//                return  "reflexive";
+            case AGGREGATION:
+                return  "aggregation";
+            case COMPOSITION:
+                return  "composition";
+            case INHERITANCE_GENERALIZATION:
+                return "inheritance";
+            case REALIZATION:
+                return  "realization";
+        }
+        return "association";
     }
 
-    public Type getTypeTo() {
-        return typeTo;
+    public void setTypeShip(Type typeFrom) {
+        this.typeShip = typeFrom;
     }
 
-    public void setTypeTo(Type typeTo) {
-        this.typeTo = typeTo;
+
+    public void setTypeString(String type) {
+        switch (type){
+            case "association":
+                this.typeShip = Type.ASSOCIATION;
+                return;
+            case "aggregation":
+                this.typeShip = Type.AGGREGATION;
+                return;
+            case "composition":
+                this.typeShip = Type.COMPOSITION;
+                return;
+            case "inheritance":
+                this.typeShip = Type.INHERITANCE_GENERALIZATION;
+                return;
+            case "realization":
+                this.typeShip = Type.REALIZATION;
+        }
     }
+
+
 
     public double getStartX() {
         return startX;
@@ -144,5 +177,10 @@ public class Relationships{
 
     public void setEndY(double endY) {
         this.endY = endY;
+    }
+
+
+    public String getName(){
+        return name;
     }
 }

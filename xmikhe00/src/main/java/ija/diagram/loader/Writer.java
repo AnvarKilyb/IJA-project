@@ -1,8 +1,6 @@
 package ija.diagram.loader;
 
-import ija.diagram.classdiagram.model.Arguments;
-import ija.diagram.classdiagram.model.DClass;
-import ija.diagram.classdiagram.model.Methods;
+import ija.diagram.classdiagram.model.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -19,16 +17,21 @@ import java.util.Locale;
  */
 public class Writer {
     String path;
-
+    JSONArray mainList = new JSONArray();
     public Writer(String path){
         this.path = path;
     }
 
+    public void saveJSON(ClassDiagram classDiagram){
+        writeClassJSON(classDiagram.getdClassList());
+        writeRelationJSON(classDiagram.getRelationshipsList());
+        writeToJSON();
+
+    }
     /**
      * Získá dCLassList s daty ve třídách a vypíše vše do souboru ve formátu JSON
      */
-    public void writeJSON(List<DClass> dClassList){
-        JSONArray mainList = new JSONArray();
+    public void writeClassJSON(List<DClass> dClassList){
         for(DClass item: dClassList){
             JSONArray attrList = new JSONArray();
             JSONArray methodList = new JSONArray();
@@ -60,6 +63,31 @@ public class Writer {
             classList.put("class", classParams);
             mainList.add(classList);
         }
+    }
+
+    public void writeRelationJSON(List<Relationships> relationshipsList){
+        for(Relationships relationships : relationshipsList){
+            JSONObject relationList = new JSONObject();
+            JSONObject relationArgument = new JSONObject();
+            relationArgument.put("name", relationships.getName());
+            relationArgument.put("start", relationships.getClassFrom().getName());
+            if(relationships.getClassTo() == null){
+                continue;
+            }
+            relationArgument.put("end", relationships.getClassTo().getName());
+
+            relationArgument.put("type", relationships.getTypeShipString());
+            relationArgument.put("startX", relationships.getStartX());
+            relationArgument.put("startY", relationships.getStartY());
+            relationArgument.put("endX", relationships.getEndX());
+            relationArgument.put("endY", relationships.getEndY());
+            if(!relationshipsList.isEmpty())
+                relationList.put("relation", relationArgument);
+                mainList.add(relationList);
+        }
+    }
+
+    public void writeToJSON(){
         try (FileWriter file = new FileWriter(path)) {
             file.write(mainList.toJSONString());
             file.flush();
@@ -68,4 +96,5 @@ public class Writer {
             e.printStackTrace();
         }
     }
+
 }

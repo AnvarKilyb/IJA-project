@@ -13,7 +13,6 @@ import java.util.List;
 public class DClass extends Element{
     private List<Arguments> argumentsList;
     private List<Methods> methodsList;
-//    private List<Relationships> relationshipsList;
     private double X = 0;
     private double Y = 0;
     //todo coordinates
@@ -22,7 +21,6 @@ public class DClass extends Element{
         super(name);
         argumentsList = new ArrayList<Arguments>();
         methodsList = new ArrayList<Methods>();
-//        relationshipsList = new ArrayList<Relationships>();
     }
 
     public List<Arguments> getArgumentsList(){
@@ -33,9 +31,7 @@ public class DClass extends Element{
         return methodsList;
     }
 
-//    public List<Relationships> getRelationshipsList(){
-//        return relationshipsList;
-//    }
+
 
     /**
      * Vytvoří argument a uloží ho do seznamu argumentů
@@ -94,49 +90,6 @@ public class DClass extends Element{
     public void methodDelete(Methods method){
         this.methodsList.remove(method);
     }
-
-//    /**
-//     * @deprecated bude změněno a z třídy reprezentace tříd přesunuto do třídy {@link ClassDiagram}
-//     */
-//    public Relationships addRelationship(String nameClassTo, Relationships.Type typeFrom, Relationships.Type typeTo){
-//        Relationships relationships = new Relationships(nameClassTo,typeFrom,typeTo);
-//        relationshipsList.add(relationships);
-//        return relationships;
-//    }
-//
-//    /**
-//     * @deprecated bude změněno a z třídy reprezentace tříd přesunuto do třídy {@link ClassDiagram}
-//     */
-//    public Relationships addRelationship(String nameClassTo, Relationships.Type typeFrom, Relationships.Type typeTo,
-//                                         double startX, double startY, double endX, double endY){
-//        Relationships relationships = new Relationships(nameClassTo,typeFrom,typeTo,startX,startY,endX,endY);
-//        relationshipsList.add(relationships);
-//        return relationships;
-//    }
-//
-//    /**
-//     * @deprecated bude změněno a z třídy reprezentace tříd přesunuto do třídy {@link ClassDiagram}
-//     */
-//    public Relationships addRelationship(String nameClassTo){
-//        Relationships relationships = new Relationships(nameClassTo);
-//        relationshipsList.add(relationships);
-//        return relationships;
-//    }
-//
-//    /**
-//     * @deprecated bude změněno a z třídy reprezentace tříd přesunuto do třídy {@link ClassDiagram}
-//     */
-//    public void relationshipDelete(Relationships relationships){
-//        this.relationshipsList.remove(relationships);
-//    }
-
-//    /**
-//     * @deprecated bude změněno a z třídy reprezentace tříd přesunuto do třídy {@link ClassDiagram}
-//     */
-//    public List<Relationships> returnRelationShipList(){
-//        return relationshipsList;
-//    }
-
 
     public void setX(double x){
         this.X = x;

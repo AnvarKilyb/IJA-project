@@ -92,8 +92,9 @@
 #classBox{
     -fx-background-color: rgb(48, 47, 46);
     -fx-border-color: rgb(255,255,255);
-    -fx-border-width: 2 2 0 2;
+    -fx-border-width: 2 2 1 2;
 }
+
 
 #classChoice{
     -fx-background-color: rgb(48, 47, 46);
@@ -151,6 +152,7 @@
     -fx-border-width: 0 0 1 0;
     -fx-text-fill: rgb(255,255,255);
     -fx-font-size: 10;
+    -fx-padding: 0 0 0 0;
 }
 
 #classField1{
@@ -160,6 +162,7 @@
     -fx-text-fill: rgb(255,255,255);
     /*-fx-font: system;*/
     -fx-font-size: 10;
+    -fx-padding: 0 0 0 0;
 }
 
 
@@ -170,6 +173,7 @@
     -fx-text-fill: rgb(255,255,255);
     -fx-alignment: center;
     -fx-font-size: 10;
+    /*-fx-padding: 0 0 0 0;*/
 }
 
 #classHbox{
@@ -184,13 +188,86 @@
 /*    -fx-border-width: 0 0 3 0;*/
 /*}*/
 
+
+#lineMenuPanel{
+    -fx-background-color: rgb(48, 47, 46);
+}
+
+#lineMenuButton{
+    -fx-background-color: rgb(48, 47, 46);
+    -fx-mark-color: rgb(61, 84, 133);
+}
+
+#lineMenuButton .menu-item:focused{
+    -fx-background-color: rgb(54, 48, 119);
+}
+
+#lineMenuButton .menu-item > .label{
+    -fx-text-fill: rgb(255,255,255);
+}
+
+#lineMenuButton .menu-item:focused > .label{
+    -fx-text-fill: rgb(255,255,255);
+}
+
+#lineMenuButton .menu-item:focused > .label{
+    -fx-text-fill: rgb(255,255,255);
+}
+
+#lineMenuButton > .label{
+    -fx-text-fill: rgb(255,255,255);
+}
+
 #relation{
     -fx-stroke: rgb(255,255,255);
     -fx-stroke-width: 3;
     /*-fx-fill: rgb(255,255,255);*/
+
 }
 
 
+
+.scroll-pane{
+    -fx-background-color: rgb(48, 47, 46);
+}
+
+.scroll-pane .scroll-bar{
+    -fx-background-color: rgb(48, 47, 46);
+    -fx-padding: 0 2 0 0;
+
+}
+
+.scroll-bar .thumb{
+    -fx-background-color: rgb(54, 48, 119);
+
+}
+
+
+#realizationLine{
+    -fx-stroke: rgb(255,255,255);
+    -fx-stroke-width: 3;
+    -fx-stroke-dash-array: 2 12 12 2;
+}
+
+#arrowInvisible{
+    -fx-opacity: 0;
+}
+
+#arrowAggregation{
+    -fx-border-color: black;
+    -fx-border: 2 2 2 2;
+    -fx-background-color: white;
+}
+
+#arrowComposition{
+    -fx-background-color: rgb(0,0,0);
+}
+
+#arrowInheritance{
+    -fx-background-image: url(./arr.png);
+    -fx-background-size: 12 12;
+    -fx-background-repeat: no-repeat;
+}
 
 
 /* 

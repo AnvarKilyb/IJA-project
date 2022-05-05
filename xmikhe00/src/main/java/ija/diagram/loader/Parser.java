@@ -233,9 +233,9 @@ public class Parser {
                     case "inheritance":
                         newObject.setConType(objectJSON.ConType.INHERITANCE);
                         break;
-                    case "multiplicity":
-                        newObject.setConType(objectJSON.ConType.MULTIPLICITY);
-                        break;
+//                    case "multiplicity":
+//                        newObject.setConType(objectJSON.ConType.MULTIPLICITY);
+//                        break;
                     case "realization":
                         newObject.setConType(objectJSON.ConType.REALIZATION);
                         break;

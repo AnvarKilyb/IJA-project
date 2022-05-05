@@ -4,9 +4,7 @@ import ija.diagram.ControllerMain;
 import ija.diagram.classdiagram.model.*;
 import javafx.scene.shape.Line;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -23,7 +21,7 @@ public class ViewDiagram {
     private ControllerMain controllerMain;
 
     /**Uchovává instance vztahu a instance která reprezentuje zobrazení vztahu*/
-    private Map<Line, Relationships> relationshipsLineMap = new HashMap<Line, Relationships>(); //todo
+    private Map<ViewRelationships, Relationships> relationshipsLineMap = new HashMap<ViewRelationships, Relationships>(); //todo
 
     public void setControllerMain(ControllerMain controllerMain){
         this.controllerMain = controllerMain;
@@ -99,19 +97,36 @@ public class ViewDiagram {
        diagramClassMap.remove(viewClass);
     }
 
+    public void deleteViewRelationship(ViewRelationships viewRelationships){
+        relationshipsLineMap.remove(viewRelationships);
+    }
 
-    public Line addRelationships(Relationships relationships){
-        Line line = new Line();
-        line.setStartX(relationships.getStartX());
-        line.setStartY(relationships.getStartY());
-        line.setEndX(relationships.getEndX());
-        line.setEndY(relationships.getEndY());
-        relationshipsLineMap.put(line, relationships);
-        return line;
+    public ViewRelationships addRelationships(Relationships relationships, ViewRelationships viewRelation){
+        ViewClass classFrom = getViewClass(relationships.getClassFrom());
+        ViewClass classTo = getViewClass(relationships.getClassTo());
+        if(classFrom != null){
+            viewRelation.startXProperty().bind(classFrom.layoutXProperty().add(relationships.getStartX()));
+            viewRelation.startYProperty().bind(classFrom.layoutYProperty().add(relationships.getStartY()));
+        }
+        if(classTo != null){
+            viewRelation.endXProperty().bind(classTo.layoutXProperty().add(relationships.getEndX()));
+            viewRelation.endYProperty().bind(classTo.layoutYProperty().add(relationships.getEndY()));
+        }
+        viewRelation.setClassFrom(classFrom);
+        viewRelation.setClassTo(classTo);
+        viewRelation.setStartClassY(relationships.getStartX());
+        viewRelation.setStartClassY(relationships.getStartY());
+        viewRelation.setEndClassX(relationships.getEndX());
+        viewRelation.setEndClassY(relationships.getEndY());
+        viewRelation.setController();
+
+        relationshipsLineMap.put(viewRelation, relationships);
+        return viewRelation;
     }
 
     public void deleteAll(){
         diagramClassMap.clear();
+        deleteAllArrow();
         relationshipsLineMap.clear();
     }
 
@@ -119,7 +134,35 @@ public class ViewDiagram {
         return diagramClassMap;
     }
 
-    public Map<Line,Relationships> getRelationshipsLineMap(){
+
+    public void addRelationship(ViewRelationships viewRelationships, Relationships relationships){
+        relationshipsLineMap.put(viewRelationships, relationships);
+    }
+    public Relationships getRelationShip(ViewRelationships viewRelationships){
+        return relationshipsLineMap.get(viewRelationships);
+    }
+
+    public Map<ViewRelationships,Relationships> getRelationshipsLineMap(){
         return relationshipsLineMap;
     }
+
+    public ViewClass getViewClass(DClass dClass){
+        Set<Map.Entry<ViewClass,DClass>>viewClassCollation = diagramClassMap.entrySet();
+        for(Map.Entry<ViewClass, DClass> map: viewClassCollation){
+            if(map != null){
+                if(dClass.equals(map.getValue())){
+                    return map.getKey();
+                }
+            }
+        }
+        return null;
+    }
+
+    public void deleteAllArrow(){
+        Set<Map.Entry<ViewRelationships, Relationships>> viewRelationshipMap = relationshipsLineMap.entrySet();
+        for(Map.Entry<ViewRelationships, Relationships> map: viewRelationshipMap){
+                map.getKey().deleteArrow();
+            }
+    }
+
 }

@@ -6,11 +6,17 @@ import ija.diagram.classdiagram.view.*;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Timer;
 
 import static ija.diagram.classdiagram.model.Item.returnModifier;
 
@@ -166,6 +172,14 @@ public class ClassContextController {
 
         ViewDiagram viewDiagram = controllerMain.getViewDiagram();
         DClass dClass = viewDiagram.returnDClass(viewClass);
-        dClass.setName(className.getText());
+        ClassDiagram classDiagram = controllerMain.getClassDiagram();
+        if(!classDiagram.setClassName(className.getText(),dClass)){
+            Label labelWarning = controllerMain.getLabelWarning();
+            labelWarning.setPrefHeight(labelWarning.getHeight() + 15);
+            DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+            Date date = new Date();
+            labelWarning.setText(labelWarning.getText() + "\n[" + dateFormat.format(date) +"] сlass name already exists ");
+            className.setText(dClass.getName());
+        }
     }
 }

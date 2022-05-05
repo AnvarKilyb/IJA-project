@@ -11,12 +11,10 @@ import ija.diagram.loader.Loader;
 import ija.diagram.loader.Writer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Path;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -65,6 +63,9 @@ public class ControllerMain {
     @FXML
     private Button buttonAddRelation;
 
+    @FXML
+    private Label labelWarning;
+
     /**
      * Konstruktér ovladače
      * předáváme do lokálních parametrů instance tříd
@@ -103,7 +104,7 @@ public class ControllerMain {
 
     private void addRelation(ActionEvent event){
         ViewRelationships relationships = new ViewRelationships();
-        relationships.setController(viewClassController);
+        relationships.setController();
         mainPane.getChildren().add(relationships);
     }
 
@@ -116,8 +117,7 @@ public class ControllerMain {
         String path = file.getAbsolutePath();
 
         Writer writer = new Writer(path);
-        List<DClass> dClassList = classDiagram.getdClassList();
-        writer.writeJSON(dClassList);
+        writer.saveJSON(classDiagram);
     }
 
     /**
@@ -147,17 +147,21 @@ public class ControllerMain {
 
 
         Loader loader = new Loader(classDiagram, path);
-        loader.classLoad();
+        loader.loading();
         for(DClass dClass : classDiagram.getdClassList()){
             ViewClass viewClass = viewDiagram.addNewClass(dClass);
-            List<Relationships> relationshipsList= classDiagram.getRelationshipsList();
-            for(Relationships relationships : relationshipsList){
-                Line line = viewDiagram.addRelationships(relationships);
-                line.setId("relation");
-                this.mainPane.getChildren().add(line);
-            }
             this.mainPane.getChildren().add(viewClass);
-//            System.out.println(viewClass.getLayoutX());
+        }
+        List<Relationships> relationshipsList = classDiagram.getRelationshipsList();
+        for(Relationships relationships : relationshipsList){
+            ViewRelationships line = new ViewRelationships();
+            this.mainPane.getChildren().add(line);
+            line.setViewClassController(viewClassController);
+            viewDiagram.addRelationships(relationships,line);
+            line.setUserData(mainPane);
+            line.setMainPane(mainPane);
+            line.addArrow();
+            line.setType(relationships.getTypeShipString());
         }
 
     }
@@ -187,4 +191,7 @@ public class ControllerMain {
         return viewDiagram;
     }
 
+    public Label getLabelWarning(){
+        return labelWarning;
+    }
 }

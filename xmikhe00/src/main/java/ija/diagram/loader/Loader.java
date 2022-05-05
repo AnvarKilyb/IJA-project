@@ -3,7 +3,6 @@ package ija.diagram.loader;
 import ija.diagram.classdiagram.model.ClassDiagram;
 import ija.diagram.classdiagram.model.DClass;
 import ija.diagram.classdiagram.model.Relationships;
-import ija.diagram.loader.Parser;
 
 import java.util.ArrayList;
 
@@ -19,16 +18,19 @@ public class Loader {
     private Parser parser;
 
 
-    public void classLoad(){
+    public void loading(){
         list = parser.parseJSON();
         if(list == null){
             return;
         }
         for(objectJSON item: list){
             if(item.getType() == objectJSON.ItemType.CLASS){
-                classDiagram.addClass(parseDiagram(item));
+                DClass dClass  = parseClasses(item);
+                classDiagram.addClass(dClass);
+
             }
         }
+        parseRelation();
     }
 
     public Loader(ClassDiagram classDiagram, String path){
@@ -37,44 +39,45 @@ public class Loader {
     }
 
 
-    private DClass parseDiagram(objectJSON item) {
-//        ArrayList<objectJSON> list = parser.parseJSON();
-        DClass dClass  = parseClasses(item);
+    private void parseRelation() {
         //Parse relations
         for (objectJSON relation : list) {
             if (relation.getType() == objectJSON.ItemType.CONNECTION) {
-                if (relation.getStartConnection().equals(item.getName())) {
-                    double sX = relation.getStartX();
-                    double sY = relation.getStartY();
-                    double eX = relation.getEndX();
-                    double eY = relation.getEndY();
-                    switch (relation.getConType()) {
-                        case ASSOCIATION:
-                            classDiagram.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.ASSOCIATION, sX, sY, eX, eY);
-                            break;
-                        case AGGREGATION:
-                            classDiagram.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.AGGREGATION, sX, sY, eX, eY);
-                            break;
-                        case REFLEXIVE_ASSOCIATION:
-                            classDiagram.addRelationship(relation.getEndConnection(), Relationships.Type.REFLEXIVEASSOCIATION, Relationships.Type.REFLEXIVEASSOCIATION, sX, sY, eX, eY);
-                            break;
-                        case MULTIPLICITY:
-                            classDiagram.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.MULTIPLICITY, sX, sY, eX, eY);
-                            break;
-                        case COMPOSITION:
-                            classDiagram.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.COMPOSITION, sX, sY, eX, eY);
-                            break;
-                        case INHERITANCE:
-                            classDiagram.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.INHERITANCE_GENERALIZATION, sX, sY, eX, eY);
-                            break;
-                        case REALIZATION:
-                            classDiagram.addRelationship(relation.getEndConnection(), Relationships.Type.ASSOCIATION, Relationships.Type.REALIZATION, sX, sY, eX, eY);
-                            break;
-                    }
+                double sX = relation.getStartX();
+                double sY = relation.getStartY();
+                double eX = relation.getEndX();
+                double eY = relation.getEndY();
+                DClass classFrom = classDiagram.returnClass(relation.getStartConnection());
+                DClass classTo = classDiagram.returnClass(relation.getEndConnection());
+                switch (relation.getConType()) {
+                    case ASSOCIATION:
+                        classDiagram.addRelationship(classFrom,classTo, Relationships.Type.ASSOCIATION, sX, sY, eX, eY);
+                        break;
+                    case AGGREGATION:
+                        classDiagram.addRelationship(classFrom,classTo,  Relationships.Type.AGGREGATION, sX, sY, eX, eY);
+                        break;
+//                    case REFLEXIVE_ASSOCIATION:
+//                        classDiagram.addRelationship(classFrom,classTo, Relationships.Type.REFLEXIVE, sX, sY, eX, eY);
+//                        break;
+//                    case MULTIPLICITY:
+//                        classDiagram.addRelationship(classFrom,classTo, Relationships.Type.MULTIPLICITY, sX, sY, eX, eY);
+//                        break;
+                    case COMPOSITION:
+                        classDiagram.addRelationship(classFrom,classTo, Relationships.Type.COMPOSITION, sX, sY, eX, eY);
+                        break;
+                    case INHERITANCE:
+                        classDiagram.addRelationship(classFrom,classTo, Relationships.Type.INHERITANCE_GENERALIZATION, sX, sY, eX, eY);
+                        break;
+                    case REALIZATION:
+                        classDiagram.addRelationship(classFrom,classTo, Relationships.Type.REALIZATION, sX, sY, eX, eY);
+                        break;
+                    default:
+                        classDiagram.addRelationship(classFrom,classTo, Relationships.Type.ASSOCIATION, sX, sY, eX, eY);
+                        break;
+
                 }
             }
         }
-        return dClass;
     }
 
     private DClass parseClasses(objectJSON item){
