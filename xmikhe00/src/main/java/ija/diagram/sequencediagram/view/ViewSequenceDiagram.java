@@ -5,6 +5,7 @@ import ija.diagram.classdiagram.view.ViewClass;
 import ija.diagram.sequencediagram.model.Message;
 import ija.diagram.sequencediagram.model.SObject;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 
 import java.util.HashMap;
@@ -14,7 +15,7 @@ public class ViewSequenceDiagram {
 
     private ControllerMain controllerMain;
 
-    private Map<Line, Message> messageLineMap = new HashMap<Line, Message>();
+    private Map<ViewMessage, Message> messageLineMap = new HashMap<ViewMessage, Message>();
 
     private  Map<ViewObject, SObject> objectSequenceMap = new HashMap<ViewObject, SObject>();
 
@@ -30,9 +31,13 @@ public class ViewSequenceDiagram {
         viewObject.setY(modelObject.getY());
         return viewObject;
     }
+    public ViewObject setActiveChunk(int chunkNum, ViewObject viewObject){
+        viewObject.getChunkList().get(chunkNum).activeChunk();
+        return viewObject;
+    }
 
 
-    public Map<Line, Message> getMessageLineMap() {
+    public Map<ViewMessage, Message> getMessageLineMap() {
         return messageLineMap;
     }
 

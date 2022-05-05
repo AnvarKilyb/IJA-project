@@ -25,6 +25,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
 /**
  * Hlavní ovladač,
@@ -139,13 +140,19 @@ public class ControllerMain {
             return;
         }
         short count = 2;
-        for(DClass dClass: classDiagram.getdClassList()){
+        List<DClass> randList = classDiagram.getdClassList();
+        Collections.shuffle(randList);
+        for(DClass dClass: randList){
             SObject sObject = new SObject();
             sObject.setName(dClass.getName());
             sObject.setX(160*count);
             count++;
             sequenceDiagram.addObject(sObject);
-            content.getChildren().add(viewSequenceDiagram.addNewObject(sObject));
+            ViewObject target = viewSequenceDiagram.addNewObject(sObject);
+            target = viewSequenceDiagram.setActiveChunk(0, target);
+            target = viewSequenceDiagram.setActiveChunk(1, target);
+            target = viewSequenceDiagram.setActiveChunk(5, target);
+            content.getChildren().add(target);
         }
         scrollPane.setContent(content);
         this.sequencePane.getChildren().add(scrollPane);

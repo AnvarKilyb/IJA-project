@@ -302,6 +302,15 @@
     -fx-background-repeat: no-repeat;
 }
 
+#chunkVisible{
+    -fx-background-color: rgb(255,102,102);
+}
+
+#chunkTransparent{
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+}
+
 
 /* 
 black rgb(15, 15, 15)
