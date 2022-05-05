@@ -54,7 +54,7 @@
                      </font>
                   </Button>
                   <Pane prefHeight="24.0" prefWidth="268.0" />
-                  <Button fx:id="sequenceDiagram1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="64.0" prefWidth="310.0" stylesheets="@WindowStyle.css" text="New sequence diagram" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="buttonNewSequence" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="64.0" prefWidth="310.0" stylesheets="@WindowStyle.css" text="New sequence diagram" textAlignment="CENTER" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
@@ -89,9 +89,9 @@
           <Tab id="topbuttom" text="SEQUENCE DIAGRAM">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Pane prefHeight="704.0" prefWidth="912.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                     </children></AnchorPane>
+                  <children>
+                      <Pane id="sequencePane" fx:id="sequencePane" layoutX="8.0" layoutY="-1.0" prefHeight="702.0" prefWidth="920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  </children></AnchorPane>
             </content>
           </Tab>
         </tabs>

@@ -72,6 +72,11 @@
     -fx-background-size: 40 40;
     /* -fx-background-position: center center; */
 }
+#sequencePane{
+    -fx-background-color: rgb(64, 64, 64);
+    -fx-background-size: 40 40;
+    /* -fx-background-position: center center; */
+}
 #labelWarning{
     -fx-background-color:rgb(48, 47, 46);
     -fx-text-fill:rgb(255, 161, 110);
@@ -226,6 +231,34 @@
 }
 
 
+#objectBox{
+    -fx-border-color: rgb(255,255,255);
+    -fx-border-width: 2 2 2 2;
+}
+
+#objectLabel{
+    -fx-background-size: 10 10;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 10 center;
+    -fx-background-color: rgb(48, 47, 46);
+    -fx-border-color: rgb(255,255,255);
+    -fx-border-width: 1 1 1 1;
+    -fx-text-fill: rgb(255,255,255);
+    -fx-alignment: center center;
+}
+
+#message{
+    -fx-stroke: rgb(255,255,255);
+    -fx-stroke-width: 4;
+    /*-fx-fill: rgb(255,255,255);*/
+}
+
+#lifeLine{
+    -fx-stroke: rgb(255,255,255);
+    -fx-stroke-width: 3;
+    -fx-stroke-dash-array: 2 12 12 2;
+    /*-fx-fill: rgb(255,255,255);*/
+}
 
 .scroll-pane{
     -fx-background-color: rgb(48, 47, 46);

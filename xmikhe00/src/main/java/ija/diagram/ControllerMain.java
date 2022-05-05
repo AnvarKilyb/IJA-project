@@ -9,10 +9,16 @@ import ija.diagram.classdiagram.view.ViewDiagram;
 import ija.diagram.classdiagram.view.ViewRelationships;
 import ija.diagram.loader.Loader;
 import ija.diagram.loader.Writer;
+import ija.diagram.sequencediagram.model.SObject;
+import ija.diagram.sequencediagram.model.SequenceDiagram;
+import ija.diagram.sequencediagram.view.ViewObject;
+import ija.diagram.sequencediagram.view.ViewSequenceDiagram;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
@@ -30,6 +36,8 @@ import java.util.List;
 public class ControllerMain {
     private ViewClassController viewClassController;
     private ClassContextController classContextController;
+    private final SequenceDiagram sequenceDiagram;
+    private final ViewSequenceDiagram viewSequenceDiagram;
     private final ClassDiagram classDiagram;
     private final ViewDiagram viewDiagram;
     private Stage stage;
@@ -61,10 +69,13 @@ public class ControllerMain {
     private Pane mainPane;
 
     @FXML
-    private Button buttonAddRelation;
+    private Pane sequencePane;
 
     @FXML
     private Label labelWarning;
+
+    @FXML
+    private Button buttonAddRelation;
 
     /**
      * Konstruktér ovladače
@@ -72,9 +83,12 @@ public class ControllerMain {
      * @param classDiagram instance třídy {@link ClassDiagram}
      * @param viewDiagram instance třídy {@link ViewDiagram}
      */
-    public ControllerMain(ClassDiagram classDiagram, ViewDiagram viewDiagram, FileChooser fileChooser, Stage stage){
+    public ControllerMain(ClassDiagram classDiagram, ViewDiagram viewDiagram,
+                          SequenceDiagram sequenceDiagram, ViewSequenceDiagram viewSequenceDiagram, FileChooser fileChooser, Stage stage){
             this.classDiagram = classDiagram;
             this.viewDiagram = viewDiagram;
+            this.sequenceDiagram = sequenceDiagram;
+            this.viewSequenceDiagram = viewSequenceDiagram;
             this.stage = stage;
             this.fileChooser = fileChooser;
     }
@@ -89,6 +103,7 @@ public class ControllerMain {
         buttonLoad.addEventFilter(ActionEvent.ACTION,this::loadFile);
         buttonSave.addEventFilter(ActionEvent.ACTION,this::saveFile);
         buttonAddRelation.addEventHandler(ActionEvent.ACTION, this::addRelation);
+        buttonNewSequence.addEventFilter(ActionEvent.ACTION, this::newSequence);
     }
 
     /**
@@ -106,6 +121,33 @@ public class ControllerMain {
         ViewRelationships relationships = new ViewRelationships();
         relationships.setController();
         mainPane.getChildren().add(relationships);
+    }
+
+    private void newSequence(ActionEvent event){
+        Pane content = new Pane();
+        content.setId("sequencePane");
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setPrefSize(880, 682);
+        scrollPane.setStyle("-fx-background: transparent; -fx-background-color: transparent;");
+        SObject actor = sequenceDiagram.addActor();
+        ViewObject viewObject = viewSequenceDiagram.addNewObject(actor);
+        content.getChildren().add(viewObject);
+        if(classDiagram.getdClassList().isEmpty()){
+            labelWarning.setText("Transformation warning:\n---There are no entities.");
+            return;
+        }
+        short count = 2;
+        for(DClass dClass: classDiagram.getdClassList()){
+            SObject sObject = new SObject();
+            sObject.setName(dClass.getName());
+            sObject.setX(160*count);
+            count++;
+            sequenceDiagram.addObject(sObject);
+            content.getChildren().add(viewSequenceDiagram.addNewObject(sObject));
+        }
+        scrollPane.setContent(content);
+        this.sequencePane.getChildren().add(scrollPane);
+
     }
 
     private void saveFile(ActionEvent event){
@@ -181,6 +223,14 @@ public class ControllerMain {
 
     public void setViewClassController(ViewClassController viewClassController){
         this.viewClassController = viewClassController;
+    }
+
+    public SequenceDiagram getSequenceDiagram() {
+        return sequenceDiagram;
+    }
+
+    public ViewSequenceDiagram getViewSequenceDiagram() {
+        return viewSequenceDiagram;
     }
 
     public ClassDiagram getClassDiagram(){

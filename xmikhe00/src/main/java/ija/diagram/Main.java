@@ -3,6 +3,8 @@ import ija.diagram.classdiagram.controller.ClassContextController;
 import ija.diagram.classdiagram.controller.ViewClassController;
 import ija.diagram.classdiagram.model.ClassDiagram;
 import ija.diagram.classdiagram.view.ViewDiagram;
+import ija.diagram.sequencediagram.model.SequenceDiagram;
+import ija.diagram.sequencediagram.view.ViewSequenceDiagram;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -31,16 +33,20 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         ClassDiagram classDiagram = new ClassDiagram();
         ViewDiagram viewDiagram = new ViewDiagram();
+        SequenceDiagram sequenceDiagram = new SequenceDiagram();
+        ViewSequenceDiagram viewSequenceDiagram = new ViewSequenceDiagram();
         FileChooser fileChooser = new FileChooser();
 //        fileChooser.getExtensionFilters().add(
 //            new FileChooser.ExtensionFilter("JSON file","*.json")
 //        );
-        ControllerMain controllerMain = new ControllerMain(classDiagram, viewDiagram, fileChooser, stage);
+        ControllerMain controllerMain = new ControllerMain(classDiagram, viewDiagram, sequenceDiagram, viewSequenceDiagram, fileChooser, stage);
         viewDiagram.setControllerMain(controllerMain);
+        viewSequenceDiagram.setControllerMain(controllerMain);
         ViewClassController viewClassController = new ViewClassController(controllerMain);
         ClassContextController classContextController = new ClassContextController(controllerMain);
         controllerMain.setClassContextController(classContextController);
         controllerMain.setViewClassController(viewClassController);
+
 
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("/main/main.fxml"));
         loader.setController(controllerMain);
