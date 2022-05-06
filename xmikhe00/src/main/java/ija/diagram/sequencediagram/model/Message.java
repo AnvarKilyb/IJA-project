@@ -16,6 +16,8 @@ public class Message {
     private MessageType messageType;
     private double Y;
     private double X = 26;
+    private DClass classStart;
+    private DClass classEnd;
 
     public Message(String name, MessageType messageType){
         this.name = name;
@@ -67,5 +69,21 @@ public class Message {
 
     public void setX(double x) {
         X = x;
+    }
+
+    public DClass getClassStart() {
+        return classStart;
+    }
+
+    public void setClassStart(DClass classStart) {
+        this.classStart = classStart;
+    }
+
+    public DClass getClassEnd() {
+        return classEnd;
+    }
+
+    public void setClassEnd(DClass classEnd) {
+        this.classEnd = classEnd;
     }
 }
