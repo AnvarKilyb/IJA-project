@@ -263,7 +263,7 @@ public class ControllerMain {
         addObjectWindow.showAndWait();
     }
 
-    public SequenceDiagram getSequenceDiagram() {
+    public SequenceDiagram getSequenceDiagram1() {
         return sequenceDiagram1;
     }
     public SequenceDiagram getSequenceDiagram2() {
@@ -273,7 +273,33 @@ public class ControllerMain {
         return sequenceDiagram3;
     }
 
-    public ViewSequenceDiagram getViewSequenceDiagram() {
+
+    public SequenceDiagram getSequenceDiagram() {
+        RadioButton selectedRadioButton = (RadioButton) sequenceGroup.getSelectedToggle();
+        switch (selectedRadioButton.getText()){
+            case "1":
+                return sequenceDiagram1;
+            case "2":
+                return sequenceDiagram2;
+            case "3":
+                return sequenceDiagram3;
+        }
+        return sequenceDiagram1;
+    }
+
+    public ViewSequenceDiagram getViewSequenceDiagram(){
+        RadioButton selectedRadioButton = (RadioButton) sequenceGroup.getSelectedToggle();
+        switch (selectedRadioButton.getText()){
+            case "1":
+                return viewSequenceDiagram1;
+            case "2":
+                return viewSequenceDiagram2;
+            case "3":
+                return viewSequenceDiagram3;
+        }
+        return viewSequenceDiagram1;
+    }
+    public ViewSequenceDiagram getViewSequenceDiagram1() {
         return viewSequenceDiagram1;
     }
     public ViewSequenceDiagram getViewSequenceDiagram2() {
