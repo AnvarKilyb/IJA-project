@@ -24,6 +24,11 @@ abstract public class Item extends Element{
         this.accessModifier = accessModifier;
     }
 
+    public Item(String name){
+        super(name);
+        this.accessModifier =AccessModifier.PUBLIC;
+    }
+
     public Item(){
         super();
         this.accessModifier = AccessModifier.PUBLIC;

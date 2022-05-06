@@ -18,6 +18,7 @@ public class Message {
     private double X = 26;
     private DClass classStart;
     private DClass classEnd;
+    private int len = 104;
 
     public Message(String name, MessageType messageType){
         this.name = name;
@@ -85,5 +86,13 @@ public class Message {
 
     public void setClassEnd(DClass classEnd) {
         this.classEnd = classEnd;
+    }
+
+    public void setLen(int len){
+        this.len = len;
+    }
+
+    public int getLen(){
+        return this.len;
     }
 }

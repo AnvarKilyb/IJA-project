@@ -86,6 +86,15 @@ public class DClass extends Element{
     }
 
     /**
+     * Vytvoří a uloží prázdnou metodu do seznamu argumentů
+     */
+    public Methods addMethod(String name){
+        Methods methods = new Methods(name);
+        methodsList.add(methods);
+        return methods;
+    }
+
+    /**
      * Odstraní metodu
      * @param method instance metod
      */

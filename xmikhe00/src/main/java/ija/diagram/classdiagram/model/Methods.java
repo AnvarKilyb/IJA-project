@@ -12,6 +12,10 @@ public class Methods extends Item{
         super(name, accessModifier);
     }
 
+    public Methods(String name) {
+        super(name);
+    }
+
     public Methods(){
         super();
     }

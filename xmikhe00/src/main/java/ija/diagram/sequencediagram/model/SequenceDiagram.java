@@ -44,4 +44,9 @@ public class SequenceDiagram {
         }
         return null;
     }
+
+    public int getObjectNumber(SObject sObject){
+        return sObjectList.indexOf(sObject);
+    }
+
 }

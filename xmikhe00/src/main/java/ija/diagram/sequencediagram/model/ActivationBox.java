@@ -14,6 +14,10 @@ public class ActivationBox{
     private double y = 90;
     private double height = 30;
     private final int weight = 26;
+    private boolean isDelete = false;
+    private boolean reply = false;
+    private double plush = 0.0;
+
 
     public SObject getThisObject() {
         return thisObject;
@@ -58,14 +62,40 @@ public class ActivationBox{
 
     public Message addNewOutMessage(String name, Message.MessageType messageType){
         Message message = new Message(name, messageType);
-        message.setY((outMessage.size() + inMessage.size()) *  16 + 2);
+        if(reply){
+            message.setY((outMessage.size() + inMessage.size()) *  16 + 16 + plush);
+            plush += 16;
+            reply = false;
+        }else{
+            message.setY((outMessage.size() + inMessage.size()) *  16 + plush);
+            plush = 0;
+        }
         outMessage.add(message);
-        height += 20;
+        height += 16 + plush;
         return message;
     }
 
     public void addNewInMessage(Message message){
-        height += 20;
+        if(message.getMessageType() == Message.MessageType.REPLY){
+            reply = true;
+        }
+        if(height < message.getY()){
+            height = message.getY() + 20;
+        }else{
+            height += 20;
+        }
         inMessage.add(message);
+    }
+
+    public List<Message> getInMessage() {
+        return inMessage;
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
     }
 }

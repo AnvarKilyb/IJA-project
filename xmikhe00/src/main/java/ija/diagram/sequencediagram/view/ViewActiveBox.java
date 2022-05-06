@@ -19,7 +19,7 @@ public class ViewActiveBox extends Pane {
 
 
     public ViewMessage addViewMessage(Message message){
-        ViewMessage viewMessage = new ViewMessage();
+        ViewMessage viewMessage = new ViewMessage(message.getLen(), message.getMessageType());
         viewMessage.setElement();
         viewMessage.setText(message.getName());
         viewMessage.setLayoutX(message.getX());

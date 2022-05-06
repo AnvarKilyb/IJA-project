@@ -12,6 +12,8 @@ public class SObject {
     private double X = 0;
     private double Y = 30;
     private ActivationBox activationBox = null;
+    private boolean objectDelete = false;
+    private boolean objectActive = false;
 
     public SObject(){
         this.name = "";
@@ -56,7 +58,7 @@ public class SObject {
 
     public ActivationBox addActiveBox(Message message){
         activationBox = new ActivationBox();
-        activationBox.setY(message.getY());
+        activationBox.setY(activationBox.getY() + message.getY());
         return activationBox;
     }
 
@@ -64,5 +66,19 @@ public class SObject {
         return this.activationBox;
     }
 
+    public boolean isObjectDelete() {
+        return objectDelete;
+    }
 
+    public void setObjectDelete(boolean objectDelete) {
+        this.objectDelete = objectDelete;
+    }
+
+    public boolean isObjectActive() {
+        return objectActive;
+    }
+
+    public void setObjectActive(boolean objectActive) {
+        this.objectActive = objectActive;
+    }
 }

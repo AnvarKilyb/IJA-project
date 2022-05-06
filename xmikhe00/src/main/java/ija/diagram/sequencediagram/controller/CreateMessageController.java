@@ -12,16 +12,21 @@ import ija.diagram.sequencediagram.view.ViewObject;
 import ija.diagram.sequencediagram.view.ViewSequenceDiagram;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.List;
 
 import static ija.diagram.sequencediagram.model.Message.convertType;
+import static java.lang.Math.abs;
 
 public class CreateMessageController {
 
@@ -35,10 +40,13 @@ public class CreateMessageController {
     private RadioButton Synchronous;
 
     @FXML
+    private RadioButton Reply;
+
+    @FXML
     private Button createMessage;
 
     @FXML
-    private TextField messageReply;
+    private TextField message;
 
     @FXML
     private TextField objectName;
@@ -56,6 +64,7 @@ public class CreateMessageController {
         Asynchronous.setToggleGroup(messageGroup);
         Synchronous.setToggleGroup(messageGroup);
         Delete.setToggleGroup(messageGroup);
+        Reply.setToggleGroup(messageGroup);
         Synchronous.fire();
         createMessage.addEventHandler(ActionEvent.ACTION, this::createNewMessage);
     }
@@ -63,11 +72,163 @@ public class CreateMessageController {
 
     public void createNewMessage(ActionEvent actionEvent){
         Stage stage = (Stage)createMessage.getScene().getWindow();
+        //get all diagram
         SequenceDiagram sequenceDiagram = controllerMain.getSequenceDiagram();
         ViewSequenceDiagram viewSequenceDiagram = controllerMain.getViewSequenceDiagram();
+        //get names
+        String name  = objectName.getText();
+        String messageName = message.getText();
 
+        //objects
         ViewObject viewObjectLeft = (ViewObject) stage.getUserData();
         SObject sObjectLeft = viewSequenceDiagram.returnObject(viewObjectLeft);
+        SObject sObjectRight = sequenceDiagram.getObject(name);
+        if(sObjectRight == null){
+            FXMLLoader loader = new FXMLLoader(CreateMessageController.class.getResource("/main/objectDontExist.fxml"));
+            ObjectNotExistController objectNotExistController = new ObjectNotExistController(controllerMain, name);
+            loader.setController(objectNotExistController);
+            Scene scene = null;
+            try {
+                scene = new Scene(loader.load());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            Stage addClass = new Stage();
+            addClass.setScene(scene);
+            addClass.initModality(Modality.APPLICATION_MODAL);
+            addClass.setResizable(false);
+            addClass.showAndWait();
+
+            sObjectRight = sequenceDiagram.getObject(name);
+            if(sObjectRight == null){
+                return;
+            }
+        }
+
+        DClass dClass = controllerMain.getClassDiagram().returnClass(name);
+        List<Methods> methodsList = dClass.getMethodsList();
+        Methods method = null;
+        RadioButton selectedRadioButton = (RadioButton) messageGroup.getSelectedToggle();
+        Message.MessageType messageType = convertType(selectedRadioButton.getText());
+
+
+        if(messageType != Message.MessageType.DELETE && messageType != Message.MessageType.REPLY){
+            for (Methods m : methodsList) {
+                if (m.getName().equals(messageName)) {
+                    method = m;
+                }
+            }
+            if (method == null) {
+                FXMLLoader loader = new FXMLLoader(CreateMessageController.class.getResource("/main/MethodNotExist.fxml"));
+                MethodNotExistController methodNotExistController = new MethodNotExistController(controllerMain, messageName, dClass);
+                loader.setController(methodNotExistController);
+                Scene scene = null;
+                try {
+                    scene = new Scene(loader.load());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                Stage addClass = new Stage();
+                addClass.setScene(scene);
+                addClass.initModality(Modality.APPLICATION_MODAL);
+                addClass.setResizable(false);
+                addClass.showAndWait();
+
+                for (Methods m : methodsList) {
+                    if (m.getName().equals(messageName)) {
+                        method = m;
+                    }
+                }
+                if (method == null) {
+                    return;
+                }
+            }
+        }
+
+        int numberLeftObject = sequenceDiagram.getObjectNumber(sObjectLeft);
+        int numberRightObject = sequenceDiagram.getObjectNumber(sObjectRight);
+        int len = numberRightObject - numberLeftObject;
+
+        if(sObjectLeft == sObjectRight){
+            controllerMain.writeLabelWarning("messages to self is not supported");
+            return;
+        }
+        if(len < 0 && messageType != Message.MessageType.REPLY){
+            controllerMain.writeLabelWarning("only reply can be sent back");
+            return;
+        }else if(len >= 0 && messageType == Message.MessageType.REPLY){
+            controllerMain.writeLabelWarning("response cannot be sent\n to next object");
+            return;
+        }
+        if (sObjectLeft.isObjectDelete() || sObjectRight.isObjectDelete()) {
+            controllerMain.writeLabelWarning("you cannot send messages \nfrom or to a remote object");
+            return;
+        }
+
+        if(sObjectLeft.getActivationBox() != null){
+            if(sObjectLeft.getActivationBox().getOutMessage().size() != 0) {
+                Message lastOutMessage = sObjectLeft.getActivationBox().getOutMessage().get(sObjectLeft.getActivationBox().getOutMessage().size() -1);
+                Message lastInMessage = null;
+                if(sObjectLeft.getActivationBox().getInMessage().size() != 0){
+                    lastInMessage = sObjectLeft.getActivationBox().getInMessage().get(sObjectLeft.getActivationBox().getInMessage().size() - 1);
+                }
+                if (lastOutMessage != null) {
+                    if (lastOutMessage.getMessageType() == Message.MessageType.SYNCHRONOUS) {
+                        if (lastInMessage == null) {
+                            controllerMain.writeLabelWarning("object expected response");
+                            return;
+                        } else if (lastInMessage.getMessageType() != Message.MessageType.REPLY) {
+                            controllerMain.writeLabelWarning("object expected response");
+                            return;
+                        } else {
+                            if (!lastOutMessage.getName().equals(lastInMessage.getName())) {
+                                controllerMain.writeLabelWarning("object expected response");
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if(messageType == Message.MessageType.REPLY){
+            int countRequest = 0;
+            int countResponse = 0;
+            if(sObjectRight.getActivationBox() == null){
+                controllerMain.writeLabelWarning("the response can only \nbe given to the request");
+                return;
+            }
+            List<Message> messagesOut = sObjectRight.getActivationBox().getOutMessage();
+            for(Message m: messagesOut){
+                if(m.getName().equals(messageName) && m.getMessageType() != Message.MessageType.REPLY){
+                    countRequest++;
+                }
+            }
+
+            List<Message> messagesIn = sObjectRight.getActivationBox().getInMessage();
+            for(Message m: messagesIn){
+                if(m.getName().equals(messageName) && m.getMessageType() == Message.MessageType.REPLY){
+                    countResponse++;
+                }
+            }
+
+            if(countRequest == countResponse){
+                controllerMain.writeLabelWarning("the response can only \nbe given to the request");
+                return;
+            }
+        }
+
+        if(messageType == Message.MessageType.DELETE && !sObjectRight.isObjectActive()){
+            controllerMain.writeLabelWarning("can't delete \nan inactive object");
+            return;
+        }
+
+        if(messageType == Message.MessageType.DELETE){
+            sObjectRight.setObjectDelete(true);
+        }else{
+            sObjectRight.setObjectActive(true);
+        }
+
+
         ActivationBox activationBoxLeft = sObjectLeft.getActivationBox();
         ViewActiveBox viewActiveBoxLeft = viewObjectLeft.getViewActiveBox();
         if(activationBoxLeft == null){
@@ -76,45 +237,35 @@ public class CreateMessageController {
             viewObjectLeft.getChildren().add(viewActiveBoxLeft);
         }
 
-        String name  = objectName.getText();
-        String messageName = messageReply.getText();
-        SObject sObjectRight = sequenceDiagram.getObject(name);
-        if(sObjectRight == null){
-            return;
+
+        Message message = activationBoxLeft.addNewOutMessage(messageName, convertType(selectedRadioButton.getText()));
+
+
+
+        if(len < 0){
+            len = abs(len);
         }
+        if(numberRightObject - numberLeftObject != 1) {
+            message.setLen((message.getLen() * (len)) + ((len) - 1) * 26);
+        }
+
         ViewObject viewObjectRight = viewSequenceDiagram.getViewObject(sObjectRight);
         ActivationBox activationBoxRight = sObjectRight.getActivationBox();
         ViewActiveBox viewActiveBoxRight = viewObjectRight.getViewActiveBox();
 
         if(activationBoxRight == null){
-            activationBoxRight = sObjectRight.addActiveBox();
+            activationBoxRight = sObjectRight.addActiveBox(message);
             viewActiveBoxRight = viewObjectRight.addViewActionBox(activationBoxRight);
             viewObjectRight.getChildren().add(viewActiveBoxRight);
         }
 
-        DClass dClass = controllerMain.getClassDiagram().returnClass(name);
-        List<Methods> methodsList = dClass.getMethodsList();
-        Methods method = null;
-
-        for(Methods m : methodsList){
-            if(m.getName().equals(messageName)){
-                method = m;
-            }
-        }
-
-        if(method == null){
-            System.out.println("Todo");
-        }
-
-        RadioButton selectedRadioButton = (RadioButton) messageGroup.getSelectedToggle();
-
-        Message message = activationBoxLeft.addNewOutMessage(messageName, convertType(selectedRadioButton.getText()));
+        message.setClassStart(sObjectLeft.getThisClass());
+        message.setClassEnd(sObjectRight.getThisClass());
         activationBoxRight.addNewInMessage(message);
         ViewMessage viewMessage = viewActiveBoxLeft.addViewMessage(message);
         viewActiveBoxLeft.setPrefHeight(activationBoxLeft.getHeight());
         viewActiveBoxLeft.getChildren().add(viewMessage);
 
-//        activationBoxRight.setHeight(activationBoxLeft.getHeight());
         viewActiveBoxRight.setPrefHeight(activationBoxRight.getHeight());
     }
 }

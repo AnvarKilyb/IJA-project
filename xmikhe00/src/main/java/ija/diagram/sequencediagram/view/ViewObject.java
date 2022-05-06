@@ -5,9 +5,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ViewObject extends Pane {
     private Label mainLabel = new Label("Object");
     private Line lifeLine = new Line();
@@ -27,15 +24,6 @@ public class ViewObject extends Pane {
         mainLabel.setPrefHeight(80);
         super.setPrefHeight(600);
         super.setPrefWidth(80);
-//        for(short start = 100; start <= 600; start += 25){
-//            ViewChunk chunk = new ViewChunk();
-//            chunk.setPrefHeight(25);
-//            chunk.setPrefWidth(20);
-//            chunk.setX(30);
-//            chunk.setY(start);
-//            super.getChildren().add(chunk);
-//            chunkList.add(chunk);
-//        }
         super.getChildren().add(lifeLine);
         super.getChildren().add(mainLabel);
     }

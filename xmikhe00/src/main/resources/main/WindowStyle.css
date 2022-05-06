@@ -358,11 +358,45 @@
     -fx-background-color: rgb(48, 47, 46);
 }
 .radio-button:selected .radio {
-    -fx-background-color: white;
+    -fx-background-color: rgb(255,255,255);
 }
 
 
+#synchronAsyncronLine{
+    -fx-background-color: rgb(255, 255, 255);
+}
 
+#synchronArrow{
+    -fx-background-image: url(./synchron.png);
+    -fx-background-size: 12 12;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}
+
+#message{
+    -fx-text-fill: rgb(255,255,255);
+}
+#replayLine{
+    -fx-background-image: url(./replay.png);
+    -fx-background-size: 12 12;
+    -fx-background-repeat: repeat;
+    -fx-background-position: center center;
+}
+
+#sharpArrow{
+    -fx-background-image: url(./sharpArrow.png);
+    -fx-background-size: 16 16;
+    -fx-background-repeat: repeat;
+    -fx-background-position: center center;
+}
+
+
+#deleteArrow{
+    -fx-background-image: url(./arrowDelete.png);
+    -fx-background-size: 16 16;
+    -fx-background-repeat: repeat;
+    -fx-background-position: center center;
+}
 /* 
 black rgb(15, 15, 15)
 */

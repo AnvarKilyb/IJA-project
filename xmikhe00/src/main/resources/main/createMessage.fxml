@@ -6,19 +6,18 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="350.0" stylesheets="@WindowStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="288.0" prefWidth="350.0" stylesheets="@WindowStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label id="windowLabel" layoutX="115.0" prefHeight="27.0" prefWidth="120.0" text="Create message" AnchorPane.leftAnchor="115.0" AnchorPane.rightAnchor="115.0" />
-      <Button fx:id="createMessage" layoutY="247.0" mnemonicParsing="false" text="CREATE MESSAGE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="247.0" />
+      <Button fx:id="createMessage" layoutX="143.0" layoutY="150.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="205.0" text="CREATE MESSAGE" AnchorPane.leftAnchor="143.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0" />
       <TextField id="allField" fx:id="objectName" layoutX="16.0" layoutY="56.0" prefHeight="28.0" prefWidth="323.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" />
       <Label id="windowLabel" layoutX="14.0" layoutY="28.0" prefHeight="27.0" prefWidth="178.0" text="Recipient object name" />
-      <RadioButton fx:id="Synchronous" layoutX="16.0" layoutY="218.0" mnemonicParsing="false" text="Synchronous" />
-      <RadioButton fx:id="Asynchronous" layoutX="137.0" layoutY="218.0" mnemonicParsing="false" text="Asynchronous" />
-      <RadioButton fx:id="Delete" layoutX="270.0" layoutY="218.0" mnemonicParsing="false" text="Delete" />
-      <Label id="windowLabel" layoutX="14.0" layoutY="85.0" prefHeight="27.0" prefWidth="178.0" text="Message request" />
-      <TextField id="allField" fx:id="messageRequest" layoutX="16.0" layoutY="113.0" prefHeight="28.0" prefWidth="323.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" />
-      <Label id="windowLabel" layoutX="14.0" layoutY="142.0" prefHeight="27.0" prefWidth="178.0" text="Message reply" />
-      <TextField id="allField" fx:id="messageReply" layoutX="16.0" layoutY="170.0" prefHeight="28.0" prefWidth="323.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" />
+      <RadioButton fx:id="Synchronous" layoutX="16.0" layoutY="151.0" mnemonicParsing="false" text="Synchronous" />
+      <RadioButton fx:id="Asynchronous" layoutX="16.0" layoutY="180.0" mnemonicParsing="false" text="Asynchronous" />
+      <RadioButton fx:id="Delete" layoutX="16.0" layoutY="240.0" mnemonicParsing="false" text="Delete" />
+      <Label id="windowLabel" layoutX="14.0" layoutY="85.0" prefHeight="27.0" prefWidth="178.0" text="Message" />
+      <TextField id="allField" fx:id="message" layoutX="16.0" layoutY="113.0" prefHeight="28.0" prefWidth="323.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" />
+      <RadioButton fx:id="Reply" layoutX="16.0" layoutY="211.0" mnemonicParsing="false" text="Reply" />
+      <Button fx:id="deleteObjectButton" layoutX="143.0" layoutY="219.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="205.0" text="DELETE OBJECT" AnchorPane.rightAnchor="0.0" />
    </children>
 </AnchorPane>

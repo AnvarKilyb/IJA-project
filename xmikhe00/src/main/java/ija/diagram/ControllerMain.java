@@ -223,10 +223,8 @@ public class ControllerMain {
         List<DClass> dClassListCopy = new ArrayList<>(classDiagram.getdClassList());
         for(DClass dClass : dClassListCopy){
             if(dClass.getReapedName()){
-                labelWarning.setPrefHeight(labelWarning.getHeight() + 30);
-                DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-                Date date = new Date();
-                labelWarning.setText(labelWarning.getText() + "\n[" + dateFormat.format(date) + "] class named " + dClass.getName() + "\nremoved due to name repetition \nand its relation ");
+                String text = "class named " + dClass.getName() + "\nremoved due to name repetition \nand its relation";
+                writeLabelWarning(text);
                 continue;
             }
             ViewClass viewClass = viewDiagram.addNewClass(dClass);
@@ -270,7 +268,7 @@ public class ControllerMain {
 
     public void addObject(ActionEvent actionEvent){
         if(classDiagram.getdClassList().isEmpty()){
-            labelWarning.setText("Transformation warning:\n---There are no entities.");
+            writeLabelWarning("Transformation warning:\n---There are no entities.");
             return;
         }
 
@@ -336,5 +334,12 @@ public class ControllerMain {
 
     public ContextObjectController getContextObjectController(){
         return this.contextObjectController;
+    }
+
+    public void writeLabelWarning(String text){
+        labelWarning.setPrefHeight(labelWarning.getHeight() + 30);
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        Date date = new Date();
+        labelWarning.setText(labelWarning.getText() + "\n[" + dateFormat.format(date) + "] " + text);
     }
 }
