@@ -1,73 +1,47 @@
 package ija.diagram.sequencediagram.model;
 
 import ija.diagram.classdiagram.model.DClass;
+import ija.diagram.classdiagram.model.Item;
+import ija.diagram.classdiagram.model.Methods;
+import ija.diagram.classdiagram.model.Relationships;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SequenceDiagram {
-    private List<SObject> objectList = new ArrayList<>();
-    private List<Message> messageList = new ArrayList<>();
+    private List<SObject> sObjectList = new ArrayList<>();
+    private List<RelatedActivationBoxes> relatedActivationBoxesList = new ArrayList<>();
+    private final int indent = 130;
 
-    public List<Message> getMessageList() {return messageList;}
 
-    public List<SObject> getObjectList() {return objectList;}
-
-    public void addObject(SObject object){objectList.add(object);}
-
-    public SObject addObject(String name){
-        SObject obj = returnObject(name);
-        if(obj != null){
-            System.out.println("WARNING TODO");
-            //TODO
+    public SObject addObject(DClass dClass){
+        SObject sObject =  getObject(dClass);
+        if(sObject != null){
+            return null;
         }
-        SObject object = new SObject(name);
-        objectList.add(object);
-        return object;
-    }
-    public SObject addActor(){
-        String name = "Actor";
-        SObject object = new SObject(name);
-        object.setX(20);
-        object.setY(30);
-        objectList.add(object);
-        return object;
+        sObject = new SObject();
+        sObject.setName(dClass.getName());
+        sObject.setThisClass(dClass);
+        sObject.setX(sObjectList.size() * indent);
+        sObjectList.add(sObject);
+        return sObject;
     }
 
-    public void changeName(String name){
-        SObject obj = returnObject(name);
-        obj.setName(name);
-    }
-
-    public void deleteObject(String name){
-        objectList.remove(returnObject(name));
-    }
-
-    public void deleteObject(SObject object){
-        objectList.remove(object);
-    }
-
-    public SObject returnObject(String name){
-        for(SObject obj: objectList){
-            if(obj.getName().equals(name))
-                return obj;
+    private SObject getObject(DClass dClass){
+        for(SObject sObject : sObjectList){
+            if (sObject.getName().equals(dClass.getName())){
+                return sObject;
+            }
         }
         return null;
     }
 
-    public void addMessage(Message message){messageList.add(message);}
-
-    public void addMessage(String name, Message.MessageType type){
-        Message message = new Message(name, type);
-        messageList.add(message);
-    }
-
-    public void addMessage(Message.MessageType type){
-        Message message = new Message(type);
-        messageList.add(message);
-    }
-
-    public void deleteMessage(Message message){
-        messageList.remove(message);
+    public SObject getObject(String name){
+        for(SObject sObject: sObjectList){
+            if(sObject.getName().equals(name)){
+                return sObject;
+            }
+        }
+        return null;
     }
 }

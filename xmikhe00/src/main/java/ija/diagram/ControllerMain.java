@@ -2,7 +2,6 @@ package ija.diagram;
 import ija.diagram.classdiagram.controller.ClassContextController;
 import ija.diagram.classdiagram.controller.NameRepeatedController;
 import ija.diagram.classdiagram.controller.ViewClassController;
-import ija.diagram.classdiagram.controller.ViewRelationshipController;
 import ija.diagram.classdiagram.model.ClassDiagram;
 import ija.diagram.classdiagram.model.DClass;
 import ija.diagram.classdiagram.model.Relationships;
@@ -11,9 +10,9 @@ import ija.diagram.classdiagram.view.ViewDiagram;
 import ija.diagram.classdiagram.view.ViewRelationships;
 import ija.diagram.loader.Loader;
 import ija.diagram.loader.Writer;
-import ija.diagram.sequencediagram.model.SObject;
+import ija.diagram.sequencediagram.controller.AddObjectController;
+import ija.diagram.sequencediagram.controller.ContextObjectController;
 import ija.diagram.sequencediagram.model.SequenceDiagram;
-import ija.diagram.sequencediagram.view.ViewObject;
 import ija.diagram.sequencediagram.view.ViewSequenceDiagram;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,7 +20,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
@@ -29,13 +29,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.util.Collections;
+import java.util.*;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+
 /**
  * Hlavní ovladač,
  * kontroluje hlavní rozhraní
@@ -51,6 +49,7 @@ public class ControllerMain {
     private final ClassDiagram classDiagram;
     private final ViewDiagram viewDiagram;
     private Stage stage;
+    private ContextObjectController contextObjectController;
 
     private FileChooser fileChooser;
 
@@ -79,16 +78,32 @@ public class ControllerMain {
     private Pane mainPane;
 
     @FXML
-    private Pane sequencePane;
-
-    @FXML
     private Label labelWarning;
 
     @FXML
-    private Button buttonAddRelation;
+    private RadioButton choice1;
 
     @FXML
-    private  Button buttonNewSequence;
+    private RadioButton choice2;
+
+    @FXML
+    private RadioButton choice3;
+
+    @FXML
+    private Pane sequencePane1;
+
+    @FXML
+    private Pane sequencePane2;
+
+    @FXML
+    private Pane sequencePane3;
+
+    @FXML
+    private Button buttonAddObject;
+
+
+    ToggleGroup sequenceGroup = new ToggleGroup();
+
     /**
      * Konstruktér ovladače
      * předáváme do lokálních parametrů instance tříd
@@ -114,8 +129,11 @@ public class ControllerMain {
         buttonAdd.addEventFilter(ActionEvent.ACTION,this::addClassAction);
         buttonLoad.addEventFilter(ActionEvent.ACTION,this::loadFile);
         buttonSave.addEventFilter(ActionEvent.ACTION,this::saveFile);
-        buttonAddRelation.addEventHandler(ActionEvent.ACTION, this::addRelation);
-        buttonNewSequence.addEventFilter(ActionEvent.ACTION, this::newSequence);
+        buttonAddObject.addEventFilter(ActionEvent.ACTION, this::addObject);
+        choice1.setToggleGroup(sequenceGroup);
+        choice2.setToggleGroup(sequenceGroup);
+        choice3.setToggleGroup(sequenceGroup);
+        choice1.fire();
     }
 
     /**
@@ -135,38 +153,6 @@ public class ControllerMain {
         mainPane.getChildren().add(relationships);
     }
 
-    private void newSequence(ActionEvent event){
-        Pane content = new Pane();
-        content.setId("sequencePane");
-        ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setPrefSize(880, 682);
-        scrollPane.setStyle("-fx-background: transparent; -fx-background-color: transparent;");
-        SObject actor = sequenceDiagram.addActor();
-        ViewObject viewObject = viewSequenceDiagram.addNewObject(actor);
-        content.getChildren().add(viewObject);
-        if(classDiagram.getdClassList().isEmpty()){
-            labelWarning.setText("Transformation warning:\n---There are no entities.");
-            return;
-        }
-        short count = 2;
-        List<DClass> randList = classDiagram.getdClassList();
-        Collections.shuffle(randList);
-        for(DClass dClass: randList){
-            SObject sObject = new SObject();
-            sObject.setName(dClass.getName());
-            sObject.setX(160*count);
-            count++;
-            sequenceDiagram.addObject(sObject);
-            ViewObject target = viewSequenceDiagram.addNewObject(sObject);
-            target = viewSequenceDiagram.setActiveChunk(0, target);
-            target = viewSequenceDiagram.setActiveChunk(1, target);
-            target = viewSequenceDiagram.setActiveChunk(5, target);
-            content.getChildren().add(target);
-        }
-        scrollPane.setContent(content);
-        this.sequencePane.getChildren().add(scrollPane);
-
-    }
 
     private void saveFile(ActionEvent event){
 
@@ -282,6 +268,29 @@ public class ControllerMain {
         this.viewClassController = viewClassController;
     }
 
+    public void addObject(ActionEvent actionEvent){
+        if(classDiagram.getdClassList().isEmpty()){
+            labelWarning.setText("Transformation warning:\n---There are no entities.");
+            return;
+        }
+
+        FXMLLoader loader = new FXMLLoader(ControllerMain.class.getResource("/main/objectNewWindow.fxml"));
+        AddObjectController addObjectController = new AddObjectController();
+        addObjectController.setControllerMain(this);
+        loader.setController(addObjectController);
+        Scene scene = null;
+        try {
+            scene = new Scene(loader.load());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Stage addObjectWindow = new Stage();
+        addObjectWindow.setScene(scene);
+        addObjectWindow.initModality(Modality.APPLICATION_MODAL);
+        addObjectWindow.setResizable(false);
+        addObjectWindow.showAndWait();
+    }
+
     public SequenceDiagram getSequenceDiagram() {
         return sequenceDiagram;
     }
@@ -300,5 +309,32 @@ public class ControllerMain {
 
     public Label getLabelWarning(){
         return labelWarning;
+    }
+
+
+    public Pane getSequencePane(){
+        RadioButton selectedRadioButton = (RadioButton) sequenceGroup.getSelectedToggle();
+        switch (selectedRadioButton.getText()){
+            case "1":
+                return sequencePane1;
+            case "2":
+                return sequencePane2;
+            case "3":
+                return sequencePane3;
+        }
+        return sequencePane1;
+    }
+
+
+    public Pane getMainPane(){
+        return mainPane;
+    }
+
+    public void setContextObjectController(ContextObjectController contextObjectController){
+        this.contextObjectController = contextObjectController;
+    }
+
+    public ContextObjectController getContextObjectController(){
+        return this.contextObjectController;
     }
 }

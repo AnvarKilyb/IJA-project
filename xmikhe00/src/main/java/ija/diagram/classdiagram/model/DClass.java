@@ -1,5 +1,7 @@
 package ija.diagram.classdiagram.model;
 
+import ija.diagram.sequencediagram.model.ActivationBox;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +18,6 @@ public class DClass extends Element{
     private double X = 0;
     private double Y = 0;
     private boolean reapedName = false;
-    //todo coordinates
 
     public DClass(String name){
         super(name);

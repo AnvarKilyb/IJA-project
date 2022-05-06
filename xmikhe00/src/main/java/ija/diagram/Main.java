@@ -3,6 +3,7 @@ import ija.diagram.classdiagram.controller.ClassContextController;
 import ija.diagram.classdiagram.controller.ViewClassController;
 import ija.diagram.classdiagram.model.ClassDiagram;
 import ija.diagram.classdiagram.view.ViewDiagram;
+import ija.diagram.sequencediagram.controller.ContextObjectController;
 import ija.diagram.sequencediagram.model.SequenceDiagram;
 import ija.diagram.sequencediagram.view.ViewSequenceDiagram;
 import javafx.application.Application;
@@ -46,6 +47,8 @@ public class Main extends Application {
         ClassContextController classContextController = new ClassContextController(controllerMain);
         controllerMain.setClassContextController(classContextController);
         controllerMain.setViewClassController(viewClassController);
+        ContextObjectController contextObjectController = new ContextObjectController(controllerMain);
+        controllerMain.setContextObjectController(contextObjectController);
 
 
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("/main/main.fxml"));

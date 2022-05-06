@@ -313,7 +313,7 @@
 }
 
 #chunkVisible{
-    -fx-background-color: rgb(255,102,102);
+    -fx-background-color: rgb(54, 48, 119);
 }
 
 #chunkTransparent{
@@ -333,6 +333,35 @@
 #windowPanel{
     -fx-background-color: rgb(15, 15, 15);
 }
+
+
+#allArcane{
+    -fx-background-color: rgb(15, 15, 15);
+}
+
+#objectName{
+    -fx-background-color: rgb(48, 47, 46);
+    -fx-text-fill: rgb(255,255,255);
+    -fx-font-size: 10;
+    -fx-padding: 0 0 0 0;
+}
+
+#allField{
+    -fx-background-color: rgb(48, 47, 46);
+    -fx-text-fill: rgb(255,255,255);
+    -fx-font-size: 10;
+    -fx-padding: 0 0 0 0;
+}
+
+
+.radio-button .radio {
+    -fx-background-color: rgb(48, 47, 46);
+}
+.radio-button:selected .radio {
+    -fx-background-color: white;
+}
+
+
 
 /* 
 black rgb(15, 15, 15)

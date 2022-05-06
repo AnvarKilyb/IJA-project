@@ -1,6 +1,7 @@
 package ija.diagram.sequencediagram.view;
 
 import ija.diagram.ControllerMain;
+import ija.diagram.classdiagram.model.DClass;
 import ija.diagram.classdiagram.view.ViewClass;
 import ija.diagram.sequencediagram.model.Message;
 import ija.diagram.sequencediagram.model.SObject;
@@ -10,14 +11,14 @@ import javafx.scene.shape.Line;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class ViewSequenceDiagram {
 
     private ControllerMain controllerMain;
 
-    private Map<ViewMessage, Message> messageLineMap = new HashMap<ViewMessage, Message>();
-
     private  Map<ViewObject, SObject> objectSequenceMap = new HashMap<ViewObject, SObject>();
+
 
     public void setControllerMain(ControllerMain controllerMain){this.controllerMain = controllerMain;}
 
@@ -27,19 +28,28 @@ public class ViewSequenceDiagram {
         viewObject.setObjectName(modelObject.getName());
         viewObject.show();
         objectSequenceMap.put(viewObject, modelObject);
-        viewObject.setX(modelObject.getX());
-        viewObject.setY(modelObject.getY());
-        return viewObject;
-    }
-    public ViewObject setActiveChunk(int chunkNum, ViewObject viewObject){
-        viewObject.getChunkList().get(chunkNum).activeChunk();
+        viewObject.setLayoutX(modelObject.getX());
+        viewObject.setLayoutY(modelObject.getY());
         return viewObject;
     }
 
-
-    public Map<ViewMessage, Message> getMessageLineMap() {
-        return messageLineMap;
+    public SObject returnObject(ViewObject viewObject){
+        return objectSequenceMap.get(viewObject);
     }
+
+
+    public ViewObject getViewObject(SObject sObject){
+        Set<Map.Entry<ViewObject,SObject>> viewClassCollation = objectSequenceMap.entrySet();
+        for(Map.Entry<ViewObject, SObject> map: viewClassCollation){
+            if(map != null){
+                if(sObject.equals(map.getValue())){
+                    return map.getKey();
+                }
+            }
+        }
+        return null;
+    }
+
 
     public Map<ViewObject, SObject> getObjectSequenceMap() {
         return objectSequenceMap;

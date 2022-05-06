@@ -9,4 +9,8 @@ module ija.diagram.gui {
     opens ija.diagram.classdiagram.view;
     exports ija.diagram.classdiagram.controller;
     opens ija.diagram.classdiagram.controller;
+    exports  ija.diagram.sequencediagram.controller;
+    opens  ija.diagram.sequencediagram.controller;
+    exports ija.diagram.sequencediagram.view;
+    opens ija.diagram.sequencediagram.view;
 }
