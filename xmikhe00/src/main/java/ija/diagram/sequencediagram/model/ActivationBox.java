@@ -31,6 +31,10 @@ public class ActivationBox{
         return outMessage;
     }
 
+    public List<Message> getInMessage() {
+        return inMessage;
+    }
+
     public void addOutMessage(Message outMessage) {
         this.outMessage.add(outMessage);
     }

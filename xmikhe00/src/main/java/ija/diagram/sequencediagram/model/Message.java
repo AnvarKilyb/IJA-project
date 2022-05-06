@@ -24,6 +24,10 @@ public class Message {
         this.name = name;
         this.messageType = messageType;
     }
+    public Message(String name){
+        this.name = name;
+        this.messageType = MessageType.ASYNCHRONOUS;
+    }
 
     public String getName() {
         return name;

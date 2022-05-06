@@ -1,6 +1,11 @@
 package ija.diagram.loader;
 
+import ija.diagram.classdiagram.model.DClass;
+import ija.diagram.sequencediagram.model.Message;
+import ija.diagram.sequencediagram.model.SObject;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 /**
  * Třída reprezentuje jednotlivou reprezentaci třídy nebo vztahu v JSON souboru
@@ -12,7 +17,8 @@ import java.util.List;
 public class objectJSON {
     public enum ItemType{
         CLASS,
-        CONNECTION
+        CONNECTION,
+        SEQUENCE
     }
     public enum ConType{
         ASSOCIATION,
@@ -43,6 +49,8 @@ public class objectJSON {
     ItemType type;
     ArrayList<attrJSON> attributes = new ArrayList<>();
     ArrayList<attrJSON> operations = new ArrayList<>();
+    HashSet<String> participantList = new HashSet<>();
+    ArrayList<Message> messageList = new ArrayList<>();
     ConType conType;
     String startConnection;
     String endConnection;
@@ -191,5 +199,46 @@ public class objectJSON {
 
     public void setEndY(double endY) {
         this.endY = endY;
+    }
+
+    public void addParticipant(String participant) {
+        this.participantList.add(participant);
+    }
+
+    public boolean isClass(){
+        if(this.type.equals(ItemType.CLASS))
+            return true;
+        else
+            return false;
+    }
+    public HashSet<String> getParticipantList() {
+        return participantList;
+    }
+
+    public ArrayList<Message> getMessageList() {
+        return messageList;
+    }
+
+    public void addMessageList(String name, String startObject, String endObject, String type) {
+        DClass start = new DClass(startObject);
+        DClass end = new DClass(endObject);
+        Message message = new Message(name);
+        message.setClassStart(start);
+        message.setClassEnd(end);
+        switch(type){
+            case "sync":
+                message.setMessageType(Message.MessageType.SYNCHRONOUS);
+                break;
+            case "async":
+                message.setMessageType(Message.MessageType.ASYNCHRONOUS);
+                break;
+            case "delete":
+                message.setMessageType(Message.MessageType.DELETE);
+                break;
+            case "reply":
+                message.setMessageType(Message.MessageType.REPLY);
+                break;
+        }
+        this.messageList.add(message);
     }
 }

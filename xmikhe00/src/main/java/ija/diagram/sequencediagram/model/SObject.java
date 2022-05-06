@@ -61,6 +61,9 @@ public class SObject {
         activationBox.setY(activationBox.getY() + message.getY());
         return activationBox;
     }
+    public void addActiveBox(ActivationBox activationBox){
+        this.activationBox = activationBox;
+    }
 
     public ActivationBox getActivationBox(){
         return this.activationBox;

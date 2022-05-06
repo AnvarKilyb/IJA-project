@@ -3,8 +3,10 @@ package ija.diagram.loader;
 import ija.diagram.classdiagram.model.ClassDiagram;
 import ija.diagram.classdiagram.model.DClass;
 import ija.diagram.classdiagram.model.Relationships;
+import ija.diagram.sequencediagram.model.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Třída převádí do modelu dat již analyzované soubory
@@ -14,6 +16,10 @@ import java.util.ArrayList;
  */
 public class Loader {
     private final ClassDiagram classDiagram;
+    private short sequenceCounter = 0;
+    private final SequenceDiagram sequenceDiagram1;
+    private final SequenceDiagram sequenceDiagram2;
+    private final SequenceDiagram sequenceDiagram3;
     private ArrayList<objectJSON> list;
     private Parser parser;
 
@@ -29,13 +35,55 @@ public class Loader {
                 classDiagram.addClass(dClass);
 
             }
+            if(item.getType() == objectJSON.ItemType.SEQUENCE){
+                if(sequenceCounter == 0)
+                    parseSequence(item, sequenceDiagram1);
+                else if(sequenceCounter == 1)
+                    parseSequence(item, sequenceDiagram2);
+                else if(sequenceCounter == 2)
+                    parseSequence(item, sequenceDiagram3);
+                sequenceCounter++;
+            }
         }
         parseRelation();
     }
 
-    public Loader(ClassDiagram classDiagram, String path){
+    public Loader(ClassDiagram classDiagram,SequenceDiagram sequenceDiagram1,SequenceDiagram sequenceDiagram2,SequenceDiagram sequenceDiagram3, String path){
         this.classDiagram = classDiagram;
         this.parser = new Parser(path);
+        this.sequenceDiagram1 = sequenceDiagram1;
+        this.sequenceDiagram2 = sequenceDiagram2;
+        this.sequenceDiagram3 = sequenceDiagram3;
+    }
+    private void parseSequence(objectJSON item, SequenceDiagram sequenceDiagram){
+        boolean fraud;
+        for(String participant: item.getParticipantList()){
+            fraud = true;
+            for(DClass dClass: classDiagram.getdClassList()){
+                if(participant.equals(dClass.getName())){
+                    sequenceDiagram.addObject(dClass);
+                    fraud = false;
+                }
+            }
+            if(fraud){
+                //TODO
+            }
+        }
+        for(SObject sObject: sequenceDiagram.getsObjectList()){
+            ActivationBox activationBox = new ActivationBox();
+            for(Message message: item.getMessageList()){
+                if(message.getClassStart().getName().equals(sObject.getName())){
+                    activationBox.setThisObject(sObject);
+                    activationBox.addNewOutMessage(message.getName(), message.getMessageType());
+                }
+                if(message.getClassEnd().getName().equals(sObject.getName())){
+                    activationBox.setThisObject(sObject);
+                    activationBox.addNewInMessage(message);
+                }
+            }
+            sObject.addActiveBox(activationBox);
+        }
+
     }
 
 
