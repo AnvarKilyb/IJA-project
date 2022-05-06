@@ -1,7 +1,11 @@
 package ija.diagram;
+import ija.diagram.classdiagram.Actions.Action;
+import ija.diagram.classdiagram.Actions.AddNewClassAction;
+import ija.diagram.classdiagram.Actions.LoadFileAction;
 import ija.diagram.classdiagram.controller.ClassContextController;
 import ija.diagram.classdiagram.controller.NameRepeatedController;
 import ija.diagram.classdiagram.controller.ViewClassController;
+import ija.diagram.classdiagram.controller.ViewRelationshipController;
 import ija.diagram.classdiagram.model.ClassDiagram;
 import ija.diagram.classdiagram.model.DClass;
 import ija.diagram.classdiagram.model.Relationships;
@@ -42,10 +46,15 @@ import java.text.SimpleDateFormat;
  * @version 0.0.5
  */
 public class ControllerMain {
+    private ArrayDeque<Action> history = new ArrayDeque<>();
     private ViewClassController viewClassController;
     private ClassContextController classContextController;
-    private final SequenceDiagram sequenceDiagram;
-    private final ViewSequenceDiagram viewSequenceDiagram;
+    private final SequenceDiagram sequenceDiagram1;
+    private final SequenceDiagram sequenceDiagram2;
+    private final SequenceDiagram sequenceDiagram3;
+    private final ViewSequenceDiagram viewSequenceDiagram1;
+    private final ViewSequenceDiagram viewSequenceDiagram2;
+    private final ViewSequenceDiagram viewSequenceDiagram3;
     private final ClassDiagram classDiagram;
     private final ViewDiagram viewDiagram;
     private Stage stage;
@@ -99,6 +108,8 @@ public class ControllerMain {
     private Pane sequencePane3;
 
     @FXML
+    private Button buttonUndo;
+    @FXML
     private Button buttonAddObject;
 
 
@@ -111,11 +122,17 @@ public class ControllerMain {
      * @param viewDiagram instance třídy {@link ViewDiagram}
      */
     public ControllerMain(ClassDiagram classDiagram, ViewDiagram viewDiagram,
-                          SequenceDiagram sequenceDiagram, ViewSequenceDiagram viewSequenceDiagram, FileChooser fileChooser, Stage stage){
+                          SequenceDiagram sequenceDiagram1, SequenceDiagram sequenceDiagram2, SequenceDiagram sequenceDiagram3,
+                          ViewSequenceDiagram viewSequenceDiagram1, ViewSequenceDiagram viewSequenceDiagram2, ViewSequenceDiagram viewSequenceDiagram3,
+                          FileChooser fileChooser, Stage stage){
             this.classDiagram = classDiagram;
             this.viewDiagram = viewDiagram;
-            this.sequenceDiagram = sequenceDiagram;
-            this.viewSequenceDiagram = viewSequenceDiagram;
+            this.sequenceDiagram1 = sequenceDiagram1;
+            this.sequenceDiagram2 = sequenceDiagram2;
+            this.sequenceDiagram3 = sequenceDiagram3;
+            this.viewSequenceDiagram1 = viewSequenceDiagram1;
+            this.viewSequenceDiagram2 = viewSequenceDiagram2;
+            this.viewSequenceDiagram3 = viewSequenceDiagram3;
             this.stage = stage;
             this.fileChooser = fileChooser;
     }
@@ -129,11 +146,17 @@ public class ControllerMain {
         buttonAdd.addEventFilter(ActionEvent.ACTION,this::addClassAction);
         buttonLoad.addEventFilter(ActionEvent.ACTION,this::loadFile);
         buttonSave.addEventFilter(ActionEvent.ACTION,this::saveFile);
+        buttonUndo.addEventFilter(ActionEvent.ACTION,this::buttonUndo);
         buttonAddObject.addEventFilter(ActionEvent.ACTION, this::addObject);
         choice1.setToggleGroup(sequenceGroup);
         choice2.setToggleGroup(sequenceGroup);
         choice3.setToggleGroup(sequenceGroup);
         choice1.fire();
+    }
+    private void run(Action action){
+        history.addLast(action);
+
+        action.run();
     }
 
     /**
@@ -142,15 +165,15 @@ public class ControllerMain {
      * @param event přenáší akce tlačení na tlačítko
      */
     private void addClassAction(ActionEvent event){
-        DClass dClass = classDiagram.addClass();
-        ViewClass viewClass = viewDiagram.addNewClass(dClass);
-        this.mainPane.getChildren().add(viewClass);
+        run(new AddNewClassAction(classDiagram, viewDiagram, mainPane));
     }
 
-    private void addRelation(ActionEvent event){
-        ViewRelationships relationships = new ViewRelationships();
-        relationships.setController();
-        mainPane.getChildren().add(relationships);
+    private void buttonUndo(ActionEvent event){
+        if(history.isEmpty())
+            return;
+
+        var lastAction = history.removeLast();
+        lastAction.undo();
     }
 
 
@@ -188,7 +211,7 @@ public class ControllerMain {
         String path = file.getAbsolutePath();
 
         Writer writer = new Writer(path);
-        writer.saveJSON(classDiagram);
+        writer.saveJSON(classDiagram, sequenceDiagram1, sequenceDiagram2, sequenceDiagram3);
     }
 
     /**
@@ -197,58 +220,7 @@ public class ControllerMain {
      * @param event přenáší akce tlačení na tlačítko
      */
     private void loadFile(ActionEvent event){
-
-
-        File file = fileChooser.showOpenDialog(this.stage);
-
-        if(file == null){
-            return;
-        }
-
-        String path = file.getAbsolutePath();
-
-        for(ViewClass viewClass : viewDiagram.getDiagramClassMap().keySet()){
-            mainPane.getChildren().remove(viewClass);
-        }
-        for(Line line : viewDiagram.getRelationshipsLineMap().keySet()){
-            mainPane.getChildren().remove(line);
-        }
-        classDiagram.deleteAll();
-        viewDiagram.deleteAll();
-
-
-        Loader loader = new Loader(classDiagram, path);
-        loader.loading();
-        classDiagram.setAllReaped();
-        List<DClass> dClassListCopy = new ArrayList<>(classDiagram.getdClassList());
-        for(DClass dClass : dClassListCopy){
-            if(dClass.getReapedName()){
-                labelWarning.setPrefHeight(labelWarning.getHeight() + 30);
-                DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-                Date date = new Date();
-                labelWarning.setText(labelWarning.getText() + "\n[" + dateFormat.format(date) + "] class named " + dClass.getName() + "\nremoved due to name repetition \nand its relation ");
-                continue;
-            }
-            ViewClass viewClass = viewDiagram.addNewClass(dClass);
-            this.mainPane.getChildren().add(viewClass);
-        }
-        List<Relationships> relationshipsList = classDiagram.getRelationshipsList();
-        List<Relationships> relationshipsListCopy =  new ArrayList<>(relationshipsList);
-        for(Relationships relationships : relationshipsListCopy){
-            ViewRelationships line = new ViewRelationships();
-            this.mainPane.getChildren().add(line);
-            line.setViewClassController(viewClassController);
-            if(viewDiagram.addRelationships(relationships,line) == null){
-                this.mainPane.getChildren().remove(line);
-                classDiagram.deleteRelation(relationships);
-                continue;
-            }
-            line.setUserData(mainPane);
-            line.setMainPane(mainPane);
-            line.addArrow();
-            line.setType(relationships.getTypeShipString());
-        }
-
+        run(new LoadFileAction(fileChooser, stage, viewDiagram, mainPane, classDiagram, sequenceDiagram1, sequenceDiagram2, sequenceDiagram3, labelWarning, viewClassController));
     }
 
 
@@ -292,11 +264,23 @@ public class ControllerMain {
     }
 
     public SequenceDiagram getSequenceDiagram() {
-        return sequenceDiagram;
+        return sequenceDiagram1;
+    }
+    public SequenceDiagram getSequenceDiagram2() {
+        return sequenceDiagram2;
+    }
+    public SequenceDiagram getSequenceDiagram3() {
+        return sequenceDiagram3;
     }
 
     public ViewSequenceDiagram getViewSequenceDiagram() {
-        return viewSequenceDiagram;
+        return viewSequenceDiagram1;
+    }
+    public ViewSequenceDiagram getViewSequenceDiagram2() {
+        return viewSequenceDiagram2;
+    }
+    public ViewSequenceDiagram getViewSequenceDiagram3() {
+        return viewSequenceDiagram3;
     }
 
     public ClassDiagram getClassDiagram(){

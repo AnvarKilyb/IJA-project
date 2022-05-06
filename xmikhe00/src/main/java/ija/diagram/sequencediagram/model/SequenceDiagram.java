@@ -10,7 +10,6 @@ import java.util.List;
 
 public class SequenceDiagram {
     private List<SObject> sObjectList = new ArrayList<>();
-    private List<RelatedActivationBoxes> relatedActivationBoxesList = new ArrayList<>();
     private final int indent = 130;
 
 
@@ -25,6 +24,10 @@ public class SequenceDiagram {
         sObject.setX(sObjectList.size() * indent);
         sObjectList.add(sObject);
         return sObject;
+    }
+
+    public List<SObject> getsObjectList() {
+        return sObjectList;
     }
 
     private SObject getObject(DClass dClass){

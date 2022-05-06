@@ -42,6 +42,9 @@ public class Parser {
             JSONObject object = (JSONObject) o;
             JSONObject objectClass = (JSONObject) object.get("class");
             JSONObject objectConnection = (JSONObject) object.get("relation");
+            JSONObject objectSequence1 = (JSONObject) object.get("sequence1");
+            JSONObject objectSequence2 = (JSONObject) object.get("sequence2");
+            JSONObject objectSequence3 = (JSONObject) object.get("sequence3");
             //Classes parse
             boolean check = parseClass(objectClass);
             if (!check) {
@@ -52,6 +55,16 @@ public class Parser {
             if (!check) {
                 return null;
             }
+            //Sequence parse
+            check = parseSequence(objectSequence1);
+            if(!check)
+                return null;
+            check = parseSequence(objectSequence2);
+            if(!check)
+                return null;
+            check = parseSequence(objectSequence3);
+            if(!check)
+                return null;
         }
         return itemList;
     }
@@ -72,6 +85,33 @@ public class Parser {
 //            e.printStackTrace();
             return null;
         }
+    }
+    private boolean parseSequence(JSONObject obj){
+        if(obj != null){
+            objectJSON newObject = new objectJSON();
+            newObject.setType(objectJSON.ItemType.SEQUENCE);
+            JSONArray participantList = (JSONArray) obj.get("participants");
+            if(participantList == null)
+                return false;
+            for(int i = 0; i < participantList.size(); i++){
+                String participant = (String) participantList.get(i);
+                newObject.addParticipant(participant);
+            }
+            JSONArray messageList = (JSONArray) obj.get("message");
+            if(messageList == null)
+                return false;
+            for(int i = 0; i < messageList.size(); i++){
+                JSONObject message = (JSONObject) messageList.get(i);
+                String name = (String) message.get("name");
+                String nameFrom = (String) message.get("start");
+                String nameTo = (String) message.get("end");
+                String type = (String) message.get("type");
+                newObject.addMessageList(name, nameFrom, nameTo, type);
+            }
+            itemList.add(newObject);
+
+        }
+        return true;
     }
 
     private boolean setAttributeOperation(objectJSON newObject, JSONArray item, String nameItem){
@@ -312,23 +352,6 @@ public class Parser {
     private static int checkJSON(JSONArray jsonArr){
         if(jsonArr == null){
             return -1;
-        }
-        for (Object o : jsonArr) {
-            JSONObject object = (JSONObject) o;
-            JSONObject newObject = (JSONObject) object.get("class");
-            if (newObject == null) {
-                newObject = (JSONObject) object.get("relation");
-                if (newObject == null) {
-                    System.err.println("Invalid objects");
-                    return -1;
-                }
-            }
-
-            String name = (String) newObject.get("name");
-            if (name == null) {
-                System.err.println("Object requires name");
-                return -1;
-            }
         }
         return 0;
     }

@@ -1,6 +1,9 @@
 package ija.diagram.loader;
 
 import ija.diagram.classdiagram.model.*;
+import ija.diagram.sequencediagram.model.Message;
+import ija.diagram.sequencediagram.model.SObject;
+import ija.diagram.sequencediagram.model.SequenceDiagram;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -22,11 +25,46 @@ public class Writer {
         this.path = path;
     }
 
-    public void saveJSON(ClassDiagram classDiagram){
+    public void saveJSON(ClassDiagram classDiagram, SequenceDiagram sequenceDiagram1, SequenceDiagram sequenceDiagram2, SequenceDiagram sequenceDiagram3){
         writeClassJSON(classDiagram.getdClassList());
         writeRelationJSON(classDiagram.getRelationshipsList());
+        writeSequenceJSON(sequenceDiagram1.getsObjectList());
+        writeSequenceJSON(sequenceDiagram2.getsObjectList());
+        writeSequenceJSON(sequenceDiagram3.getsObjectList());
         writeToJSON();
 
+    }
+    public void writeSequenceJSON(List<SObject> sObjectList){
+        JSONObject sequenceParams = new JSONObject();
+        JSONObject finalParams = new JSONObject();
+        JSONArray participantArray = new JSONArray();
+        JSONArray messageList = new JSONArray();
+        JSONObject messageParams = new JSONObject();
+        for(SObject sObject: sObjectList){
+            participantArray.add(sObject.getName());
+            for(Message message: sObject.getActivationBox().getInMessage()){
+                messageParams.put("name", message.getName());
+                messageParams.put("start", message.getClassStart().getName());
+                messageParams.put("end", message.getClassEnd().getName());
+                switch (message.getMessageType()){
+                    case SYNCHRONOUS:
+                        messageParams.put("type", "sync");
+                        break;
+                    case ASYNCHRONOUS:
+                        messageParams.put("type", "async");
+                        break;
+                    case DELETE:
+                        messageParams.put("type", "delete");
+                        break;
+                    case REPLY:
+                        messageParams.put("type", "reply");
+                        break;
+                }
+                messageList.add(messageParams);
+            }
+        }
+        sequenceParams.put("participants", participantArray);
+        sequenceParams.put("message", messageList);
     }
     /**
      * Získá dCLassList s daty ve třídách a vypíše vše do souboru ve formátu JSON

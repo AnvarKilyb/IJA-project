@@ -13,7 +13,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
 /**
  * Hlavní soubor pro projekt predmětu IJA
  * Hlavni soubor pro spuštění programu
@@ -34,15 +33,23 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         ClassDiagram classDiagram = new ClassDiagram();
         ViewDiagram viewDiagram = new ViewDiagram();
-        SequenceDiagram sequenceDiagram = new SequenceDiagram();
-        ViewSequenceDiagram viewSequenceDiagram = new ViewSequenceDiagram();
+        SequenceDiagram sequenceDiagram1 = new SequenceDiagram();
+        SequenceDiagram sequenceDiagram2 = new SequenceDiagram();
+        SequenceDiagram sequenceDiagram3 = new SequenceDiagram();
+        ViewSequenceDiagram viewSequenceDiagram1 = new ViewSequenceDiagram();
+        ViewSequenceDiagram viewSequenceDiagram2 = new ViewSequenceDiagram();
+        ViewSequenceDiagram viewSequenceDiagram3 = new ViewSequenceDiagram();
         FileChooser fileChooser = new FileChooser();
 //        fileChooser.getExtensionFilters().add(
 //            new FileChooser.ExtensionFilter("JSON file","*.json")
 //        );
-        ControllerMain controllerMain = new ControllerMain(classDiagram, viewDiagram, sequenceDiagram, viewSequenceDiagram, fileChooser, stage);
+        ControllerMain controllerMain = new ControllerMain(classDiagram, viewDiagram, sequenceDiagram1, sequenceDiagram2, sequenceDiagram3,
+                viewSequenceDiagram1, viewSequenceDiagram2, viewSequenceDiagram3,
+                fileChooser, stage);
         viewDiagram.setControllerMain(controllerMain);
-        viewSequenceDiagram.setControllerMain(controllerMain);
+        viewSequenceDiagram1.setControllerMain(controllerMain);
+        viewSequenceDiagram2.setControllerMain(controllerMain);
+        viewSequenceDiagram3.setControllerMain(controllerMain);
         ViewClassController viewClassController = new ViewClassController(controllerMain);
         ClassContextController classContextController = new ClassContextController(controllerMain);
         controllerMain.setClassContextController(classContextController);
