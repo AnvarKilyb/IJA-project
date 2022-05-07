@@ -28,43 +28,58 @@ public class Writer {
     public void saveJSON(ClassDiagram classDiagram, SequenceDiagram sequenceDiagram1, SequenceDiagram sequenceDiagram2, SequenceDiagram sequenceDiagram3){
         writeClassJSON(classDiagram.getdClassList());
         writeRelationJSON(classDiagram.getRelationshipsList());
-        writeSequenceJSON(sequenceDiagram1.getsObjectList());
-        writeSequenceJSON(sequenceDiagram2.getsObjectList());
-        writeSequenceJSON(sequenceDiagram3.getsObjectList());
+        writeSequenceJSON(sequenceDiagram1.getsObjectList(), 1);
+        writeSequenceJSON(sequenceDiagram2.getsObjectList(), 2);
+        writeSequenceJSON(sequenceDiagram3.getsObjectList(), 3);
         writeToJSON();
 
     }
-    public void writeSequenceJSON(List<SObject> sObjectList){
-        JSONObject sequenceParams = new JSONObject();
-        JSONObject finalParams = new JSONObject();
-        JSONArray participantArray = new JSONArray();
-        JSONArray messageList = new JSONArray();
-        JSONObject messageParams = new JSONObject();
-        for(SObject sObject: sObjectList){
-            participantArray.add(sObject.getName());
-            for(Message message: sObject.getActivationBox().getInMessage()){
-                messageParams.put("name", message.getName());
-                messageParams.put("start", message.getClassStart().getName());
-                messageParams.put("end", message.getClassEnd().getName());
-                switch (message.getMessageType()){
-                    case SYNCHRONOUS:
-                        messageParams.put("type", "sync");
-                        break;
-                    case ASYNCHRONOUS:
-                        messageParams.put("type", "async");
-                        break;
-                    case DELETE:
-                        messageParams.put("type", "delete");
-                        break;
-                    case REPLY:
-                        messageParams.put("type", "reply");
-                        break;
+    public void writeSequenceJSON(List<SObject> sObjectList, int num){
+        if(!sObjectList.isEmpty()){
+            JSONObject sequenceParams = new JSONObject();
+            JSONObject finalParams = new JSONObject();
+            JSONArray participantArray = new JSONArray();
+            JSONArray messageList = new JSONArray();
+            JSONObject messageParams = new JSONObject();
+            for(SObject sObject: sObjectList){
+                participantArray.add(sObject.getName());
+                for(Message message: sObject.getActivationBox().getInMessage()){
+                    messageParams.put("name", message.getName());
+                    messageParams.put("start", message.getClassStart().getName());
+                    messageParams.put("end", message.getClassEnd().getName());
+                    switch (message.getMessageType()){
+                        case SYNCHRONOUS:
+                            messageParams.put("type", "sync");
+                            break;
+                        case ASYNCHRONOUS:
+                            messageParams.put("type", "async");
+                            break;
+                        case DELETE:
+                            messageParams.put("type", "delete");
+                            break;
+                        case REPLY:
+                            messageParams.put("type", "reply");
+                            break;
+                    }
+                    messageList.add(messageParams);
                 }
-                messageList.add(messageParams);
             }
+            sequenceParams.put("participants", participantArray);
+            sequenceParams.put("message", messageList);
+            switch (num){
+                case 1:
+                    finalParams.put("sequence1", sequenceParams);
+                    break;
+                case 2:
+                    finalParams.put("sequence2", sequenceParams);
+                    break;
+                case 3:
+                    finalParams.put("sequence3", sequenceParams);
+                    break;
+            }
+            mainList.add(finalParams);
         }
-        sequenceParams.put("participants", participantArray);
-        sequenceParams.put("message", messageList);
+
     }
     /**
      * Získá dCLassList s daty ve třídách a vypíše vše do souboru ve formátu JSON
