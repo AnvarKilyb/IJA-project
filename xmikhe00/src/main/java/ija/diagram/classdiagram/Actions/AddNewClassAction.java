@@ -12,6 +12,8 @@ public class AddNewClassAction implements Action {
     Pane mainPane;
     ViewClass viewClass;
 
+    private DClass dClass;
+
     public AddNewClassAction(ClassDiagram classDiagram, ViewDiagram viewDiagram, Pane mainPane){
         this.classDiagram = classDiagram;
         this.viewDiagram = viewDiagram;
@@ -20,7 +22,7 @@ public class AddNewClassAction implements Action {
 
     @Override
     public void run() {
-        DClass dClass = classDiagram.addClass();
+        dClass = classDiagram.addClass();
         viewClass = viewDiagram.addNewClass(dClass);
         mainPane.getChildren().add(viewClass);
     }
@@ -28,5 +30,7 @@ public class AddNewClassAction implements Action {
     @Override
     public void undo() {
         mainPane.getChildren().remove(viewClass);
+        classDiagram.classDelete(dClass);
+        classDiagram.decrement();
     }
 }

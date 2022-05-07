@@ -1,11 +1,9 @@
 package ija.diagram.loader;
 
 import ija.diagram.classdiagram.model.*;
-import ija.diagram.sequencediagram.model.ActivationBox;
 import ija.diagram.sequencediagram.model.Message;
 import ija.diagram.sequencediagram.model.SObject;
 import ija.diagram.sequencediagram.model.SequenceDiagram;
-import ija.diagram.sequencediagram.view.ViewActiveBox;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -42,35 +40,40 @@ public class Writer {
             JSONObject finalParams = new JSONObject();
             JSONArray participantArray = new JSONArray();
             JSONArray messageList = new JSONArray();
-            JSONObject messageParams = new JSONObject();
+            Double height = 0.0;
             for(SObject sObject: sObjectList){
-                participantArray.add(sObject.getName());
-
-                if(sObject.getActivationBox() != null) {
-                    for (Message message : sObject.getActivationBox().getInMessage()) {
-                        messageParams.put("name", message.getName());
-                        messageParams.put("start", message.getClassStart().getName());
-                        messageParams.put("end", message.getClassEnd().getName());
-                        switch (message.getMessageType()) {
-                            case SYNCHRONOUS:
-                                messageParams.put("type", "sync");
-                                break;
-                            case ASYNCHRONOUS:
-                                messageParams.put("type", "async");
-                                break;
-                            case DELETE:
-                                messageParams.put("type", "delete");
-                                break;
-                            case REPLY:
-                                messageParams.put("type", "reply");
-                                break;
-                        }
-                        messageList.add(messageParams);
+                height = sObject.getActivationBox().getHeight();
+                JSONObject participantParams = new JSONObject();
+                participantParams.put("name", sObject.getName());
+                participantParams.put("x", sObject.getX());
+                participantArray.add(participantParams);
+                for(Message message: sObject.getActivationBox().getInMessage()){
+                    JSONObject messageParams = new JSONObject();
+                    messageParams.put("name", message.getName());
+                    messageParams.put("start", message.getClassStart().getName());
+                    messageParams.put("end", message.getClassEnd().getName());
+                    messageParams.put("x", message.getX());
+                    messageParams.put("y", message.getY());
+                    switch (message.getMessageType()){
+                        case SYNCHRONOUS:
+                            messageParams.put("type", "sync");
+                            break;
+                        case ASYNCHRONOUS:
+                            messageParams.put("type", "async");
+                            break;
+                        case DELETE:
+                            messageParams.put("type", "delete");
+                            break;
+                        case REPLY:
+                            messageParams.put("type", "reply");
+                            break;
                     }
+                    messageList.add(messageParams);
                 }
             }
             sequenceParams.put("participants", participantArray);
             sequenceParams.put("message", messageList);
+            sequenceParams.put("height", height);
             switch (num){
                 case 1:
                     finalParams.put("sequence1", sequenceParams);
