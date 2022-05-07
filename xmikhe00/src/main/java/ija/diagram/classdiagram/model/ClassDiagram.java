@@ -188,6 +188,7 @@ public class ClassDiagram {
         this.relationshipsList.remove(relationships);
     }
 
-
-
+    public void decrement(){
+        this.classNameCounter--;
+    }
 }
