@@ -59,6 +59,7 @@ public class objectJSON {
     double width;
     double xAxis;
     double yAxis;
+    double len;
 
     double startX;
     double startY;
@@ -221,7 +222,7 @@ public class objectJSON {
         return messageList;
     }
 
-    public void addMessageList(String name, String startObject, String endObject, String type, double x, double y) {
+    public void addMessageList(String name, String startObject, String endObject, String type, double x, double y, int len) {
         DClass start = new DClass(startObject);
         DClass end = new DClass(endObject);
         Message message = new Message(name);
@@ -229,6 +230,7 @@ public class objectJSON {
         message.setClassEnd(end);
         message.setX(x);
         message.setY(y);
+        message.setLen(len);
         switch(type){
             case "sync":
                 message.setMessageType(Message.MessageType.SYNCHRONOUS);
@@ -244,5 +246,13 @@ public class objectJSON {
                 break;
         }
         this.messageList.add(message);
+    }
+
+    public double getLen() {
+        return len;
+    }
+
+    public void setLen(double len) {
+        this.len = len;
     }
 }

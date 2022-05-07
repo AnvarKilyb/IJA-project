@@ -75,7 +75,7 @@ public class Loader {
             for(Message message: item.getMessageList()){
                 if(message.getClassStart().getName().equals(sObject.getName())){
                     activationBox.setThisObject(sObject);
-                    activationBox.addNewOutMessageLoad(message.getName(), message.getMessageType(),message.getX(), message.getY());
+                    activationBox.addNewOutMessageLoad(message.getName(), message.getMessageType(), message.getX(), message.getY(), message.getLen());
                 }
                 if(message.getClassEnd().getName().equals(sObject.getName())){
                     activationBox.setThisObject(sObject);

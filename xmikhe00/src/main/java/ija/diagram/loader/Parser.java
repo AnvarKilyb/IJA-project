@@ -110,7 +110,8 @@ public class Parser {
                 String type = (String) message.get("type");
                 double x = Double.parseDouble(message.get("x").toString());
                 double y = Double.parseDouble(message.get("y").toString());
-                newObject.addMessageList(name, nameFrom, nameTo, type, x, y);
+                int len = Integer.parseInt(message.get("len").toString());
+                newObject.addMessageList(name, nameFrom, nameTo, type, x, y, len);
             }
             double height = Double.parseDouble(obj.get("height").toString());
             newObject.setHeight(height);
