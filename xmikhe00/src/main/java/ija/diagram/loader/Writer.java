@@ -41,6 +41,7 @@ public class Writer {
             JSONArray participantArray = new JSONArray();
             JSONArray messageList = new JSONArray();
             Double height = 0.0;
+            int len = 0;
             for(SObject sObject: sObjectList){
                 height = sObject.getActivationBox().getHeight();
                 JSONObject participantParams = new JSONObject();
@@ -54,6 +55,7 @@ public class Writer {
                     messageParams.put("end", message.getClassEnd().getName());
                     messageParams.put("x", message.getX());
                     messageParams.put("y", message.getY());
+                    messageParams.put("len", message.getLen());
                     switch (message.getMessageType()){
                         case SYNCHRONOUS:
                             messageParams.put("type", "sync");

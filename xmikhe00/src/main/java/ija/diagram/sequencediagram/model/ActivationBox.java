@@ -75,15 +75,31 @@ public class ActivationBox{
         height += 16 + plush;
         return message;
     }
+    public Message addNewOutMessageLoad(String name, Message.MessageType messageType, double x, double y, int len){
+        Message message = new Message(name, messageType);
+        if(reply){
+            plush += 16;
+            reply = false;
+        }else{
+            plush = 0;
+        }
+        message.setLen(len);
+        message.setX(x);
+        message.setY(y);
+        outMessage.add(message);
+        height += 16 + plush;
+        return message;
+    }
 
     public void addNewInMessage(Message message){
         if(message.getMessageType() == Message.MessageType.REPLY){
             reply = true;
         }
-        if(height < message.getY()){
-            height = message.getY() + 20;
-        }else{
-            height += 20;
+        inMessage.add(message);
+    }
+    public void addNewInMessageLoad(Message message){
+        if(message.getMessageType() == Message.MessageType.REPLY){
+            reply = true;
         }
         inMessage.add(message);
     }

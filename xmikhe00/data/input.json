@@ -65,9 +65,9 @@
         {"name":  "Food", "x":  150}
       ],
       "message": [
-        {"name": "pet", "start": "Person", "end":  "Dog", "type": "sync", "x":  10, "y":  20},
-        {"name": "seek", "start": "Dog", "end":  "Food", "type":  "async", "x":  5, "y":  23},
-        {"name": "have", "start": "Person", "end":  "Food", "type":  "delete","x":  15, "y":  43}
+        {"name": "pet", "start": "Person", "end":  "Dog", "type": "sync", "x":  10, "y":  20, "len":  20},
+        {"name": "seek", "start": "Dog", "end":  "Food", "type":  "async", "x":  5, "y":  23, "len": 150},
+        {"name": "have", "start": "Person", "end":  "Food", "type":  "delete","x":  15, "y":  43, "len": 205}
       ],
       "height": 25
     }
@@ -80,8 +80,8 @@
         {"name":  "Dog", "x":  300}
       ],
       "message": [
-        {"name": "buy", "start": "Person", "end":  "Dog", "type": "sync", "x":  10, "y":  20},
-        {"name": "call", "start": "Person", "end":  "Dog", "type":  "async", "x":  20, "y":  35}
+        {"name": "buy", "start": "Person", "end":  "Dog", "type": "sync", "x":  10, "y":  20, "len":  100},
+        {"name": "call", "start": "Person", "end":  "Dog", "type":  "async", "x":  20, "y":  35, "len":  125}
       ],
       "height": 50
     }

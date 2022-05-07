@@ -31,6 +31,5 @@ public class AddNewClassAction implements Action {
     public void undo() {
         mainPane.getChildren().remove(viewClass);
         classDiagram.classDelete(dClass);
-        classDiagram.decrement();
     }
 }
