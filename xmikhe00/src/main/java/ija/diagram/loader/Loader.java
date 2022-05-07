@@ -57,11 +57,12 @@ public class Loader {
     }
     private void parseSequence(objectJSON item, SequenceDiagram sequenceDiagram){
         boolean fraud;
-        for(String participant: item.getParticipantList()){
+        for(ParticipantJSON participantObj: item.getParticipantList()){
             fraud = true;
             for(DClass dClass: classDiagram.getdClassList()){
-                if(participant.equals(dClass.getName())){
+                if(participantObj.getName().equals(dClass.getName())){
                     sequenceDiagram.addObject(dClass);
+                    sequenceDiagram.getObject(dClass.getName()).setX(participantObj.getX());
                     fraud = false;
                 }
             }
@@ -79,8 +80,11 @@ public class Loader {
                 if(message.getClassEnd().getName().equals(sObject.getName())){
                     activationBox.setThisObject(sObject);
                     activationBox.addNewInMessage(message);
+
                 }
             }
+
+            activationBox.setHeight(item.getHeight());
             sObject.addActiveBox(activationBox);
         }
 

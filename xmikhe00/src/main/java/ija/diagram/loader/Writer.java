@@ -40,13 +40,20 @@ public class Writer {
             JSONObject finalParams = new JSONObject();
             JSONArray participantArray = new JSONArray();
             JSONArray messageList = new JSONArray();
-            JSONObject messageParams = new JSONObject();
+            Double height = 0.0;
             for(SObject sObject: sObjectList){
-                participantArray.add(sObject.getName());
+                height = sObject.getActivationBox().getHeight();
+                JSONObject participantParams = new JSONObject();
+                participantParams.put("name", sObject.getName());
+                participantParams.put("x", sObject.getX());
+                participantArray.add(participantParams);
                 for(Message message: sObject.getActivationBox().getInMessage()){
+                    JSONObject messageParams = new JSONObject();
                     messageParams.put("name", message.getName());
                     messageParams.put("start", message.getClassStart().getName());
                     messageParams.put("end", message.getClassEnd().getName());
+                    messageParams.put("x", message.getX());
+                    messageParams.put("y", message.getY());
                     switch (message.getMessageType()){
                         case SYNCHRONOUS:
                             messageParams.put("type", "sync");
@@ -66,6 +73,7 @@ public class Writer {
             }
             sequenceParams.put("participants", participantArray);
             sequenceParams.put("message", messageList);
+            sequenceParams.put("height", height);
             switch (num){
                 case 1:
                     finalParams.put("sequence1", sequenceParams);

@@ -59,22 +59,31 @@
   {
     "sequence1":
     {
-      "participants": ["Person", "Dog", "Food", "Person", "Bed"],
+      "participants": [
+        {"name": "Person", "x":  100},
+        {"name":  "Dog", "x":  125},
+        {"name":  "Food", "x":  150}
+      ],
       "message": [
-        {"name": "pet", "start": "Person", "end":  "Dog", "type": "sync"},
-        {"name": "seek", "start": "Dog", "end":  "Food", "type":  "async"},
-        {"name": "have", "start": "Person", "end":  "Food", "type":  "delete"}
-      ]
+        {"name": "pet", "start": "Person", "end":  "Dog", "type": "sync", "x":  10, "y":  20},
+        {"name": "seek", "start": "Dog", "end":  "Food", "type":  "async", "x":  5, "y":  23},
+        {"name": "have", "start": "Person", "end":  "Food", "type":  "delete","x":  15, "y":  43}
+      ],
+      "height": 25
     }
   },
   {
     "sequence2":
     {
-      "participants": ["Person", "Dog", "Person", "Bed"],
+      "participants": [
+        {"name": "Person", "x":  250},
+        {"name":  "Dog", "x":  300}
+      ],
       "message": [
-        {"name": "buy", "start": "Person", "end":  "Dog", "type": "sync"},
-        {"name": "call", "start": "Person", "end":  "Dog", "type":  "async"}
-      ]
+        {"name": "buy", "start": "Person", "end":  "Dog", "type": "sync", "x":  10, "y":  20},
+        {"name": "call", "start": "Person", "end":  "Dog", "type":  "async", "x":  20, "y":  35}
+      ],
+      "height": 50
     }
   }
 ]

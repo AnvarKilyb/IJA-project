@@ -94,20 +94,26 @@ public class Parser {
             if(participantList == null)
                 return false;
             for(int i = 0; i < participantList.size(); i++){
-                String participant = (String) participantList.get(i);
-                newObject.addParticipant(participant);
+                JSONObject participantObj = (JSONObject) participantList.get(i);
+                String name = (String) participantObj.get("name");
+                double x = Double.parseDouble(participantObj.get("x").toString());
+                newObject.addParticipant(name, x);
             }
             JSONArray messageList = (JSONArray) obj.get("message");
             if(messageList == null)
                 return false;
-            for(int i = 0; i < messageList.size(); i++){
-                JSONObject message = (JSONObject) messageList.get(i);
+            for (Object o : messageList) {
+                JSONObject message = (JSONObject) o;
                 String name = (String) message.get("name");
                 String nameFrom = (String) message.get("start");
                 String nameTo = (String) message.get("end");
                 String type = (String) message.get("type");
-                newObject.addMessageList(name, nameFrom, nameTo, type);
+                double x = Double.parseDouble(message.get("x").toString());
+                double y = Double.parseDouble(message.get("y").toString());
+                newObject.addMessageList(name, nameFrom, nameTo, type, x, y);
             }
+            double height = Double.parseDouble(obj.get("height").toString());
+            newObject.setHeight(height);
             itemList.add(newObject);
 
         }

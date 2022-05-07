@@ -49,14 +49,14 @@ public class objectJSON {
     ItemType type;
     ArrayList<attrJSON> attributes = new ArrayList<>();
     ArrayList<attrJSON> operations = new ArrayList<>();
-    HashSet<String> participantList = new HashSet<>();
+    HashSet<ParticipantJSON> participantList = new HashSet<>();
     ArrayList<Message> messageList = new ArrayList<>();
     ConType conType;
     String startConnection;
     String endConnection;
     Notation notation;
-    int height;
-    int width;
+    double height;
+    double width;
     double xAxis;
     double yAxis;
 
@@ -121,19 +121,19 @@ public class objectJSON {
         return attributes;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(double height) {
         this.height = height;
     }
 
-    public int getHeight() {
+    public double getHeight() {
         return height;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(double width) {
         this.width = width;
     }
 
-    public int getWidth() {
+    public double getWidth() {
         return width;
     }
 
@@ -201,7 +201,8 @@ public class objectJSON {
         this.endY = endY;
     }
 
-    public void addParticipant(String participant) {
+    public void addParticipant(String name, double x) {
+        ParticipantJSON participant = new ParticipantJSON(name, x);
         this.participantList.add(participant);
     }
 
@@ -211,7 +212,8 @@ public class objectJSON {
         else
             return false;
     }
-    public HashSet<String> getParticipantList() {
+
+    public HashSet<ParticipantJSON> getParticipantList() {
         return participantList;
     }
 
@@ -219,12 +221,14 @@ public class objectJSON {
         return messageList;
     }
 
-    public void addMessageList(String name, String startObject, String endObject, String type) {
+    public void addMessageList(String name, String startObject, String endObject, String type, double x, double y) {
         DClass start = new DClass(startObject);
         DClass end = new DClass(endObject);
         Message message = new Message(name);
         message.setClassStart(start);
         message.setClassEnd(end);
+        message.setX(x);
+        message.setY(y);
         switch(type){
             case "sync":
                 message.setMessageType(Message.MessageType.SYNCHRONOUS);
