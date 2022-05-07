@@ -50,6 +50,13 @@ public class ViewSequenceDiagram {
         return null;
     }
 
+    public void deleteObject(ViewObject viewObject){
+        objectSequenceMap.remove(viewObject);
+    }
+
+    public void deleteAll(){
+        objectSequenceMap.clear();
+    }
 
     public Map<ViewObject, SObject> getObjectSequenceMap() {
         return objectSequenceMap;

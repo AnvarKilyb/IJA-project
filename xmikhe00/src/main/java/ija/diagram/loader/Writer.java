@@ -1,9 +1,11 @@
 package ija.diagram.loader;
 
 import ija.diagram.classdiagram.model.*;
+import ija.diagram.sequencediagram.model.ActivationBox;
 import ija.diagram.sequencediagram.model.Message;
 import ija.diagram.sequencediagram.model.SObject;
 import ija.diagram.sequencediagram.model.SequenceDiagram;
+import ija.diagram.sequencediagram.view.ViewActiveBox;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -43,25 +45,28 @@ public class Writer {
             JSONObject messageParams = new JSONObject();
             for(SObject sObject: sObjectList){
                 participantArray.add(sObject.getName());
-                for(Message message: sObject.getActivationBox().getInMessage()){
-                    messageParams.put("name", message.getName());
-                    messageParams.put("start", message.getClassStart().getName());
-                    messageParams.put("end", message.getClassEnd().getName());
-                    switch (message.getMessageType()){
-                        case SYNCHRONOUS:
-                            messageParams.put("type", "sync");
-                            break;
-                        case ASYNCHRONOUS:
-                            messageParams.put("type", "async");
-                            break;
-                        case DELETE:
-                            messageParams.put("type", "delete");
-                            break;
-                        case REPLY:
-                            messageParams.put("type", "reply");
-                            break;
+
+                if(sObject.getActivationBox() != null) {
+                    for (Message message : sObject.getActivationBox().getInMessage()) {
+                        messageParams.put("name", message.getName());
+                        messageParams.put("start", message.getClassStart().getName());
+                        messageParams.put("end", message.getClassEnd().getName());
+                        switch (message.getMessageType()) {
+                            case SYNCHRONOUS:
+                                messageParams.put("type", "sync");
+                                break;
+                            case ASYNCHRONOUS:
+                                messageParams.put("type", "async");
+                                break;
+                            case DELETE:
+                                messageParams.put("type", "delete");
+                                break;
+                            case REPLY:
+                                messageParams.put("type", "reply");
+                                break;
+                        }
+                        messageList.add(messageParams);
                     }
-                    messageList.add(messageParams);
                 }
             }
             sequenceParams.put("participants", participantArray);

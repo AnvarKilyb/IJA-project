@@ -84,4 +84,5 @@ public class SObject {
     public void setObjectActive(boolean objectActive) {
         this.objectActive = objectActive;
     }
+
 }

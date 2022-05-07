@@ -165,4 +165,8 @@ public class ViewClass extends VBox {
     public void setIdClassName(String id){
         className.setId(id);
     }
+
+    public TextField returnClassNameField(){
+        return className;
+    }
 }

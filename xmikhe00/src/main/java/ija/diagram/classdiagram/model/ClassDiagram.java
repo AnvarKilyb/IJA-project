@@ -2,6 +2,7 @@ package ija.diagram.classdiagram.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Třída reprezentuje diagram tříd
@@ -13,9 +14,6 @@ import java.util.List;
 public class ClassDiagram {
     /**Seznam pro uchovaní jednotlivých tříd*/
     private List<DClass> dClassList = new ArrayList<DClass>();
-    /**Automatické jméno pro třídu vytvářenou uživatelem**/
-    private int classNameCounter = 0;
-
     private List<Relationships> relationshipsList = new ArrayList<Relationships>();
 
 
@@ -58,8 +56,14 @@ public class ClassDiagram {
      * @return vrátí vytvořenou třídu
      */
     public DClass addClass(){
-        String name = Integer.toString(classNameCounter);
-        classNameCounter++;
+        String abcString="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        Random random = new Random();
+        StringBuffer stringBuffer = new StringBuffer();
+        for(int i=0;i< 10 ;i++) {
+            int number = random.nextInt(abcString.length());
+            stringBuffer.append(abcString.charAt(number));
+        }
+        String name = stringBuffer.toString();
         DClass dClass = new DClass(name);
         dClassList.add(dClass);
         return dClass;

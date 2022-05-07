@@ -48,6 +48,13 @@ public class SequenceDiagram {
         return null;
     }
 
+    public void deleteAll(){
+        sObjectList.clear();
+    }
+    public void deleteObject(SObject sObject){
+        sObjectList.remove(sObject);
+    }
+
     public int getObjectNumber(SObject sObject){
         return sObjectList.indexOf(sObject);
     }

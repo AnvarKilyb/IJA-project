@@ -49,6 +49,9 @@ public class CreateMessageController {
     private TextField message;
 
     @FXML
+    private Button deleteObjectButton;
+
+    @FXML
     private TextField objectName;
 
     private ControllerMain controllerMain;
@@ -67,6 +70,32 @@ public class CreateMessageController {
         Reply.setToggleGroup(messageGroup);
         Synchronous.fire();
         createMessage.addEventHandler(ActionEvent.ACTION, this::createNewMessage);
+        deleteObjectButton.addEventHandler(ActionEvent.ACTION, this::deleteObject);
+    }
+
+    public void deleteObject(ActionEvent actionEvent){
+        Stage stage = (Stage)deleteObjectButton.getScene().getWindow();
+        SequenceDiagram sequenceDiagram = controllerMain.getSequenceDiagram();
+        ViewSequenceDiagram viewSequenceDiagram = controllerMain.getViewSequenceDiagram();
+        ViewObject viewObject = (ViewObject) stage.getUserData();
+        SObject sObject = viewSequenceDiagram.returnObject(viewObject);
+        if(sObject.getActivationBox() != null){
+            for(Message message : sObject.getActivationBox().getInMessage()){
+                DClass dClass = message.getClassStart();
+                SObject sObject1 = sequenceDiagram.getObject(dClass.getName());
+                ViewObject viewObject1  =  viewSequenceDiagram.getViewObject(sObject1);
+                ViewActiveBox viewActiveBox = viewObject1.getViewActiveBox();
+                ViewMessage viewMessage = viewActiveBox.getViewMessage(message);
+                if(viewMessage != null){
+                    viewActiveBox.getChildren().remove(viewMessage);
+                }
+            }
+        }
+        Pane mainPane = controllerMain.getSequencePane();
+        mainPane.getChildren().remove(viewObject);
+        viewSequenceDiagram.deleteObject(viewObject);
+        sequenceDiagram.deleteObject(sObject);
+
     }
 
 

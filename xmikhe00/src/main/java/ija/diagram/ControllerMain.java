@@ -220,7 +220,8 @@ public class ControllerMain {
      * @param event přenáší akce tlačení na tlačítko
      */
     private void loadFile(ActionEvent event){
-        run(new LoadFileAction(fileChooser, stage, viewDiagram, mainPane, classDiagram, sequenceDiagram1, sequenceDiagram2, sequenceDiagram3, labelWarning, viewClassController));
+        run(new LoadFileAction(fileChooser, stage, viewDiagram, mainPane, classDiagram, sequenceDiagram1,
+                sequenceDiagram2, sequenceDiagram3, labelWarning, viewClassController,this));
     }
 
 
@@ -271,6 +272,16 @@ public class ControllerMain {
     }
     public SequenceDiagram getSequenceDiagram3() {
         return sequenceDiagram3;
+    }
+
+    public Pane getSequencePane1() {
+        return sequencePane1;
+    }
+    public Pane getSequencePane2() {
+        return sequencePane2;
+    }
+    public Pane getSequencePane3() {
+        return sequencePane3;
     }
 
 

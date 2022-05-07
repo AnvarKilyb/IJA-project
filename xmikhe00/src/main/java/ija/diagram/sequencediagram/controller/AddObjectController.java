@@ -4,6 +4,7 @@ package ija.diagram.sequencediagram.controller;
 import ija.diagram.ControllerMain;
 import ija.diagram.classdiagram.model.ClassDiagram;
 import ija.diagram.classdiagram.model.DClass;
+import ija.diagram.classdiagram.view.ViewClass;
 import ija.diagram.sequencediagram.model.SObject;
 import ija.diagram.sequencediagram.view.ViewObject;
 import javafx.event.ActionEvent;
@@ -65,9 +66,18 @@ public class AddObjectController {
        if(sObject == null){
            return;
        }
+
        ViewObject viewObject = controllerMain.getViewSequenceDiagram().addNewObject(sObject);
        ContextObjectController contextObjectController = controllerMain.getContextObjectController();
        viewObject.addEventHandler(MouseEvent.MOUSE_CLICKED,contextObjectController::addNewMessage);
+
+        ViewClass viewClass = controllerMain.getViewDiagram().getViewClass(dClass);
+        viewClass.returnClassNameField().textProperty().addListener((observable, oldValue, newValue) ->
+        {
+            viewObject.returnMainLabel().setText(newValue);
+            sObject.setName(newValue);
+        });
+
        Pane mainPane = controllerMain.getSequencePane();
        mainPane.getChildren().add(viewObject);
        stage.close();

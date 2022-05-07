@@ -1,5 +1,6 @@
 package ija.diagram.classdiagram.Actions;
 
+import ija.diagram.ControllerMain;
 import ija.diagram.classdiagram.controller.ViewClassController;
 import ija.diagram.classdiagram.model.ClassDiagram;
 import ija.diagram.classdiagram.model.DClass;
@@ -8,8 +9,18 @@ import ija.diagram.classdiagram.view.ViewClass;
 import ija.diagram.classdiagram.view.ViewDiagram;
 import ija.diagram.classdiagram.view.ViewRelationships;
 import ija.diagram.loader.Loader;
+import ija.diagram.sequencediagram.controller.ContextObjectController;
+import ija.diagram.sequencediagram.controller.CreateMessageController;
+import ija.diagram.sequencediagram.model.Message;
+import ija.diagram.sequencediagram.model.SObject;
 import ija.diagram.sequencediagram.model.SequenceDiagram;
+import ija.diagram.sequencediagram.view.ViewActiveBox;
+import ija.diagram.sequencediagram.view.ViewMessage;
+import ija.diagram.sequencediagram.view.ViewObject;
+import ija.diagram.sequencediagram.view.ViewSequenceDiagram;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
@@ -33,10 +44,11 @@ public class LoadFileAction implements Action{
     private SequenceDiagram sequenceDiagram3;
     private Label labelWarning;
     private ViewClassController viewClassController;
+    private ControllerMain controllerMain;
 
     public LoadFileAction(FileChooser fileChooser, Stage stage, ViewDiagram viewDiagram, Pane mainPane, ClassDiagram classDiagram,
                           SequenceDiagram sequenceDiagram1, SequenceDiagram sequenceDiagram2, SequenceDiagram sequenceDiagram3,
-                          Label labelWarning, ViewClassController viewClassController) {
+                          Label labelWarning, ViewClassController viewClassController, ControllerMain controllerMain) {
         this.fileChooser = fileChooser;
         this.stage = stage;
         this.viewDiagram = viewDiagram;
@@ -47,6 +59,7 @@ public class LoadFileAction implements Action{
         this.sequenceDiagram3 = sequenceDiagram3;
         this.labelWarning = labelWarning;
         this.viewClassController = viewClassController;
+        this.controllerMain = controllerMain;
     }
 
 
@@ -67,6 +80,26 @@ public class LoadFileAction implements Action{
         }
         classDiagram.deleteAll();
         viewDiagram.deleteAll();
+        ViewSequenceDiagram viewSequenceDiagram1 = controllerMain.getViewSequenceDiagram1();
+        ViewSequenceDiagram viewSequenceDiagram2 = controllerMain.getViewSequenceDiagram2();
+        ViewSequenceDiagram viewSequenceDiagram3 = controllerMain.getViewSequenceDiagram3();
+
+        for(ViewObject viewObject : viewSequenceDiagram1.getObjectSequenceMap().keySet()){
+            controllerMain.getSequencePane1().getChildren().remove(viewObject);
+        }
+        for(ViewObject viewObject : viewSequenceDiagram2.getObjectSequenceMap().keySet()){
+            controllerMain.getSequencePane2().getChildren().remove(viewObject);
+        }
+        for(ViewObject viewObject : viewSequenceDiagram3.getObjectSequenceMap().keySet()){
+            controllerMain.getSequencePane3().getChildren().remove(viewObject);
+        }
+
+        sequenceDiagram1.deleteAll();
+        sequenceDiagram2.deleteAll();
+        sequenceDiagram3.deleteAll();
+        viewSequenceDiagram1.deleteAll();
+        viewSequenceDiagram2.deleteAll();
+        viewSequenceDiagram3.deleteAll();
 
 
         Loader loader = new Loader(classDiagram, sequenceDiagram1,sequenceDiagram2,sequenceDiagram3, path);
@@ -99,6 +132,28 @@ public class LoadFileAction implements Action{
             line.setMainPane(mainPane);
             line.addArrow();
             line.setType(relationships.getTypeShipString());
+        }
+
+
+        for(SObject sObject : sequenceDiagram1.getsObjectList()){
+            ViewObject viewObject = viewSequenceDiagram1.addNewObject(sObject);
+            ContextObjectController contextObjectController = controllerMain.getContextObjectController();
+            viewObject.addEventHandler(MouseEvent.MOUSE_CLICKED, contextObjectController::addNewMessage);
+            ViewClass viewClass = controllerMain.getViewDiagram().getViewClass(sObject.getThisClass());
+            viewClass.returnClassNameField().textProperty().addListener((observable, oldValue, newValue) ->
+            {
+                viewObject.returnMainLabel().setText(newValue);
+                sObject.setName(newValue);
+            });
+            controllerMain.getSequencePane1().getChildren().add(viewObject);
+            if(sObject.getActivationBox() != null){
+                ViewActiveBox viewActiveBox = viewObject.addViewActionBox(sObject.getActivationBox());
+                viewObject.getChildren().add(viewActiveBox);
+                for(Message message : sObject.getActivationBox().getOutMessage()){
+                    ViewMessage viewMessage = viewActiveBox.addViewMessage(message);
+                    viewActiveBox.getChildren().add(viewMessage);
+                }
+            }
         }
     }
 

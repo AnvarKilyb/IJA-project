@@ -60,4 +60,8 @@ public class ViewObject extends Pane {
         viewActiveBox.setPrefHeight(activationBox.getHeight());
         return  viewActiveBox;
     }
+
+    public Label returnMainLabel(){
+        return mainLabel;
+    }
 }
