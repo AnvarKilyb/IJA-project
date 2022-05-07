@@ -9,7 +9,7 @@ import java.util.Random;
  * obsahuje metody pro manipulaci s jednotlivými třídami a vztahy
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
- * @version 0.0.5
+ * @version 0.7.5
  */
 public class ClassDiagram {
     /**Seznam pro uchovaní jednotlivých tříd*/

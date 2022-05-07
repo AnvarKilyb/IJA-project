@@ -28,6 +28,13 @@ import java.util.List;
 import static ija.diagram.sequencediagram.model.Message.convertType;
 import static java.lang.Math.abs;
 
+/**
+ * Ovladač pro vytvoření zpravy v diagramu
+ * kontroluje stav přepínače a nastaví podle toho typ zpravy
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.7.5
+ */
 public class CreateMessageController {
 
     @FXML

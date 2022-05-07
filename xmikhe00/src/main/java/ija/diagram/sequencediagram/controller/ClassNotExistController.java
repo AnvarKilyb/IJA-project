@@ -8,6 +8,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+/**
+ * Ovladač pro kontrolu existence třidy v diagramu
+ * obsahuje metodu pro vytvoření třidy v diagramu
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.7.5
+ */
 public class ClassNotExistController {
 
     @FXML

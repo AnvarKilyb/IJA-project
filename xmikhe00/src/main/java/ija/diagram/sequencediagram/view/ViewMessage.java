@@ -5,6 +5,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
+/**
+ * Třída reprezentuje zobrazení zprav v sekvenčním diagramu
+ * obsahuje metody pro vytvoření zobrazení zprav a zobrazení šipky
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.7.5
+ */
 public class ViewMessage extends AnchorPane {
 
     private Pane line;

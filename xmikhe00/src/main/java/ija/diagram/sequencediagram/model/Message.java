@@ -5,6 +5,12 @@ import ija.diagram.classdiagram.model.Methods;
 
 import java.util.Random;
 
+/**
+ * Třída reprezentuje zpravy mezi objekty
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.7.5
+ */
 public class Message {
     public enum MessageType{
         SYNCHRONOUS,

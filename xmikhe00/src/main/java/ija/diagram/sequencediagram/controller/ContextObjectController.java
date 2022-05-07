@@ -12,6 +12,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Ovladač pro kontextovou nabídku objektu
+ * obsahuje metody pro vytvoření zpravy
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.7.5
+ */
 public class ContextObjectController {
     private ControllerMain controllerMain;
     public ContextObjectController(ControllerMain controllerMain)

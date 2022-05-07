@@ -12,7 +12,7 @@ import org.json.simple.parser.ParseException;
  * Parser pro načtení souboru
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
- * @version 0.0.5
+ * @version 0.7.5
  */
 public class Parser {
     private ArrayList<objectJSON> itemList = new ArrayList<>();
@@ -97,7 +97,9 @@ public class Parser {
                 JSONObject participantObj = (JSONObject) participantList.get(i);
                 String name = (String) participantObj.get("name");
                 double x = Double.parseDouble(participantObj.get("x").toString());
-                newObject.addParticipant(name, x);
+                double y = Double.parseDouble(participantObj.get("boxY").toString());
+                double height = Double.parseDouble(participantObj.get("boxHeight").toString());
+                newObject.addParticipant(name, x, height, y);
             }
             JSONArray messageList = (JSONArray) obj.get("message");
             if(messageList == null)
@@ -113,8 +115,6 @@ public class Parser {
                 int len = Integer.parseInt(message.get("len").toString());
                 newObject.addMessageList(name, nameFrom, nameTo, type, x, y, len);
             }
-            double height = Double.parseDouble(obj.get("height").toString());
-            newObject.setHeight(height);
             itemList.add(newObject);
 
         }

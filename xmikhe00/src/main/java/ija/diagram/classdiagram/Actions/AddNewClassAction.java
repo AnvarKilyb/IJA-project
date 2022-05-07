@@ -6,6 +6,12 @@ import ija.diagram.classdiagram.view.ViewClass;
 import ija.diagram.classdiagram.view.ViewDiagram;
 import javafx.scene.layout.Pane;
 
+/**
+ * Vytvoří model a view třídy a zobrazí je
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.7.5
+ */
 public class AddNewClassAction implements Action {
     ClassDiagram classDiagram;
     ViewDiagram viewDiagram;

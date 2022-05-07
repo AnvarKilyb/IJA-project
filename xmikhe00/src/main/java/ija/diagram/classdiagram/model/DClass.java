@@ -10,7 +10,7 @@ import java.util.List;
  * obsahuje metody pro vytvaření a odstranění metod a argumentů
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
- * @version 0.0.5
+ * @version 0.7.5
  */
 public class DClass extends Element{
     private List<Arguments> argumentsList;

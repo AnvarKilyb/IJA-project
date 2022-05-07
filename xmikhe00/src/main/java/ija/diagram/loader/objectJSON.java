@@ -12,7 +12,7 @@ import java.util.List;
  * obsahuje metody pro uchování položek a práci s nimi
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
- * @version 0.0.5
+ * @version 0.7.5
  */
 public class objectJSON {
     public enum ItemType{
@@ -202,8 +202,8 @@ public class objectJSON {
         this.endY = endY;
     }
 
-    public void addParticipant(String name, double x) {
-        ParticipantJSON participant = new ParticipantJSON(name, x);
+    public void addParticipant(String name, double x, double boxHeight, double boxY) {
+        ParticipantJSON participant = new ParticipantJSON(name, x, boxHeight, boxY);
         this.participantList.add(participant);
     }
 

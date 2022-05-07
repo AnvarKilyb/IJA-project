@@ -34,6 +34,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Spustí parser pro soubor s daty a vytvoří nové třídy a zobrazí je
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.7.5
+ */
 public class LoadFileAction implements Action{
     private FileChooser fileChooser;
     private Stage stage;

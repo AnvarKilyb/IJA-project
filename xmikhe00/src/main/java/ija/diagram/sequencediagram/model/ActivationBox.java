@@ -5,6 +5,13 @@ import ija.diagram.classdiagram.model.Methods;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Třída reprezentuje dobu zpracovávání zpravy
+ * obsahuje metody pro přidávání zprav(voláni nebo odpovědi)
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.7.5
+ */
 public class ActivationBox{
 
     private SObject thisObject;

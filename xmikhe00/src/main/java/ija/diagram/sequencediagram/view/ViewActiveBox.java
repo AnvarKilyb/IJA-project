@@ -9,6 +9,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Třída reprezentuje zobrazení doby zpracovávání v sekvenčním diagramu
+ * obsahuje metody pro vytvoření zobrazení textu zpravy
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.7.5
+ */
 public class ViewActiveBox extends Pane {
 
     private Map<ViewMessage, Message> messageLineMap = new HashMap<ViewMessage, Message>();

@@ -11,7 +11,12 @@ import javafx.stage.Stage;
 import java.util.List;
 import java.util.Random;
 
-
+/**
+ * Ovladač kontroluje nazvý třid
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.7.5
+ */
 public class NameRepeatedController {
 
     @FXML

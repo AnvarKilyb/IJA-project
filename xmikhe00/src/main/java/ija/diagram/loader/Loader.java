@@ -12,7 +12,7 @@ import java.util.List;
  * Třída převádí do modelu dat již analyzované soubory
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
- * @version 0.0.5
+ * @version 0.7.5
  */
 public class Loader {
     private final ClassDiagram classDiagram;
@@ -87,8 +87,12 @@ public class Loader {
 
                 }
             }
-
-            activationBox.setHeight(item.getHeight());
+            for(ParticipantJSON participantJSON: item.getParticipantList()){
+                if(participantJSON.getName().equals(sObject.getName())){
+                    activationBox.setHeight(participantJSON.getBoxHeight());
+                    activationBox.setY(participantJSON.getBoxY());
+                }
+            }
             sObject.addActiveBox(activationBox);
         }
 

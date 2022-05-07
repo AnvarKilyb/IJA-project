@@ -11,6 +11,13 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+/**
+ * Ovladač pro kontrolu existence objektu v sekvenčním diagramu
+ * obsahuje metodu vytvořeni objektu v diagramu
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.7.5
+ */
 public class ObjectNotExistController {
     @FXML
     private Button createObjectButton;

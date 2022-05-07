@@ -15,7 +15,7 @@ import java.util.*;
  * obsahuje metody pro manipulace s jednotlivými třídami a vztahy
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
- * @version 0.0.5
+ * @version 0.7.5
  */
 public class ViewDiagram {
 

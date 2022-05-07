@@ -25,9 +25,9 @@ import static javafx.scene.input.KeyEvent.*;
 /**
  * Ovladač pro kontextovou nabídku třídy
  * obsahuje metody pro vytvoření a odstranění metod, argumentů a odstranění třídy
- * @author Vladislav Mikheda : xmikhe0
+ * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
- * @version 0.0.5
+ * @version 0.7.5
  */
 public class ClassContextController {
     /**

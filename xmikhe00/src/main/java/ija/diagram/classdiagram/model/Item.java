@@ -6,7 +6,7 @@ package ija.diagram.classdiagram.model;
  * Abstraktní třída reprezentuje jednotlivý item v třídě
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
- * @version 0.0.5
+ * @version 0.7.5
  */
 abstract public class Item extends Element{
 

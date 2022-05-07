@@ -19,7 +19,7 @@ import java.util.Map;
  * obsahuje metody pro vytvoření a odstranění zobrazení metod a zobrazení argumentů
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
- * @version 0.0.5
+ * @version 0.7.5
  */
 public class ViewClass extends VBox {
 

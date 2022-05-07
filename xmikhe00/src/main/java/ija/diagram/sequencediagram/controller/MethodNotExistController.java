@@ -9,7 +9,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-
+/**
+ * Ovladač kontroluje existence metod v diagramu třid
+ * obsahuje metod pro vytvoření metody v třidě
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.7.5
+ */
 public class MethodNotExistController {
 
     @FXML

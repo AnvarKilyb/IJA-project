@@ -9,6 +9,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 
+/**
+ * Reprezentuje zobrazení objektu v sekvenčním diagramu
+ * obsahuje metody pro vytvoření a odstranění zobrazení objektu, vytvoření a odstranění zobrazení doby zpracovávání
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.7.5
+ */
 public class ViewObject extends Pane {
     private Label mainLabel = new Label("Object");
     private Line lifeLine = new Line();

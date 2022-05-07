@@ -16,7 +16,7 @@ import java.util.Locale;
  * Uloží diagramu třídu do JSON souboru
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
- * @version 0.0.5
+ * @version 0.7.5
  */
 public class Writer {
     String path;
@@ -40,13 +40,13 @@ public class Writer {
             JSONObject finalParams = new JSONObject();
             JSONArray participantArray = new JSONArray();
             JSONArray messageList = new JSONArray();
-            Double height = 0.0;
             int len = 0;
             for(SObject sObject: sObjectList){
-                height = sObject.getActivationBox().getHeight();
                 JSONObject participantParams = new JSONObject();
                 participantParams.put("name", sObject.getName());
                 participantParams.put("x", sObject.getX());
+                participantParams.put("boxHeight", sObject.getActivationBox().getHeight());
+                participantParams.put("boxY", sObject.getActivationBox().getY());
                 participantArray.add(participantParams);
                 for(Message message: sObject.getActivationBox().getInMessage()){
                     JSONObject messageParams = new JSONObject();
@@ -75,7 +75,6 @@ public class Writer {
             }
             sequenceParams.put("participants", participantArray);
             sequenceParams.put("message", messageList);
-            sequenceParams.put("height", height);
             switch (num){
                 case 1:
                     finalParams.put("sequence1", sequenceParams);

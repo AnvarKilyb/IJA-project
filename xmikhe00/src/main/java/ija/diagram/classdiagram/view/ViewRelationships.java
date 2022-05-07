@@ -10,7 +10,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-
+/**
+ * Třída reprezentuje zobrazení relací v diagramu
+ * obsahuje metody pro vytvoření a odstranění zobrazení relací
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.7.5
+ */
 public class ViewRelationships extends Line {
 
     private ViewClass classFrom;

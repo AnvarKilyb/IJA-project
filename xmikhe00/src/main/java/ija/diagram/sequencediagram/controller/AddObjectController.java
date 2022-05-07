@@ -20,6 +20,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Ovladač pro kontextovou nabidku při vytvořeni objektu v sekvenčním diagramu
+ * obsahuje metodu pro vytvoření objektu v sekvenčním diagramu
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.7.5
+ */
 public class AddObjectController {
     @FXML
     private Button createObject;

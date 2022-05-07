@@ -13,6 +13,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Třída reprezentuje zobrazení sekvenčního diagramu
+ * obsahuje metody pro manipulace s jednotlivými objekty
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.7.5
+ */
 public class ViewSequenceDiagram {
 
     private ControllerMain controllerMain;

@@ -8,6 +8,13 @@ import ija.diagram.classdiagram.model.Relationships;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Třída reprezentuje sekvenční diagram
+ * obsahuje metody pro vytvoření jednotlivých objektu
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.7.5
+ */
 public class SequenceDiagram {
     private List<SObject> sObjectList = new ArrayList<>();
     private final int indent = 130;

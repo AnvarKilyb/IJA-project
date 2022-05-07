@@ -16,7 +16,7 @@ import javafx.scene.layout.VBox;
  * obsahuje metody pro vytvoření a změnu argumentu
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
- * @version 0.0.5
+ * @version 0.7.5
  */
 public class ArgumentItem extends HBox implements ViewItem {
 

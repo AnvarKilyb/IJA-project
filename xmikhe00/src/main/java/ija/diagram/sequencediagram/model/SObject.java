@@ -6,6 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Reprezentuje objekt v sekvenčním diagramu
+ * obsahuje metody pro vytvoření doby zpracovávání
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.7.5
+ */
 public class SObject {
     private String name = "";
     private DClass thisClass;

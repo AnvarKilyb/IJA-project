@@ -11,6 +11,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/**
+ * Ovladač pro kontextovou nabídku relací
+ * obsahuje metody pro změnu relace
+ * včetně agregace, asociace, compozice, realizce, dědičnosti a zrušeni relace
+ * @author Vladislav Mikheda : xmikhe0
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.7.5
+ */
 public class ViewRelationshipController {
 
     @FXML

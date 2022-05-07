@@ -15,6 +15,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+/**
+ * Ovladač pro kontextovou nabidku při nekonzistence diagramu
+ * @author Vladislav Mikheda : xmikhe00
+ * @author Anvar Kilybayev : xkilyb00
+ * @version 0.7.5
+ */
 public class WindowNotLoadController {
 
     @FXML

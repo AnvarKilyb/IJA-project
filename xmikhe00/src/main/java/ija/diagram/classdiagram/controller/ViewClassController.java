@@ -34,7 +34,7 @@ import static java.lang.Math.abs;
  * posunutí třídy, dodaní vztahu(beta)
  * @author Vladislav Mikheda : xmikhe00
  * @author Anvar Kilybayev : xkilyb00
- * @version 0.0.5
+ * @version 0.7.5
  */
 public class ViewClassController{
 
