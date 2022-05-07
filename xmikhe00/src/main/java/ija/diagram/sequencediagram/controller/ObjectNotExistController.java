@@ -44,8 +44,11 @@ public class ObjectNotExistController {
         SObject sObject = sequenceDiagram.addObject(dClass);
         ViewObject viewObject = viewSequenceDiagram.addNewObject(sObject);
         ContextObjectController contextObjectController = controllerMain.getContextObjectController();
-        viewObject.addEventHandler(MouseEvent.MOUSE_CLICKED, contextObjectController::addNewMessage);
+        viewObject.returnMainLabel().addEventHandler(MouseEvent.MOUSE_CLICKED, contextObjectController::addNewMessage);
         controllerMain.getSequencePane().getChildren().add(viewObject);
+        viewObject.returnMainLabel().setLayoutX(viewObject.getLayoutX());
+        viewObject.returnMainLabel().setLayoutY(viewObject.getLayoutY() - 30);
+        controllerMain.getSequencePane().getChildren().add(viewObject.returnMainLabel());
         stage.close();
     }
 

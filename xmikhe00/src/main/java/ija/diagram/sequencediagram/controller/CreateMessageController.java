@@ -93,8 +93,10 @@ public class CreateMessageController {
         }
         Pane mainPane = controllerMain.getSequencePane();
         mainPane.getChildren().remove(viewObject);
+        mainPane.getChildren().remove(viewObject.returnMainLabel());
         viewSequenceDiagram.deleteObject(viewObject);
         sequenceDiagram.deleteObject(sObject);
+        stage.close();
 
     }
 
@@ -296,5 +298,6 @@ public class CreateMessageController {
         viewActiveBoxLeft.getChildren().add(viewMessage);
 
         viewActiveBoxRight.setPrefHeight(activationBoxRight.getHeight());
+        stage.close();
     }
 }

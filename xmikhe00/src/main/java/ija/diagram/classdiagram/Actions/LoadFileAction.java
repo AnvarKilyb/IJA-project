@@ -139,7 +139,6 @@ public class LoadFileAction implements Action{
         for(SObject sObject : sequenceDiagram1.getsObjectList()){
             ViewObject viewObject = viewSequenceDiagram1.addNewObject(sObject);
             ContextObjectController contextObjectController = controllerMain.getContextObjectController();
-            viewObject.addEventHandler(MouseEvent.MOUSE_CLICKED, contextObjectController::addNewMessage);
             ViewClass viewClass = controllerMain.getViewDiagram().getViewClass(sObject.getThisClass());
             viewClass.returnClassNameField().textProperty().addListener((observable, oldValue, newValue) ->
             {
@@ -147,6 +146,10 @@ public class LoadFileAction implements Action{
                 sObject.setName(newValue);
             });
             controllerMain.getSequencePane1().getChildren().add(viewObject);
+            viewObject.returnMainLabel().addEventHandler(MouseEvent.MOUSE_CLICKED, contextObjectController::addNewMessage);
+            viewObject.returnMainLabel().setLayoutX(viewObject.getLayoutX());
+            viewObject.returnMainLabel().setLayoutY(viewObject.getLayoutY() - 30);
+            controllerMain.getSequencePane1().getChildren().add(viewObject.returnMainLabel());
             if(sObject.getActivationBox() != null){
                 ViewActiveBox viewActiveBox = viewObject.addViewActionBox(sObject.getActivationBox());
                 viewObject.getChildren().add(viewActiveBox);
@@ -160,7 +163,6 @@ public class LoadFileAction implements Action{
         for(SObject sObject : sequenceDiagram2.getsObjectList()){
             ViewObject viewObject = viewSequenceDiagram2.addNewObject(sObject);
             ContextObjectController contextObjectController = controllerMain.getContextObjectController();
-            viewObject.addEventHandler(MouseEvent.MOUSE_CLICKED, contextObjectController::addNewMessage);
             ViewClass viewClass = controllerMain.getViewDiagram().getViewClass(sObject.getThisClass());
             viewClass.returnClassNameField().textProperty().addListener((observable, oldValue, newValue) ->
             {
@@ -168,6 +170,10 @@ public class LoadFileAction implements Action{
                 sObject.setName(newValue);
             });
             controllerMain.getSequencePane2().getChildren().add(viewObject);
+            viewObject.returnMainLabel().addEventHandler(MouseEvent.MOUSE_CLICKED, contextObjectController::addNewMessage);
+            viewObject.returnMainLabel().setLayoutX(viewObject.getLayoutX());
+            viewObject.returnMainLabel().setLayoutY(viewObject.getLayoutY() - 30);
+            controllerMain.getSequencePane2().getChildren().add(viewObject.returnMainLabel());
             if(sObject.getActivationBox() != null){
                 ViewActiveBox viewActiveBox = viewObject.addViewActionBox(sObject.getActivationBox());
                 viewObject.getChildren().add(viewActiveBox);
@@ -182,7 +188,6 @@ public class LoadFileAction implements Action{
         for(SObject sObject : sequenceDiagram3.getsObjectList()){
             ViewObject viewObject = viewSequenceDiagram3.addNewObject(sObject);
             ContextObjectController contextObjectController = controllerMain.getContextObjectController();
-            viewObject.addEventHandler(MouseEvent.MOUSE_CLICKED, contextObjectController::addNewMessage);
             ViewClass viewClass = controllerMain.getViewDiagram().getViewClass(sObject.getThisClass());
             viewClass.returnClassNameField().textProperty().addListener((observable, oldValue, newValue) ->
             {
@@ -190,6 +195,10 @@ public class LoadFileAction implements Action{
                 sObject.setName(newValue);
             });
             controllerMain.getSequencePane3().getChildren().add(viewObject);
+            viewObject.returnMainLabel().addEventHandler(MouseEvent.MOUSE_CLICKED, contextObjectController::addNewMessage);
+            viewObject.returnMainLabel().setLayoutX(viewObject.getLayoutX());
+            viewObject.returnMainLabel().setLayoutY(viewObject.getLayoutY() - 30);
+            controllerMain.getSequencePane3().getChildren().add(viewObject.returnMainLabel());
             if(sObject.getActivationBox() != null){
                 ViewActiveBox viewActiveBox = viewObject.addViewActionBox(sObject.getActivationBox());
                 viewObject.getChildren().add(viewActiveBox);
@@ -205,9 +214,12 @@ public class LoadFileAction implements Action{
             ViewObject viewObject = notLoadViewSequenceDiagram.addNewObject(sObject);
             viewObject.setId("notLode");
             NotLoadObjectController notLoadObjectController = controllerMain.getNotLoadObjectController();
-            notLoadObjectController.setName(sObject.getName());
-            viewObject.addEventHandler(MouseEvent.MOUSE_CLICKED, notLoadObjectController::addModel);
+            notLoadObjectController.setAll(sObject.getName(), loader.getNotLoadSequenceDiagram(), notLoadViewSequenceDiagram);
             controllerMain.getSequencePane1().getChildren().add(viewObject);
+            viewObject.returnMainLabel().addEventHandler(MouseEvent.MOUSE_CLICKED, notLoadObjectController::addModel);
+            viewObject.returnMainLabel().setLayoutX(viewObject.getLayoutX());
+            viewObject.returnMainLabel().setLayoutY(viewObject.getLayoutY() - 30);
+            controllerMain.getSequencePane1().getChildren().add(viewObject.returnMainLabel());
             if(sObject.getActivationBox() != null){
                 ViewActiveBox viewActiveBox = viewObject.addViewActionBox(sObject.getActivationBox());
                 viewObject.getChildren().add(viewActiveBox);

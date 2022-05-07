@@ -1,7 +1,11 @@
 package ija.diagram.sequencediagram.view;
 
+import ija.diagram.ControllerMain;
+import ija.diagram.sequencediagram.controller.ContextObjectController;
+import ija.diagram.sequencediagram.controller.NotLoadObjectController;
 import ija.diagram.sequencediagram.model.ActivationBox;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 
@@ -9,11 +13,13 @@ public class ViewObject extends Pane {
     private Label mainLabel = new Label("Object");
     private Line lifeLine = new Line();
     private ViewActiveBox viewActiveBox = null;
+    private boolean open = true;
 
     public ViewObject(){
         super();
     }
     private void setVisualOptions(){
+        mainLabel.setUserData(this);
         mainLabel.setId("objectLabel");
         lifeLine.setId("lifeLine");
         lifeLine.setStartX(40);
@@ -25,7 +31,7 @@ public class ViewObject extends Pane {
         super.setPrefHeight(600);
         super.setPrefWidth(80);
         super.getChildren().add(lifeLine);
-        super.getChildren().add(mainLabel);
+//        super.getChildren().add(mainLabel);
     }
 
     public void show(){
@@ -63,5 +69,22 @@ public class ViewObject extends Pane {
 
     public Label returnMainLabel(){
         return mainLabel;
+    }
+
+    public void removeHendler(ControllerMain controllerMain){
+        NotLoadObjectController notLoadObjectController = controllerMain.getNotLoadObjectController();
+        this.removeEventHandler(MouseEvent.MOUSE_CLICKED,notLoadObjectController::addModel);
+        super.removeEventHandler(MouseEvent.MOUSE_CLICKED,notLoadObjectController::addModel);
+        mainLabel.removeEventHandler(MouseEvent.MOUSE_CLICKED,notLoadObjectController::addModel);
+        lifeLine.removeEventHandler(MouseEvent.MOUSE_CLICKED,notLoadObjectController::addModel);
+        viewActiveBox.removeEventHandler(MouseEvent.MOUSE_CLICKED,notLoadObjectController::addModel);
+    }
+
+    public boolean isOpen() {
+        return open;
+    }
+
+    public void setOpen(boolean open) {
+        this.open = open;
     }
 }

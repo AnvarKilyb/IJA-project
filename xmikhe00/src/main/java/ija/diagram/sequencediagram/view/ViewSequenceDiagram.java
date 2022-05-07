@@ -33,6 +33,11 @@ public class ViewSequenceDiagram {
         return viewObject;
     }
 
+    public ViewObject addObject(ViewObject viewObject,SObject modelObject){
+        objectSequenceMap.put(viewObject, modelObject);
+        return viewObject;
+    }
+
     public SObject returnObject(ViewObject viewObject){
         return objectSequenceMap.get(viewObject);
     }

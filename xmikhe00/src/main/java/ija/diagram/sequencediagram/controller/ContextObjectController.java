@@ -4,6 +4,7 @@ import ija.diagram.ControllerMain;
 import ija.diagram.sequencediagram.view.ViewObject;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
@@ -20,7 +21,7 @@ public class ContextObjectController {
 
     public void addNewMessage(MouseEvent mouseEvent){
         if(mouseEvent.getButton() == MouseButton.SECONDARY){
-            ViewObject viewObject = (ViewObject) mouseEvent.getSource();
+            ViewObject viewObject =(ViewObject) ((Label) mouseEvent.getSource()).getUserData();
             FXMLLoader loader = new FXMLLoader(ContextObjectController.class.getResource("/main/createMessage.fxml"));
             CreateMessageController createMessageController = new CreateMessageController(controllerMain);
             loader.setController(createMessageController);

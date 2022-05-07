@@ -26,6 +26,12 @@ public class SequenceDiagram {
         return sObject;
     }
 
+    public SObject addObject(SObject sObject, int number){
+        sObjectList.add(number,sObject);
+        return sObject;
+    }
+
+
     public SObject addObject(String name){
         SObject sObject =  new SObject(name);
         sObject.setX(sObjectList.size() * indent);

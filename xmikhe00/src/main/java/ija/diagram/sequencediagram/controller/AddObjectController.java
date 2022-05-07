@@ -69,7 +69,7 @@ public class AddObjectController {
 
        ViewObject viewObject = controllerMain.getViewSequenceDiagram().addNewObject(sObject);
        ContextObjectController contextObjectController = controllerMain.getContextObjectController();
-       viewObject.addEventHandler(MouseEvent.MOUSE_CLICKED,contextObjectController::addNewMessage);
+       viewObject.returnMainLabel().addEventHandler(MouseEvent.MOUSE_CLICKED,contextObjectController::addNewMessage);
 
         ViewClass viewClass = controllerMain.getViewDiagram().getViewClass(dClass);
         viewClass.returnClassNameField().textProperty().addListener((observable, oldValue, newValue) ->
@@ -80,6 +80,9 @@ public class AddObjectController {
 
        Pane mainPane = controllerMain.getSequencePane();
        mainPane.getChildren().add(viewObject);
+       viewObject.returnMainLabel().setLayoutX(viewObject.getLayoutX());
+       viewObject.returnMainLabel().setLayoutY(viewObject.getLayoutY() - 30);
+       mainPane.getChildren().add(viewObject.returnMainLabel());
        stage.close();
     }
 

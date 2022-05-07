@@ -419,6 +419,19 @@
 #notLode{
     -fx-background-color: rgb(255,124,122);
 }
+
+#load{
+    -fx-background-color: target;
+}
+
+#number{
+    -fx-background-color: rgb(48, 47, 46);
+    -fx-text-fill: rgb(255,255,255);
+    /*-fx-font: system;*/
+    -fx-font-size: 10;
+    -fx-padding: 0 0 0 0;
+}
+
 /* 
 black rgb(15, 15, 15)
 */
