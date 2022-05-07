@@ -88,6 +88,27 @@ public class ActivationBox{
         inMessage.add(message);
     }
 
+    public Message addNewOutMessageLoad(String name, Message.MessageType messageType,double X, double Y){
+        Message message = new Message(name, messageType);
+        if(reply){
+            plush += 16;
+            reply = false;
+        }else{
+            plush = 0;
+        }
+        message.setX(X);
+        message.setY(Y);
+        outMessage.add(message);
+        return message;
+    }
+
+    public void addNewInMessageLoad(Message message){
+        if(message.getMessageType() == Message.MessageType.REPLY){
+            reply = true;
+        }
+        inMessage.add(message);
+    }
+
     public List<Message> getInMessage() {
         return inMessage;
     }
