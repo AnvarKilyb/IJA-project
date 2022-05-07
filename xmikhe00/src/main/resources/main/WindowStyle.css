@@ -414,6 +414,11 @@
     -fx-background-repeat: repeat;
     -fx-background-position: center center;
 }
+
+
+#notLode{
+    -fx-background-color: rgb(255,124,122);
+}
 /* 
 black rgb(15, 15, 15)
 */

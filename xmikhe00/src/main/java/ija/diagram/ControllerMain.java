@@ -5,17 +5,12 @@ import ija.diagram.classdiagram.Actions.LoadFileAction;
 import ija.diagram.classdiagram.controller.ClassContextController;
 import ija.diagram.classdiagram.controller.NameRepeatedController;
 import ija.diagram.classdiagram.controller.ViewClassController;
-import ija.diagram.classdiagram.controller.ViewRelationshipController;
 import ija.diagram.classdiagram.model.ClassDiagram;
-import ija.diagram.classdiagram.model.DClass;
-import ija.diagram.classdiagram.model.Relationships;
-import ija.diagram.classdiagram.view.ViewClass;
 import ija.diagram.classdiagram.view.ViewDiagram;
-import ija.diagram.classdiagram.view.ViewRelationships;
-import ija.diagram.loader.Loader;
 import ija.diagram.loader.Writer;
 import ija.diagram.sequencediagram.controller.AddObjectController;
 import ija.diagram.sequencediagram.controller.ContextObjectController;
+import ija.diagram.sequencediagram.controller.NotLoadObjectController;
 import ija.diagram.sequencediagram.model.SequenceDiagram;
 import ija.diagram.sequencediagram.view.ViewSequenceDiagram;
 import javafx.event.ActionEvent;
@@ -27,7 +22,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -59,7 +53,7 @@ public class ControllerMain {
     private final ViewDiagram viewDiagram;
     private Stage stage;
     private ContextObjectController contextObjectController;
-
+    private NotLoadObjectController notLoadObjectController = new NotLoadObjectController(this);
     private FileChooser fileChooser;
 
     /**
@@ -364,5 +358,9 @@ public class ControllerMain {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         Date date = new Date();
         labelWarning.setText(labelWarning.getText() + "\n[" + dateFormat.format(date) + "] " + text);
+    }
+
+    public NotLoadObjectController getNotLoadObjectController() {
+        return notLoadObjectController;
     }
 }

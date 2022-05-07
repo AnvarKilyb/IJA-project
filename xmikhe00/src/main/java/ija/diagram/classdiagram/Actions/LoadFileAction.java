@@ -11,6 +11,7 @@ import ija.diagram.classdiagram.view.ViewRelationships;
 import ija.diagram.loader.Loader;
 import ija.diagram.sequencediagram.controller.ContextObjectController;
 import ija.diagram.sequencediagram.controller.CreateMessageController;
+import ija.diagram.sequencediagram.controller.NotLoadObjectController;
 import ija.diagram.sequencediagram.model.Message;
 import ija.diagram.sequencediagram.model.SObject;
 import ija.diagram.sequencediagram.model.SequenceDiagram;
@@ -155,6 +156,68 @@ public class LoadFileAction implements Action{
                 }
             }
         }
+
+        for(SObject sObject : sequenceDiagram2.getsObjectList()){
+            ViewObject viewObject = viewSequenceDiagram2.addNewObject(sObject);
+            ContextObjectController contextObjectController = controllerMain.getContextObjectController();
+            viewObject.addEventHandler(MouseEvent.MOUSE_CLICKED, contextObjectController::addNewMessage);
+            ViewClass viewClass = controllerMain.getViewDiagram().getViewClass(sObject.getThisClass());
+            viewClass.returnClassNameField().textProperty().addListener((observable, oldValue, newValue) ->
+            {
+                viewObject.returnMainLabel().setText(newValue);
+                sObject.setName(newValue);
+            });
+            controllerMain.getSequencePane2().getChildren().add(viewObject);
+            if(sObject.getActivationBox() != null){
+                ViewActiveBox viewActiveBox = viewObject.addViewActionBox(sObject.getActivationBox());
+                viewObject.getChildren().add(viewActiveBox);
+                for(Message message : sObject.getActivationBox().getOutMessage()){
+                    ViewMessage viewMessage = viewActiveBox.addViewMessage(message);
+                    viewActiveBox.getChildren().add(viewMessage);
+                }
+            }
+        }
+
+
+        for(SObject sObject : sequenceDiagram3.getsObjectList()){
+            ViewObject viewObject = viewSequenceDiagram3.addNewObject(sObject);
+            ContextObjectController contextObjectController = controllerMain.getContextObjectController();
+            viewObject.addEventHandler(MouseEvent.MOUSE_CLICKED, contextObjectController::addNewMessage);
+            ViewClass viewClass = controllerMain.getViewDiagram().getViewClass(sObject.getThisClass());
+            viewClass.returnClassNameField().textProperty().addListener((observable, oldValue, newValue) ->
+            {
+                viewObject.returnMainLabel().setText(newValue);
+                sObject.setName(newValue);
+            });
+            controllerMain.getSequencePane3().getChildren().add(viewObject);
+            if(sObject.getActivationBox() != null){
+                ViewActiveBox viewActiveBox = viewObject.addViewActionBox(sObject.getActivationBox());
+                viewObject.getChildren().add(viewActiveBox);
+                for(Message message : sObject.getActivationBox().getOutMessage()){
+                    ViewMessage viewMessage = viewActiveBox.addViewMessage(message);
+                    viewActiveBox.getChildren().add(viewMessage);
+                }
+            }
+        }
+
+        ViewSequenceDiagram notLoadViewSequenceDiagram = new ViewSequenceDiagram();
+        for(SObject sObject : loader.getNotLoadSequenceDiagram().getsObjectList()){
+            ViewObject viewObject = notLoadViewSequenceDiagram.addNewObject(sObject);
+            viewObject.setId("notLode");
+            NotLoadObjectController notLoadObjectController = controllerMain.getNotLoadObjectController();
+            notLoadObjectController.setName(sObject.getName());
+            viewObject.addEventHandler(MouseEvent.MOUSE_CLICKED, notLoadObjectController::addModel);
+            controllerMain.getSequencePane1().getChildren().add(viewObject);
+            if(sObject.getActivationBox() != null){
+                ViewActiveBox viewActiveBox = viewObject.addViewActionBox(sObject.getActivationBox());
+                viewObject.getChildren().add(viewActiveBox);
+                for(Message message : sObject.getActivationBox().getOutMessage()){
+                    ViewMessage viewMessage = viewActiveBox.addViewMessage(message);
+                    viewActiveBox.getChildren().add(viewMessage);
+                }
+            }
+        }
+
     }
 
     @Override

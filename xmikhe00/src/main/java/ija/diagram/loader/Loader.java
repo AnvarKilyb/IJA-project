@@ -20,6 +20,7 @@ public class Loader {
     private final SequenceDiagram sequenceDiagram1;
     private final SequenceDiagram sequenceDiagram2;
     private final SequenceDiagram sequenceDiagram3;
+    private SequenceDiagram notLoadSequenceDiagram;
     private ArrayList<objectJSON> list;
     private Parser parser;
 
@@ -54,6 +55,7 @@ public class Loader {
         this.sequenceDiagram1 = sequenceDiagram1;
         this.sequenceDiagram2 = sequenceDiagram2;
         this.sequenceDiagram3 = sequenceDiagram3;
+        this.notLoadSequenceDiagram = new SequenceDiagram();
     }
     private void parseSequence(objectJSON item, SequenceDiagram sequenceDiagram){
         boolean fraud;
@@ -67,10 +69,30 @@ public class Loader {
                 }
             }
             if(fraud){
+                SObject sObject = notLoadSequenceDiagram.addObject(participantObj.getName());
+                sObject.setX(participantObj.getX());
                 //TODO
             }
         }
         for(SObject sObject: sequenceDiagram.getsObjectList()){
+            ActivationBox activationBox = new ActivationBox();
+            for(Message message: item.getMessageList()){
+                if(message.getClassStart().getName().equals(sObject.getName())){
+                    activationBox.setThisObject(sObject);
+                    activationBox.addNewOutMessageLoad(message.getName(), message.getMessageType(), message.getX(), message.getY(), message.getLen());
+                }
+                if(message.getClassEnd().getName().equals(sObject.getName())){
+                    activationBox.setThisObject(sObject);
+                    activationBox.addNewInMessageLoad(message);
+
+                }
+            }
+
+            activationBox.setHeight(item.getHeight());
+            sObject.addActiveBox(activationBox);
+        }
+
+        for(SObject sObject: notLoadSequenceDiagram.getsObjectList()){
             ActivationBox activationBox = new ActivationBox();
             for(Message message: item.getMessageList()){
                 if(message.getClassStart().getName().equals(sObject.getName())){
@@ -149,4 +171,8 @@ public class Loader {
         return dClass;
     }
 
+
+    public SequenceDiagram getNotLoadSequenceDiagram(){
+        return this.notLoadSequenceDiagram;
+    }
 }
