@@ -45,32 +45,38 @@ public class Writer {
                 JSONObject participantParams = new JSONObject();
                 participantParams.put("name", sObject.getName());
                 participantParams.put("x", sObject.getX());
-                participantParams.put("boxHeight", sObject.getActivationBox().getHeight());
-                participantParams.put("boxY", sObject.getActivationBox().getY());
+                if(sObject.getActivationBox() != null){
+                    participantParams.put("boxHeight", sObject.getActivationBox().getHeight());
+                    participantParams.put("boxY", sObject.getActivationBox().getY());
+                }
                 participantArray.add(participantParams);
-                for(Message message: sObject.getActivationBox().getInMessage()){
-                    JSONObject messageParams = new JSONObject();
-                    messageParams.put("name", message.getName());
-                    messageParams.put("start", message.getClassStart().getName());
-                    messageParams.put("end", message.getClassEnd().getName());
-                    messageParams.put("x", message.getX());
-                    messageParams.put("y", message.getY());
-                    messageParams.put("len", message.getLen());
-                    switch (message.getMessageType()){
-                        case SYNCHRONOUS:
-                            messageParams.put("type", "sync");
-                            break;
-                        case ASYNCHRONOUS:
-                            messageParams.put("type", "async");
-                            break;
-                        case DELETE:
-                            messageParams.put("type", "delete");
-                            break;
-                        case REPLY:
-                            messageParams.put("type", "reply");
-                            break;
+                if(sObject.getActivationBox() != null){
+                    for (Message message : sObject.getActivationBox().getOutMessage()) {
+                        JSONObject messageParams = new JSONObject();
+                        messageParams.put("name", message.getName());
+                        if(message.getClassStart() != null) {
+                            messageParams.put("start", message.getClassStart().getName());
+                            messageParams.put("end", message.getClassEnd().getName());
+                        }
+                        messageParams.put("x", message.getX());
+                        messageParams.put("y", message.getY());
+                        messageParams.put("len", message.getLen());
+                        switch (message.getMessageType()) {
+                            case SYNCHRONOUS:
+                                messageParams.put("type", "sync");
+                                break;
+                            case ASYNCHRONOUS:
+                                messageParams.put("type", "async");
+                                break;
+                            case DELETE:
+                                messageParams.put("type", "delete");
+                                break;
+                            case REPLY:
+                                messageParams.put("type", "reply");
+                                break;
+                        }
+                        messageList.add(messageParams);
                     }
-                    messageList.add(messageParams);
                 }
             }
             sequenceParams.put("participants", participantArray);

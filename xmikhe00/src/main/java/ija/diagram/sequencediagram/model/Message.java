@@ -24,7 +24,7 @@ public class Message {
     private double X = 26;
     private DClass classStart;
     private DClass classEnd;
-    private int len = 104;
+    private int len = 224;
 
     public Message(String name, MessageType messageType){
         this.name = name;

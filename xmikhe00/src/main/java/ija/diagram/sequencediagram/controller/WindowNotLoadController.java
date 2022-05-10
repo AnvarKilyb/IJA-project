@@ -85,6 +85,7 @@ public class WindowNotLoadController {
         Stage stage = (Stage)notCreateButton.getScene().getWindow();
         ViewObject viewObject = (ViewObject) stage.getUserData();
         controllerMain.getSequencePane().getChildren().remove(viewObject);
+        controllerMain.getSequencePane().getChildren().remove(viewObject.returnMainLabel());
         stage.close();
     }
 

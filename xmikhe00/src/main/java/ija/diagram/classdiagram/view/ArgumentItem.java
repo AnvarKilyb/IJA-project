@@ -63,9 +63,9 @@ public class ArgumentItem extends HBox implements ViewItem {
 //        accessModifier.setPrefHeight(22);
         argumentName.setPrefHeight(27);
         argumentType.setPrefHeight(27);
-        argumentType.setPrefWidth(49);
+        argumentType.setPrefWidth(108);
         accessModifier.setPrefWidth(45);
-        argumentName.setPrefWidth(70);
+        argumentName.setPrefWidth(146.9);
 
     }
 

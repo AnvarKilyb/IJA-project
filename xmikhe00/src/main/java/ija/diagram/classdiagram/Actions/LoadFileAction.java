@@ -93,12 +93,15 @@ public class LoadFileAction implements Action{
 
         for(ViewObject viewObject : viewSequenceDiagram1.getObjectSequenceMap().keySet()){
             controllerMain.getSequencePane1().getChildren().remove(viewObject);
+            controllerMain.getSequencePane1().getChildren().remove(viewObject.returnMainLabel());
         }
         for(ViewObject viewObject : viewSequenceDiagram2.getObjectSequenceMap().keySet()){
             controllerMain.getSequencePane2().getChildren().remove(viewObject);
+            controllerMain.getSequencePane2().getChildren().remove(viewObject.returnMainLabel());
         }
         for(ViewObject viewObject : viewSequenceDiagram3.getObjectSequenceMap().keySet()){
             controllerMain.getSequencePane3().getChildren().remove(viewObject);
+            controllerMain.getSequencePane3().getChildren().remove(viewObject.returnMainLabel());
         }
 
         sequenceDiagram1.deleteAll();

@@ -45,12 +45,12 @@ public class MethodItem extends HBox implements ViewItem{
         initContextMenu(classContextController);
         accessModifier.setContextMenu(contextMenu);
         argumentName.setContextMenu(contextMenu);
-        argumentName.setPrefWidth(212); //todo normal
+//        argumentName.setPrefWidth(212); //todo normal
 
 
         argumentName.setPrefHeight(27);
         accessModifier.setPrefWidth(45);
-        argumentName.setPrefWidth(119);
+        argumentName.setPrefWidth(255);
 
     }
 

@@ -75,23 +75,34 @@ public class Loader {
             }
         }
         for(SObject sObject: sequenceDiagram.getsObjectList()){
-            ActivationBox activationBox = new ActivationBox();
-            for(Message message: item.getMessageList()){
-                if(message.getClassStart().getName().equals(sObject.getName())){
-                    activationBox.setThisObject(sObject);
-                    activationBox.addNewOutMessageLoad(message.getName(), message.getMessageType(), message.getX(), message.getY(), message.getLen());
-                }
-                if(message.getClassEnd().getName().equals(sObject.getName())){
-                    activationBox.setThisObject(sObject);
-                    activationBox.addNewInMessageLoad(message);
+                ActivationBox activationBox = new ActivationBox();
+                for (Message message : item.getMessageList()) {
+                    for(DClass dClass: classDiagram.getdClassList()){
+                        if(message.getClassStart().getName().equals(dClass.getName())){
+                            message.setClassStart(dClass);
+                        }
+                        if(message.getClassEnd().getName().equals(dClass.getName())){
+                            message.setClassEnd(dClass);
+                        }
+                    }
+                    if (message.getClassStart().getName().equals(sObject.getName())) {
+                        activationBox.setThisObject(sObject);
+                        activationBox.addNewOutMessageLoad(message.getClassStart(),message.getClassEnd(),message.getName(), message.getMessageType(), message.getX(), message.getY(), message.getLen());
+                    }
+                    else if (message.getClassEnd().getName().equals(sObject.getName())) {
+                        activationBox.setThisObject(sObject);
+                        activationBox.addNewInMessageLoad(message);
 
+                    }
                 }
-            }
-            for(ParticipantJSON participantJSON: item.getParticipantList()){
-                if(participantJSON.getName().equals(sObject.getName())){
-                    activationBox.setHeight(participantJSON.getBoxHeight());
-                    activationBox.setY(participantJSON.getBoxY());
-                }
+                for (ParticipantJSON participantJSON : item.getParticipantList()) {
+                    if (participantJSON.getName().equals(sObject.getName())) {
+                        if(participantJSON.getBoxHeight() != 0) {
+                            activationBox.setHeight(participantJSON.getBoxHeight());
+                            activationBox.setY(participantJSON.getBoxY());
+                        }
+                    }
+
             }
             sObject.addActiveBox(activationBox);
         }
@@ -99,9 +110,17 @@ public class Loader {
         for(SObject sObject: notLoadSequenceDiagram.getsObjectList()){
             ActivationBox activationBox = new ActivationBox();
             for(Message message: item.getMessageList()){
+                for(DClass dClass: classDiagram.getdClassList()){
+                    if(message.getClassStart().getName().equals(dClass.getName())){
+                        message.setClassStart(dClass);
+                    }
+                    if(message.getClassEnd().getName().equals(dClass.getName())){
+                        message.setClassEnd(dClass);
+                    }
+                }
                 if(message.getClassStart().getName().equals(sObject.getName())){
                     activationBox.setThisObject(sObject);
-                    activationBox.addNewOutMessageLoad(message.getName(), message.getMessageType(), message.getX(), message.getY(), message.getLen());
+                    activationBox.addNewOutMessageLoad(message.getClassStart(), message.getClassEnd(),message.getName(), message.getMessageType(), message.getX(), message.getY(), message.getLen());
                 }
                 if(message.getClassEnd().getName().equals(sObject.getName())){
                     activationBox.setThisObject(sObject);
@@ -110,7 +129,14 @@ public class Loader {
                 }
             }
 
-            activationBox.setHeight(item.getHeight());
+            for (ParticipantJSON participantJSON : item.getParticipantList()) {
+                if (participantJSON.getName().equals(sObject.getName())) {
+                    if(participantJSON.getBoxHeight() != 0) {
+                        activationBox.setHeight(participantJSON.getBoxHeight());
+                        activationBox.setY(participantJSON.getBoxY());
+                    }
+                }
+            }
             sObject.addActiveBox(activationBox);
         }
 

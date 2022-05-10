@@ -51,7 +51,7 @@ public class ViewClass extends VBox {
         mainLabel.setContextMenu(contextMenu);
 //        mainLabel.setPrefWidth();
         mainLabel.setId("classLabel");
-        mainLabel.setPrefWidth(164);
+        mainLabel.setPrefWidth(300);
         className.setUserData(this);
         className.addEventHandler(KeyEvent.ANY, classContextController::inputContextClassName);
         className.setId("className");

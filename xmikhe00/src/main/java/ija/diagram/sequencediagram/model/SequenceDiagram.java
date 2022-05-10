@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class SequenceDiagram {
     private List<SObject> sObjectList = new ArrayList<>();
-    private final int indent = 130;
+    private final int indent = 250;
 
 
     public SObject addObject(DClass dClass){

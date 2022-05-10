@@ -29,14 +29,14 @@ public class ViewObject extends Pane {
         mainLabel.setUserData(this);
         mainLabel.setId("objectLabel");
         lifeLine.setId("lifeLine");
-        lifeLine.setStartX(40);
+        lifeLine.setStartX(100);
         lifeLine.setStartY(80);
-        lifeLine.setEndX(40);
+        lifeLine.setEndX(100);
         lifeLine.setEndY(600);
-        mainLabel.setPrefWidth(80);
+        mainLabel.setPrefWidth(200);
         mainLabel.setPrefHeight(80);
         super.setPrefHeight(600);
-        super.setPrefWidth(80);
+        super.setPrefWidth(200);
         super.getChildren().add(lifeLine);
 //        super.getChildren().add(mainLabel);
     }

@@ -97,8 +97,12 @@ public class Parser {
                 JSONObject participantObj = (JSONObject) participantList.get(i);
                 String name = (String) participantObj.get("name");
                 double x = Double.parseDouble(participantObj.get("x").toString());
-                double y = Double.parseDouble(participantObj.get("boxY").toString());
-                double height = Double.parseDouble(participantObj.get("boxHeight").toString());
+                double y = 90;
+                double height = 30;
+                if(participantObj.get("boxY") != null){
+                y = Double.parseDouble(participantObj.get("boxY").toString());
+                height = Double.parseDouble(participantObj.get("boxHeight").toString());
+                }
                 newObject.addParticipant(name, x, height, y);
             }
             JSONArray messageList = (JSONArray) obj.get("message");

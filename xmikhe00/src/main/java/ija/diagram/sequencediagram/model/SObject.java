@@ -92,4 +92,7 @@ public class SObject {
         this.objectActive = objectActive;
     }
 
+    public void deleteActivationBox(){
+        this.activationBox = null;
+    }
 }

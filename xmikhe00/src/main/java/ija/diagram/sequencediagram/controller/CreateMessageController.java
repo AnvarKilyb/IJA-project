@@ -61,6 +61,10 @@ public class CreateMessageController {
     @FXML
     private TextField objectName;
 
+    @FXML
+    private TextField NumberOfConnect;
+
+
     private ControllerMain controllerMain;
 
     private ToggleGroup messageGroup = new ToggleGroup();
@@ -90,11 +94,13 @@ public class CreateMessageController {
             for(Message message : sObject.getActivationBox().getInMessage()){
                 DClass dClass = message.getClassStart();
                 SObject sObject1 = sequenceDiagram.getObject(dClass.getName());
-                ViewObject viewObject1  =  viewSequenceDiagram.getViewObject(sObject1);
-                ViewActiveBox viewActiveBox = viewObject1.getViewActiveBox();
-                ViewMessage viewMessage = viewActiveBox.getViewMessage(message);
-                if(viewMessage != null){
-                    viewActiveBox.getChildren().remove(viewMessage);
+                if(sObject1 != null){
+                    ViewObject viewObject1  =  viewSequenceDiagram.getViewObject(sObject1);
+                    ViewActiveBox viewActiveBox = viewObject1.getViewActiveBox();
+                    ViewMessage viewMessage = viewActiveBox.getViewMessage(message);
+                    if(viewMessage != null){
+                        viewActiveBox.getChildren().remove(viewMessage);
+                    }
                 }
             }
         }
@@ -109,6 +115,17 @@ public class CreateMessageController {
 
 
     public void createNewMessage(ActionEvent actionEvent){
+        if(NumberOfConnect.getText().equals("")){
+            return;
+        }
+        Integer number = 0;
+        try {
+            number = Integer.valueOf(NumberOfConnect.getText());
+        }catch (NumberFormatException e) {
+            controllerMain.writeLabelWarning("It is not number");
+            return;
+        }
+
         Stage stage = (Stage)createMessage.getScene().getWindow();
         //get all diagram
         SequenceDiagram sequenceDiagram = controllerMain.getSequenceDiagram();
@@ -276,7 +293,7 @@ public class CreateMessageController {
         }
 
 
-        Message message = activationBoxLeft.addNewOutMessage(messageName, convertType(selectedRadioButton.getText()));
+        Message message = activationBoxLeft.addNewOutMessage(messageName, convertType(selectedRadioButton.getText()), number);
 
 
 
