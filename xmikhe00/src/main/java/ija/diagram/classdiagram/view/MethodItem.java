@@ -82,4 +82,9 @@ public class MethodItem extends HBox implements ViewItem{
     public TextField getArgumentName() {
         return argumentName;
     }
+
+    public void newColor(){
+        accessModifier.setId("m2");
+        argumentName.setId("m1");
+    }
 }

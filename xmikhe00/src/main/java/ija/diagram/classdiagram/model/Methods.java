@@ -11,7 +11,9 @@ public class Methods extends Item{
     public Methods(String name, AccessModifier accessModifier) {
         super(name, accessModifier);
     }
-
+    public Methods(Methods methods){
+        super(methods.getName(),methods.getAccessModifier());
+    }
     public Methods(String name) {
         super(name);
     }

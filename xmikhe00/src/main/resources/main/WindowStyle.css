@@ -432,6 +432,23 @@
     -fx-padding: 0 0 0 0;
 }
 
+#m1{
+    -fx-background-color: rgb(54, 48, 119);
+    -fx-border-color: rgb(255,255,255);
+    -fx-border-width: 0 1 1 0;
+    -fx-text-fill: rgb(255,255,255);
+    /*-fx-font: system;*/
+    -fx-font-size: 10;
+    -fx-padding: 0 0 0 0;
+}
+#m2{
+    -fx-background-color: rgb(54, 48, 119);
+}
+
+#m2 .context-menu{
+    -fx-background-color: rgb(54, 48, 119);
+}
+
 /* 
 black rgb(15, 15, 15)
 */

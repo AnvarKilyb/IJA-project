@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Reprezentuje zobrazení třídy v diagramu tříd
@@ -122,7 +123,7 @@ public class ViewClass extends VBox {
      * @param method metod
      * @param classContextController ovladač
      */
-    public void addMethod(Methods method ,ClassContextController classContextController){
+    public MethodItem addMethod(Methods method ,ClassContextController classContextController){
         MethodItem methodItem = new MethodItem();
         methodItem.setUserData(this);
         methodItem.mainConstruct(classContextController);
@@ -131,6 +132,7 @@ public class ViewClass extends VBox {
         methodItem.setAccessModifier(accessModifierString);
         methods.getChildren().add(methodItem);
         methodsMap.put(methodItem, method);
+        return methodItem;
 //        methods.setUserData(this);
     }
 
@@ -148,6 +150,18 @@ public class ViewClass extends VBox {
 
     public Methods returnMethod(MethodItem methodItem){
         return  methodsMap.get(methodItem);
+    }
+
+    public MethodItem returnMethodItem(Methods method){
+        Set<Map.Entry<MethodItem,Methods>> methodList = methodsMap.entrySet();
+        for(Map.Entry<MethodItem, Methods> map: methodList){
+            if(map != null){
+                if(method.equals(map.getValue())){
+                    return map.getKey();
+                }
+            }
+        }
+        return null;
     }
 
     public void setX(double x){

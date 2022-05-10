@@ -1,9 +1,11 @@
 package ija.diagram.classdiagram.controller;
 import ija.diagram.ControllerMain;
 import ija.diagram.classdiagram.model.ClassDiagram;
+import ija.diagram.classdiagram.model.DClass;
+import ija.diagram.classdiagram.model.Methods;
 import ija.diagram.classdiagram.model.Relationships;
-import ija.diagram.classdiagram.view.ViewDiagram;
-import ija.diagram.classdiagram.view.ViewRelationships;
+import ija.diagram.classdiagram.view.*;
+import ija.diagram.sequencediagram.view.ViewMessage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -107,6 +109,17 @@ public class ViewRelationshipController {
         ViewRelationships line = (ViewRelationships) stage.getUserData();
         if(line.getClassTo() != null) {
             Relationships relationships = controllerMain.getViewDiagram().getRelationShip(line);
+            DClass dClassFrom = relationships.getClassFrom();
+            DClass dClassTo = relationships.getClassTo();
+            for(Methods method1 : dClassTo.getMethodsList()){
+                for(Methods method2 : dClassFrom.getMethodsList()){
+                    if(method1.getName().equals(method2.getName())){
+                        ViewClass viewClass = controllerMain.getViewDiagram().getViewClass(dClassFrom);
+                        MethodItem methodItem = viewClass.returnMethodItem(method2);
+                        methodItem.newColor();
+                    }
+                }
+            }
             relationships.setTypeShip(Relationships.Type.INHERITANCE_GENERALIZATION);
             line.setInheritance();
         }
