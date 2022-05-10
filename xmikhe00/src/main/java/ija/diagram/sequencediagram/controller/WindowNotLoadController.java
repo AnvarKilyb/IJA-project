@@ -76,6 +76,11 @@ public class WindowNotLoadController {
         viewObject.setOpen(false);
         viewObject.returnMainLabel().addEventHandler(MouseEvent.MOUSE_CLICKED,contextObjectController::addNewMessage);
         viewObject.setId("target");
+        viewClass.returnClassNameField().textProperty().addListener((observable, oldValue, newValue) ->
+        {
+            viewObject.returnMainLabel().setText(newValue);
+            sObject.setName(newValue);
+        });
         controllerMain.getMainPane().getChildren().add(viewClass);
         stage.close();
 
